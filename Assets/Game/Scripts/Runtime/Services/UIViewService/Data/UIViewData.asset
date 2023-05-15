@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6add37adf9041e28916ba0703bc7933, type: 3}
+  m_Name: UIViewData
+  m_EditorClassIdentifier: 
+  ViewDataMap:
+    m_keys: 000000000100000002000000030000000500000006000000
+    m_values:
+    - {fileID: 1208012979236502358, guid: 3aae3a779a0424c49a0bf4ed36d2c60b, type: 3}
+    - {fileID: 496491971416423752, guid: 0e980b17f146649e281b7a196cbd6fce, type: 3}
+    - {fileID: 5265089670962189844, guid: 4d3871c12daa94430909305b3a9a8434, type: 3}
+    - {fileID: 4606930192474411000, guid: e34c96d103e2b4627a3ab7e920cd554a, type: 3}
+    - {fileID: 4043625096814017600, guid: c5fdf0dad00ad477f9f7c4389efac6c9, type: 3}
+    - {fileID: 2051103461903741885, guid: 702104867e5334496b7b3d1432d9c082, type: 3}
