@@ -16,8 +16,9 @@ MonoBehaviour:
     Coin: 60
     Gem: 0
   Settings:
-    IsSound: 0
+    IsSound: 1
     IsMusic: 0
-    IsSliderActive: 1
+    IsVibro: 1
+    IsSliderActive: 0
     SoundVolumeCount: 0
-    MusicVolumeCount: -20
+    MusicVolumeCount: 0

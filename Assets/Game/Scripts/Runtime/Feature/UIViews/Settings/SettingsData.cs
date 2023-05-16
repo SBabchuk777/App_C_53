@@ -8,6 +8,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Settings
     {
         public bool IsSound;
         public bool IsMusic;
+        public bool IsVibro;
 
         public bool IsSliderActive;
         public float SoundVolumeCount;

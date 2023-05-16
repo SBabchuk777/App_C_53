@@ -30,6 +30,9 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Settings
             
             SettingsData.IsMusic = isOn;
         }
+        public void TurnVibro(bool isOn) => 
+            SettingsData.IsVibro = isOn;
+
         public void ChangeSound(float value)
         {
             var intValue = Mathf.Lerp(-80, 0, value);
@@ -47,6 +50,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Settings
             SettingsData.MusicVolumeCount = intValue;
             
         }
+        
         public float GetMusicValue => 
             (SettingsData.MusicVolumeCount - (-80)) / (-20 - (-80));
         public float GetSoundValue => 
