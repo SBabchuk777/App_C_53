@@ -1,3 +1,5 @@
+using System;
+using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Win;
@@ -19,9 +21,12 @@ namespace Game.Scripts.Runtime.Feature.Level
         [Inject] private ProjectAudioPlayer projectAudioPlayer;
         [Inject] private UIViewService uiViewService;
         [Inject] private SceneNavigation sceneNavigation;
+        [Inject] private DataHub dataHub;
 
-        private LevelGameData LevelGameData =>
-            ProjectContext.Instance.GetDependence<DataHub>().LevelGameData;
+        private PlayerProgressData progressData;
+        
+        public int GetBestScore => progressData.BestScore;
+        public event Action<int> OnChangeCurrent;
         
         public void Start()
         {
@@ -31,11 +36,20 @@ namespace Game.Scripts.Runtime.Feature.Level
 
         private void Initialize()
         {
-            
+            progressData = dataHub.LoadData<PlayerProgressData>("Progress");
         }
 
         private void RunAfterInitialize()
         {
+        }
+
+        public void BackLobby() => 
+            sceneFader.FadeTo(0.8f, () => sceneNavigation.LoadLobby());
+
+
+        private void CalculateScore()
+        {
+            
         }
     }
 }
