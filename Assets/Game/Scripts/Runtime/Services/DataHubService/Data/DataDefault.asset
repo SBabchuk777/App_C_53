@@ -24,4 +24,4 @@ MonoBehaviour:
     MusicVolumeCount: 0
   Progress:
     BestScore: 2
-    CurrentBallSkin: {fileID: 21300000, guid: e0b115a7ae5894af5a184950fcab4b14, type: 3}
+    CurrentIDBallSkin: 0
