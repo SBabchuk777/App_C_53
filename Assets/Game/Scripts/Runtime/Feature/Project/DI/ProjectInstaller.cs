@@ -1,6 +1,7 @@
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.UIViews.LastChance;
 using Game.Scripts.Runtime.Feature.UIViews.Settings;
+using Game.Scripts.Runtime.Feature.UIViews.Shop;
 using Game.Scripts.Runtime.Feature.UIViews.Win;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.ADSUnity;
@@ -31,6 +32,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         [Header("Controllers in MVC")]
         public WinService WinService;
         public LastChanceController LastChanceController;
+        public ShopController ShopController;
 
         private DIContainer container;
 
@@ -49,6 +51,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         {
             container.Register(WinService);
             container.Register(LastChanceController);
+            container.Register(ShopController);
         }
 
         private void RegisterServices()
