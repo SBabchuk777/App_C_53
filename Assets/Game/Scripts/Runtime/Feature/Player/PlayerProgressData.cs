@@ -8,6 +8,6 @@ namespace Game.Scripts.Runtime.Feature.Player
     public class PlayerProgressData : DataPayload
     {
         public int BestScore;
-        public Sprite CurrentBallSkin;
+        public int CurrentIDBallSkin;
     }
 }

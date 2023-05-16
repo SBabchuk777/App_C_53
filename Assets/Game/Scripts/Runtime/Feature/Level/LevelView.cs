@@ -16,9 +16,10 @@ namespace Game.Scripts.Runtime.Feature.Level
         public void Start()
         {
             HomeButton.onClick.AddListener(LevelArbiter.BackLobby);
-            ChangeBestText(LevelArbiter.GetBestScore);
+            //ChangeBestText(LevelArbiter.GetBestScore);
             
             LevelArbiter.OnChangeCurrent += ChangeCurrenText;
+            LevelArbiter.OnChangeBest += ChangeBestText;
         }
 
         private void ChangeBestText(int value) => 

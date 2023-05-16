@@ -27,6 +27,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         
         public int GetBestScore => progressData.BestScore;
         public event Action<int> OnChangeCurrent;
+        public event Action<int> OnChangeBest;
         
         public void Start()
         {
@@ -37,6 +38,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         private void Initialize()
         {
             progressData = dataHub.LoadData<PlayerProgressData>("Progress");
+            OnChangeBest?.Invoke(progressData.BestScore);
         }
 
         private void RunAfterInitialize()
