@@ -34,6 +34,8 @@ namespace Game.Scripts.Runtime.Feature.Lobby
             projectAudioPlayer.PlayAudioAmbientOnLobby();
         }
 
+        public void StartGame() => sceneNavigation.LoadLevel();
+
         public void OnDestroy() => 
             projectAudioPlayer.StopAudioAmbientOnLobby();
     }
