@@ -13,7 +13,13 @@ MonoBehaviour:
   m_Name: SkinBallDataPath
   m_EditorClassIdentifier: 
   PathMap:
-    m_keys: 00000000
+    m_keys: 00000000010000000200000003000000
     m_values:
     - Skin: {fileID: 21300000, guid: e0b115a7ae5894af5a184950fcab4b14, type: 3}
+      Count: 0
+    - Skin: {fileID: 21300000, guid: b2558422ab6a54aa595a3472cff7d896, type: 3}
       Count: 100
+    - Skin: {fileID: 21300000, guid: f10440d03c03f4b86930170ad56da2ea, type: 3}
+      Count: 200
+    - Skin: {fileID: 21300000, guid: 6918a99fd66dc4c14a6d7f30300d3e0f, type: 3}
+      Count: 300

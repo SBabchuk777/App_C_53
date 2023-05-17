@@ -11,16 +11,16 @@ namespace Game.Scripts.Runtime.Services.SceneLoaderService
 
         public void LoadLobby()
         {
-            Fader.FadeTo(1.1f, () => sceneLoader.LoadScene(SceneType.Lobby.ToString()));
+            Fader.FadeTo(0.8f, () => sceneLoader.LoadScene(SceneType.Lobby.ToString()));
         }
 
         public void LoadLevel()
         {
-            Fader.FadeTo(1.1f, () => sceneLoader.LoadScene(SceneType.Level.ToString()));
+            Fader.FadeTo(0.8f, () => sceneLoader.LoadScene(SceneType.Level.ToString()));
         }
         public void LoadSlots()
         {
-            Fader.FadeTo(1.1f, () => sceneLoader.LoadScene(SceneType.BonusGame.ToString()));
+            Fader.FadeTo(0.8f, () => sceneLoader.LoadScene(SceneType.BonusGame.ToString()));
         }
 
     }

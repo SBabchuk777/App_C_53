@@ -2,6 +2,7 @@ using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.UIViewService;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,13 +11,16 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
     public class ShopView : BaseView
     {
         public Button CloseButton;
+        public Button StartButton;
         public ImageFader Fader;
         public GameObject Panel;
 
-        [Space] public ChoosePanelShop ActiveBackground;
+        [Space] 
+        public ChoosePanelShop ActiveBackground;
         public ChoosePanelShop InactiveBackground;
 
-        [Space] public Button LeftArrow;
+        [Space] 
+        public Button LeftArrow;
         public Button RightArrow;
 
         [Inject] private ShopController shopController;
@@ -24,11 +28,54 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
         protected override void Subscribe()
         {
             CloseButton.onClick.AddListener(ClosePanel);
+            StartButton.onClick.AddListener(StartGame);
+            
+            LeftArrow.onClick.AddListener(() => shopController.GetNextIcon(-1));
+            RightArrow.onClick.AddListener(() => shopController.GetNextIcon(1));
+            
+            shopController.OnHideArrow += HideArrow;
+            shopController.OnShowArrow += ShowArrow;
+            shopController.OnChangeSkin += ChangeSkin;
         }
 
-        protected override void Initialize()
+        private void StartGame()
         {
+            shopController.StartLevel();
+            shopController.Reset();
+            
+            Destroy(gameObject, .8f);
         }
+
+        private void ChangeSkin(SkinInfo info)
+        {
+            if (info.IsCanPurchased)
+            {
+                SetTryPurchasePanel(info);
+                return;
+            }
+            
+            if (info.IsPurchased) 
+                SetChoosePanel(info);
+            else
+                SetClosePanel(info);
+        }
+
+        private void HideArrow(int value)
+        {
+            if (value == -1) 
+                LeftArrow.gameObject.SetActive(false);
+            else
+                RightArrow.gameObject.SetActive(false);
+        }
+
+        private void ShowArrow()
+        {
+            LeftArrow.gameObject.SetActive(true);
+            RightArrow.gameObject.SetActive(true);
+        }
+
+        protected override void Initialize() => 
+            ChangeSkin(shopController.GetFirstSkinIfo);
 
         protected override void Open()
         {
@@ -38,19 +85,51 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
 
         protected override void Unsubscribe()
         {
+            CloseButton.onClick.RemoveAllListeners();
+            StartButton.onClick.RemoveAllListeners();
+            
+            LeftArrow.onClick.RemoveAllListeners();
+            RightArrow.onClick.RemoveAllListeners();
+            
+            shopController.OnHideArrow -= HideArrow;
+            shopController.OnShowArrow -= ShowArrow;
+            shopController.OnChangeSkin -= ChangeSkin;
         }
 
         private void ClosePanel()
         {
+            shopController.Reset();
             Panel.transform.DOScale(Vector3.zero, .3f)
                 .OnComplete(() => Fader.FadeOut(0.3f, Close))
                 .Play();
         }
 
-        public void SetActiveSkinPanel()
+        private void SetChoosePanel(SkinInfo skinInfo)
         {
             ActiveBackground.gameObject.SetActive(true);
+            ActiveBackground.PanelCount.SetActive(false);
+            ActiveBackground.BallIcon.sprite = skinInfo.Skin;
+            
             InactiveBackground.gameObject.SetActive(false);
+        }
+        private void SetTryPurchasePanel(SkinInfo skinInfo)
+        {
+            ActiveBackground.gameObject.SetActive(true);
+            ActiveBackground.PanelCount.SetActive(true);
+            
+            ActiveBackground.BallIcon.sprite = skinInfo.Skin;
+            ActiveBackground.BallCountText.text = skinInfo.Count.ToString();
+            
+            InactiveBackground.gameObject.SetActive(false);
+        }
+
+        private void SetClosePanel(SkinInfo skinInfo)
+        {
+            InactiveBackground.gameObject.SetActive(true);
+            InactiveBackground.BallIcon.sprite = skinInfo.Skin;
+            InactiveBackground.BallCountText.text = skinInfo.Count.ToString();
+            
+            ActiveBackground.gameObject.SetActive(false);
         }
     }
 }

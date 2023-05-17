@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using UnityEngine;
 
@@ -9,5 +10,7 @@ namespace Game.Scripts.Runtime.Feature.Player
     {
         public int BestScore;
         public int CurrentIDBallSkin;
+
+        public List<int> AvailableSkins;
     }
 }
