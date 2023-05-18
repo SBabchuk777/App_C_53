@@ -39,8 +39,10 @@ namespace Game.Scripts.Runtime.Feature.Level
         {
             if (lastScore == 3)
             {
-                statusHandler.NotifyChangeMultiplayerScore(++multiplierScore);
+                multiplierScore++;
             }
+            
+            statusHandler.NotifyChangeMultiplayerScore(multiplierScore);
         }
 
         public void ResetData()
