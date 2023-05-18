@@ -62,7 +62,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
                 var currentHeightScale = Mathf.Lerp(startYScale, startYScale * maxHeightScale, (transform.position.y - startPos.y) / (endPos.y - startPos.y));
                 transform.localScale = new Vector3(currentHeightScale, currentHeightScale, transform.localScale.z);
 
-                if (transform.localScale.x < maxHeightScale) 
+                if (transform.localScale.x <= maxHeightScale) 
                     isCanChangeScale = false;
             }
         }
