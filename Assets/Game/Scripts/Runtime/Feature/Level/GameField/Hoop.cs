@@ -7,6 +7,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
     {
         public List<Collider2D> Collider2DForActivate;
         public BallDetector Detector;
+        public BallDetector GoalDetector;
 
         private void Awake()
         {

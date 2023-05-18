@@ -4,12 +4,13 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
 
     public class Ball : MonoBehaviour
     {
-        public float MinSwipeDistance = 1f;
-        public float MaxSwipeDistance = 5f;
-        public float force = 10f; // Сила полета мяча
-        public float distance = 5f; // Сила полета мяча
+        public float MinSwipeDistance;
+        public float MaxSwipeDistance;
+        public float force; // Сила полета мяча
+        public float distance; // Сила полета мяча
         public float maxHeightScale; // Максимальное значение изменения масштаба мяча
 
+        public SpriteRenderer SpriteRenderer;
         private Vector3 startPos; // Начальная позиция мяча
         private Vector3 endPos; // Конечная позиция мяча
         private Rigidbody2D rb; // Компонент Rigidbody2D мяча
@@ -20,7 +21,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
         {
             rb = GetComponent<Rigidbody2D>();
             rb.isKinematic = true;
-            startPos = transform.position;
+            startPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             startYScale = transform.localScale.y;
         }
 
@@ -28,49 +29,64 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
         {
             if (Input.GetMouseButtonDown(0))
             {
-                startPos = transform.position; // Сохраняем начальную позицию мяча
+                //startPos = transform.position; // Сохраняем начальную позицию мяча
                 startYScale = transform.localScale.y; // Сохраняем начальное значение масштаба мяча
             }
 
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && !isBallThrown)
             {
                 endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем конечную позицию мяча в мировых координатах
                 
                 var swipeDistance = Vector2.Distance(startPos, endPos);
 
-                if (swipeDistance >= MinSwipeDistance && !isBallThrown)
+                if (swipeDistance >= MinSwipeDistance )
                     ThrowBall();
                 
-                isBallThrown = false;
+                if (transform.position != startPos) 
+                    transform.position = Vector3.Lerp(transform.position, startPos, 1);
             }
 
-            if (Input.GetMouseButton(0) && !isBallThrown)
+            if (!isBallThrown && Input.GetMouseButton(0))
             {
                 endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 
                 var swipeDistance = Vector2.Distance(startPos, endPos);
-                
-                if (swipeDistance >= MaxSwipeDistance)
+                if (swipeDistance < MaxSwipeDistance)
                 {
-                    ThrowBall();
+                    transform.position = Vector3.Lerp(transform.position, new Vector3(endPos.x, endPos.y, transform.position.z), 3f * Time.deltaTime);
                 }
+                if (swipeDistance >= MaxSwipeDistance) 
+                    ThrowBall();
             }
 
             // Изменение масштаба мяча в полете
-            if (isCanChangeScale)
-            {
-                var currentHeightScale = Mathf.Lerp(startYScale, startYScale * maxHeightScale, (transform.position.y - startPos.y) / (endPos.y - startPos.y));
-                transform.localScale = new Vector3(currentHeightScale, currentHeightScale, transform.localScale.z);
+            ChangeScaleToPositionY();
+        }
 
-                if (transform.localScale.x <= maxHeightScale) 
-                    isCanChangeScale = false;
-            }
+        public void SetSprite(Sprite sprite) => 
+            SpriteRenderer.sprite = sprite;
+
+        private void ChangeScaleToPositionY()
+        {
+            if (!isCanChangeScale) 
+                return;
+            
+            var currentHeightScale = Mathf.Lerp(startYScale, startYScale * maxHeightScale, (transform.position.y - startPos.y) / (endPos.y - startPos.y));
+            transform.localScale = new Vector3(currentHeightScale, currentHeightScale, transform.localScale.z);
+
+            if (transform.localScale.x <= maxHeightScale)
+                isCanChangeScale = false;
         }
 
         private void ThrowBall()
         {
             Vector2 direction = (endPos - startPos).normalized;
-            if (direction.y < 0.12f)
+            
+            if (direction.y < 0.02)
+                return;
+            if (direction.x < -0.01f)
+                return;
+            if (direction.x > 0.01)
                 return;
             
             var distanceMultiplier = distance / Vector2.Distance(startPos, endPos); // Множитель для задания фиксированного расстояния полета

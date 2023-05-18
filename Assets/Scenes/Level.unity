@@ -1183,11 +1183,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf3666a701d40adbb35b59ba26f54dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinSwipeDistance: 1
-  MaxSwipeDistance: 2.5
+  MinSwipeDistance: 0.5
+  MaxSwipeDistance: 1
   force: 20
   distance: 12
   maxHeightScale: 0.665
+  SpriteRenderer: {fileID: 1408418351}
 --- !u!1 &899920357
 GameObject:
   m_ObjectHideFlags: 0
@@ -2122,7 +2123,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.15956251}
-  m_AnchoredPosition: {x: 0, y: -64.19998}
+  m_AnchoredPosition: {x: 0, y: -64.19995}
   m_SizeDelta: {x: 316.32996, y: 127.23999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1884347997
@@ -2333,6 +2334,7 @@ MonoBehaviour:
   - {fileID: 629647020}
   - {fileID: 1228554905}
   Detector: {fileID: 219480869}
+  GoalDetector: {fileID: 0}
 --- !u!1 &2895870961997955641
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,6 +2385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3dabf9097124ca2a456e86d3167ef39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BallFactory: {fileID: 0}
 --- !u!4 &2895870963961259376
 Transform:
   m_ObjectHideFlags: 0
