@@ -1,3 +1,5 @@
+using System;
+
 namespace Game.Scripts.Runtime.Feature.Level.GameField
 {
     using UnityEngine;
@@ -29,14 +31,13 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
         {
             if (Input.GetMouseButtonDown(0))
             {
-                //startPos = transform.position; // Сохраняем начальную позицию мяча
                 startYScale = transform.localScale.y; // Сохраняем начальное значение масштаба мяча
             }
 
             if (Input.GetMouseButtonUp(0) && !isBallThrown)
             {
-                endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition); // Получаем конечную позицию мяча в мировых координатах
-                
+                endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
                 var swipeDistance = Vector2.Distance(startPos, endPos);
 
                 if (swipeDistance >= MinSwipeDistance )
@@ -63,6 +64,11 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
             ChangeScaleToPositionY();
         }
 
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            Debug.Log(col);
+        }
+
         public void SetSprite(Sprite sprite) => 
             SpriteRenderer.sprite = sprite;
 
@@ -71,7 +77,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
             if (!isCanChangeScale) 
                 return;
             
-            var currentHeightScale = Mathf.Lerp(startYScale, startYScale * maxHeightScale, (transform.position.y - startPos.y) / (endPos.y - startPos.y));
+            var currentHeightScale = Mathf.Lerp(startYScale, startYScale * maxHeightScale, (transform.position.y - startPos.y) / (endPos.y - startPos.y)/2);
             transform.localScale = new Vector3(currentHeightScale, currentHeightScale, transform.localScale.z);
 
             if (transform.localScale.x <= maxHeightScale)
@@ -91,6 +97,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
             
             var distanceMultiplier = distance / Vector2.Distance(startPos, endPos); // Множитель для задания фиксированного расстояния полета
             rb.isKinematic = false;
+            direction = Vector2.Lerp(direction, direction * 0.2f, 0.2f);
             rb.AddForce(direction * force * distanceMultiplier, ForceMode2D.Impulse);
             isBallThrown = true;
             isCanChangeScale = true;

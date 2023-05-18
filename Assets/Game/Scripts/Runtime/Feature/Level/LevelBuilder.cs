@@ -1,36 +1,44 @@
+using System.Collections.Generic;
 using Game.Scripts.Runtime.Feature.Level.GameField;
-using Game.Scripts.Runtime.Feature.Player;
-using Game.Scripts.Runtime.Feature.Project.DI;
-using Game.Scripts.Runtime.Feature.UIViews.Shop;
+using Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime.Feature.Level
 {
     public class LevelBuilder : MonoBehaviour
     {
+        [SerializeField] private GameStatusHandler gameStatusHandler;
         public BallFactory BallFactory;
-    }
 
-    public class BallFactory : MonoBehaviour
-    {
-        public Ball BallPrefab;
-        public SkinBallInfoData SkinBallInfoData;
+        public Hoop Hoop;
+        public Transform BallAnchor;
+        public Transform InstanceParent;
 
-        [Inject] private DataHub dataHub;
+        public BallDetector BallDetector;
 
-        private PlayerProgressData progressData;
-        public void Initialize() => 
-            progressData = dataHub.LoadData<PlayerProgressData>("Progress");
+        private Ball Ball;
 
-        public Ball InstantiateBall(Vector3 position, Transform parent)
+        public void Start()
         {
-            var ballInstance = Instantiate(BallPrefab, position, Quaternion.identity, parent);
-            SetSkin(ballInstance);
-
-            return ballInstance;
+            BallFactory.Initialize();
+            CreateBall();
+            BallDetector.OnBallInArea += () =>
+            {
+                DestroyBall();
+                CreateBall();
+                Hoop.Reset();
+            };
+        }
+        
+        public void CreateBall()
+        {
+            Ball = BallFactory.InstantiateBall(BallAnchor.position, InstanceParent);
+            Hoop.DeactivateAllCollider();
         }
 
-        private void SetSkin(Ball ball) => 
-            ball.SetSprite(SkinBallInfoData.PathMap[progressData.CurrentIDBallSkin].Skin);
+        public void DestroyBall()
+        {
+            Destroy(Ball.gameObject);
+        }
     }
 }

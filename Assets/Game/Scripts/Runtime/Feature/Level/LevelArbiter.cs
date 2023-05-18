@@ -13,7 +13,9 @@ namespace Game.Scripts.Runtime.Feature.Level
 {
     public class LevelArbiter : MonoBehaviour
     {
-        public LevelBuilder Builder;
+        [SerializeField] private GameStatusHandler gameStatusHandler;
+        [SerializeField] private LevelBuilder Builder;
+        [SerializeField] private ScoreCalculator ScoreCalculator;
 
         [Inject] private ImageFader sceneFader;
         [Inject] private WinService winService;
@@ -26,7 +28,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         private PlayerProgressData progressData;
         
         public int GetBestScore => progressData.BestScore;
-        public event Action<int> OnChangeCurrent;
+        
         public event Action<int> OnChangeBest;
         
         public void Start()
@@ -39,6 +41,10 @@ namespace Game.Scripts.Runtime.Feature.Level
         {
             progressData = dataHub.LoadData<PlayerProgressData>("Progress");
             OnChangeBest?.Invoke(progressData.BestScore);
+            
+            gameStatusHandler.OnMissedToHope += ScoreCalculator.ResetData;
+            gameStatusHandler.OnTwoPointGoal +=  ScoreCalculator.CalculateForTwo;
+            gameStatusHandler.OnThreePointGoal +=  ScoreCalculator.CalculateForThree;
         }
 
         private void RunAfterInitialize()

@@ -6,32 +6,33 @@ namespace Game.Scripts.Runtime.Feature.Level
 {
     public class LevelView : MonoBehaviour
     {
-        public Text BestScoreText;
-        public Text CurrentScoreText;
-
-        public Button HomeButton;
+        [SerializeField] private Text bestScoreText;
+        [SerializeField] private Text currentScoreText;
         
-        public LevelArbiter LevelArbiter;
+        [SerializeField] private Button homeButton;
+        
+        [SerializeField] private LevelArbiter levelArbiter;
+        [SerializeField] private GameStatusHandler gameStatusHandler;
 
         public void Start()
         {
-            HomeButton.onClick.AddListener(LevelArbiter.BackLobby);
+            homeButton.onClick.AddListener(levelArbiter.BackLobby);
             //ChangeBestText(LevelArbiter.GetBestScore);
             
-            LevelArbiter.OnChangeCurrent += ChangeCurrenText;
-            LevelArbiter.OnChangeBest += ChangeBestText;
+            gameStatusHandler.OnChangeScore += ChangeCurrenText;
+            levelArbiter.OnChangeBest += ChangeBestText;
         }
 
         private void ChangeBestText(int value) => 
-            BestScoreText.text = value.ToString();
+            bestScoreText.text = value.ToString();
 
         private void ChangeCurrenText(int value) => 
-            CurrentScoreText.text = value.ToString();
+            currentScoreText.text = value.ToString();
 
         public void OnDestroy()
         {
-            HomeButton.onClick.RemoveAllListeners();
-            LevelArbiter.OnChangeCurrent -= ChangeCurrenText;
+            homeButton.onClick.RemoveAllListeners();
+            gameStatusHandler.OnChangeScore -= ChangeCurrenText;
         }
     }
 }
