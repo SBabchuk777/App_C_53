@@ -11,14 +11,15 @@ namespace Game.Scripts.Runtime.Feature.Level
         
         private const int ThreePointShot = 3;
         private const int TwoPointShot = 2;
-        
-        private int currentScore;
+
         private int multiplierScore = 1;
         private int lastScore;
-        
+
         [Inject] private DataHub dataHub;
         private PlayerProgressData progressData;
-        
+        public int CurrentScore { get;  private set; }
+        public int BestScore => progressData.BestScore;
+
         public void Initialize()
         {
             progressData = dataHub.LoadData<PlayerProgressData>("Progress");
@@ -28,12 +29,12 @@ namespace Game.Scripts.Runtime.Feature.Level
         public void CalculateForTwo()
         {
             lastScore = TwoPointShot;
-            currentScore += TwoPointShot;
+            CurrentScore += TwoPointShot;
 
             CheckBestScore();
             
             statusHandler.NotifyAddScore(TwoPointShot);
-            statusHandler.NotifyChangeScore(currentScore);
+            statusHandler.NotifyChangeScore(CurrentScore);
         }
 
         public void CalculateForThree()
@@ -43,11 +44,11 @@ namespace Game.Scripts.Runtime.Feature.Level
             var score = ThreePointShot * multiplierScore;
             lastScore = ThreePointShot;
 
-            currentScore += score;
+            CurrentScore += score;
             CheckBestScore();
             
             statusHandler.NotifyAddScore(score);
-            statusHandler.NotifyChangeScore(currentScore);
+            statusHandler.NotifyChangeScore(CurrentScore);
         }
 
         private void SetMultiplayerScore()
@@ -64,17 +65,17 @@ namespace Game.Scripts.Runtime.Feature.Level
         {
             lastScore = 0;
             multiplierScore = 1;
-            currentScore = 0;
+            CurrentScore = 0;
             
-            statusHandler.NotifyChangeScore(currentScore);
+            statusHandler.NotifyChangeScore(CurrentScore);
         }
 
         private void CheckBestScore()
         {
-            if (currentScore > progressData.BestScore)
+            if (CurrentScore > progressData.BestScore)
             {
-                progressData.BestScore = currentScore;
-                statusHandler.NotifyChangeBestScore(currentScore);
+                progressData.BestScore = CurrentScore;
+                statusHandler.NotifyChangeBestScore(CurrentScore);
                 
                 dataHub.SaveData("Progress" ,progressData);
             }

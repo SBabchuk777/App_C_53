@@ -9,8 +9,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
     {
         [Inject] private SceneNavigation sceneNavigation;
 
-        public int BestScoreCount { get; set; }
-        public int ScoreCount { get; set; }
+        public int BestScoreCount { get; private set; }
+        public int ScoreCount { get; private set; }
         
         public void PrepareView(int scoreCount, int bestScoreCount)
         {
