@@ -4,9 +4,10 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
 {
     public class ProjectContext : MonoBehaviour
     {
+        [SerializeField] private ProjectInstaller installer;
+        
+        public Injector Injector { get; private set; }
         public static ProjectContext Instance { get; private set; }
-        public ProjectInstaller Installer => GetComponentInChildren<ProjectInstaller>();
-        public Injector Injector;
 
         private void Awake()
         {
@@ -17,7 +18,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
 
         private void RunInjector()
         {
-            Injector = new Injector(Installer);
+            Injector = new Injector(installer);
             Injector.Inject();
         }
 

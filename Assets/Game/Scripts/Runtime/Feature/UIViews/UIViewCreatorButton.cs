@@ -13,8 +13,10 @@ namespace Game.Scripts.Runtime.Feature.UIViews
         
         private UIViewService UIViewService => ProjectContext.Instance.GetDependence<UIViewService>();
 
-        private void Awake() => 
+        private void Awake()
+        {
             GetComponent<Button>().onClick.AddListener(Open);
+        }
 
         private void Open()
         {

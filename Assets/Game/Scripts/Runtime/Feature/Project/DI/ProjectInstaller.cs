@@ -1,5 +1,6 @@
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.UIViews.LastChance;
+using Game.Scripts.Runtime.Feature.UIViews.Result;
 using Game.Scripts.Runtime.Feature.UIViews.Settings;
 using Game.Scripts.Runtime.Feature.UIViews.Shop;
 using Game.Scripts.Runtime.Feature.UIViews.Win;
@@ -33,6 +34,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         public WinService WinService;
         public LastChanceController LastChanceController;
         public ShopController ShopController;
+        public ResultController ResultController;
 
         private DIContainer container;
 
@@ -52,6 +54,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
             container.Register(WinService);
             container.Register(LastChanceController);
             container.Register(ShopController);
+            container.Register(ResultController);
         }
 
         private void RegisterServices()

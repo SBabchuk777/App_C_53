@@ -13,16 +13,18 @@ namespace Game.Scripts.Runtime.Services.UIViewService
 
         private Injector Injector => ProjectContext.Instance.Injector;
 
-        public BaseView Instantiate(UIViewType type, Transform transform)
+        public BaseView InstantiatePrefab(UIViewType type, Transform transform)
         {
-            var view = Object.Instantiate(ViewData.ViewDataMap[type].gameObject, Vector3.zero, Quaternion.identity,
-                transform);
+            var instance = Object
+                .Instantiate(ViewData.ViewDataMap[type].gameObject, Vector3.zero, Quaternion.identity, transform)
+                .GetComponent<BaseView>();
             
-            view.transform.localPosition = Vector3.zero;
-            Injector.InjectDependenciesInObject(view.GetComponent<BaseView>());
+            instance.transform.localPosition = Vector3.zero;
+            
+            Injector.InjectDependenciesInObject(instance);
 
 
-            return view.GetComponent<BaseView>();
+            return instance;
         }
     }
 }

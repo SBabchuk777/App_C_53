@@ -13,6 +13,6 @@ namespace Game.Scripts.Runtime.Services.UIViewService
             factory = new UIViewFactory(ViewData);
 
         public BaseView Instantiate(UIViewType type) => 
-            factory.Instantiate(type, transform);
+            factory.InstantiatePrefab(type, transform);
     }
 }
