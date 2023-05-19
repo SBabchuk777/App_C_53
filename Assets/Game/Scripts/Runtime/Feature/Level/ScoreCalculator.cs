@@ -52,7 +52,7 @@ namespace Game.Scripts.Runtime.Feature.Level
 
         private void SetMultiplayerScore()
         {
-            if (lastScore == 3)
+            if (lastScore == 3 && multiplierScore < 3)
             {
                 multiplierScore++;
             }

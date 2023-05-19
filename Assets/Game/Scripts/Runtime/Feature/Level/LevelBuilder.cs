@@ -32,10 +32,11 @@ namespace Game.Scripts.Runtime.Feature.Level
         {
             DestroyBall();
             Hoop.Reset();
-            Hoop.DeactivateAllCollider();
-            
+
             CreateBall();
             CreateStar();
+            
+            Hoop.DeactivateAllCollider();
         }
         
         private void CreateBall()

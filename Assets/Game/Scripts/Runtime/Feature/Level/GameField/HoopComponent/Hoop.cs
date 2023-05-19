@@ -54,6 +54,8 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
             {
                 Destroy(Star.gameObject);
             }
+            
+            gameStatusHandler.NotifyChangeMultiplayerScore(1);
         }
 
         private void SetIsTouch() =>
