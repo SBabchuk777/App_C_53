@@ -14,12 +14,12 @@ namespace Game.Scripts.Runtime.Feature.Level
         [SerializeField] private LevelArbiter levelArbiter;
         [SerializeField] private GameStatusHandler gameStatusHandler;
 
-        public void Start()
+        public void Awake()
         {
             homeButton.onClick.AddListener(levelArbiter.BackLobby);
 
             gameStatusHandler.OnChangeScore += ChangeCurrenText;
-            levelArbiter.OnChangeBest += ChangeBestText;
+            gameStatusHandler.OnChangeBestScore += ChangeBestText;
         }
 
         private void ChangeBestText(int value) => 
@@ -32,6 +32,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         {
             homeButton.onClick.RemoveAllListeners();
             gameStatusHandler.OnChangeScore -= ChangeCurrenText;
+            gameStatusHandler.OnChangeBestScore -= ChangeBestText;
         }
     }
 }

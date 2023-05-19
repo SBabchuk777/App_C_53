@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Game.Scripts.Runtime.Feature.Level.GameField;
 using Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent;
+using Game.Scripts.Runtime.Feature.Project.DI;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime.Feature.Level
@@ -9,6 +10,7 @@ namespace Game.Scripts.Runtime.Feature.Level
     {
         [SerializeField] private GameStatusHandler gameStatusHandler;
         public BallFactory BallFactory;
+        public Star StarPrefab;
 
         public Hoop Hoop;
         public Transform BallAnchor;
@@ -16,29 +18,47 @@ namespace Game.Scripts.Runtime.Feature.Level
 
         public BallDetector BallDetector;
 
-        private Ball Ball;
+        private Ball ball;
+        
+        private Injector Injector => ProjectContext.Instance.Injector;
 
-        public void Start()
+        public void Initialize()
         {
             BallFactory.Initialize();
-            CreateBall();
-            BallDetector.OnBallInArea += () =>
-            {
-                DestroyBall();
-                CreateBall();
-                Hoop.Reset();
-            };
-        }
-        
-        public void CreateBall()
-        {
-            Ball = BallFactory.InstantiateBall(BallAnchor.position, InstanceParent);
-            Hoop.DeactivateAllCollider();
+            BallDetector.OnBallInArea += CreateGameField;
         }
 
-        public void DestroyBall()
+        public void CreateGameField()
         {
-            Destroy(Ball.gameObject);
+            DestroyBall();
+            Hoop.Reset();
+            Hoop.DeactivateAllCollider();
+            
+            CreateBall();
+            CreateStar();
+        }
+        
+        private void CreateBall()
+        {
+            ball = BallFactory.InstantiateBall(BallAnchor.position, InstanceParent);
+        }
+
+        private void CreateStar()
+        {
+            if (Random.Range(0, 100) < 30)
+                return;
+            
+            var instance = Instantiate(StarPrefab, Hoop.StarAnchor.position, Quaternion.identity, InstanceParent);
+            Hoop.SetStar(instance);
+            Injector.InjectDependenciesInObject(instance);
+        }
+
+        private void DestroyBall()
+        {
+            if (ball != null)
+            {
+                Destroy(ball.gameObject);
+            }
         }
     }
 }

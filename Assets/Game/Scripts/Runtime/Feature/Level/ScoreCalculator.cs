@@ -1,4 +1,6 @@
 using System;
+using Game.Scripts.Runtime.Feature.Player;
+using Game.Scripts.Runtime.Feature.Project.DI;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime.Feature.Level
@@ -14,14 +16,26 @@ namespace Game.Scripts.Runtime.Feature.Level
         private int multiplierScore = 1;
         private int lastScore;
         
+        [Inject] private DataHub dataHub;
+        private PlayerProgressData progressData;
+        
+        public void Initialize()
+        {
+            progressData = dataHub.LoadData<PlayerProgressData>("Progress");
+            statusHandler.NotifyChangeBestScore(progressData.BestScore);
+        }
+
         public void CalculateForTwo()
         {
             lastScore = TwoPointShot;
             currentScore += TwoPointShot;
+
+            CheckBestScore();
             
             statusHandler.NotifyAddScore(TwoPointShot);
             statusHandler.NotifyChangeScore(currentScore);
         }
+
         public void CalculateForThree()
         {
             SetMultiplayerScore();
@@ -30,6 +44,7 @@ namespace Game.Scripts.Runtime.Feature.Level
             lastScore = ThreePointShot;
 
             currentScore += score;
+            CheckBestScore();
             
             statusHandler.NotifyAddScore(score);
             statusHandler.NotifyChangeScore(currentScore);
@@ -53,10 +68,16 @@ namespace Game.Scripts.Runtime.Feature.Level
             
             statusHandler.NotifyChangeScore(currentScore);
         }
-        
+
         private void CheckBestScore()
         {
-            
+            if (currentScore > progressData.BestScore)
+            {
+                progressData.BestScore = currentScore;
+                statusHandler.NotifyChangeBestScore(currentScore);
+                
+                dataHub.SaveData("Progress" ,progressData);
+            }
         }
     }
 }

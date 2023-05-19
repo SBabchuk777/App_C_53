@@ -23,7 +23,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
 
         protected override void Subscribe()
         {
-            reloadButton.onClick.AddListener(ClosePanel);
+            reloadButton.onClick.AddListener(ClosePanelAfterReload);
         }
 
         protected override void Initialize()
@@ -42,7 +42,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
                 .Play());
         }
 
-        private void ClosePanel()
+        private void ClosePanelAfterReload()
         {
             view.transform
                 .DOScaleX(0, 0.3f)

@@ -1,5 +1,3 @@
-using System;
-using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Win;
@@ -14,8 +12,8 @@ namespace Game.Scripts.Runtime.Feature.Level
     public class LevelArbiter : MonoBehaviour
     {
         [SerializeField] private GameStatusHandler gameStatusHandler;
-        [SerializeField] private LevelBuilder Builder;
-        [SerializeField] private ScoreCalculator ScoreCalculator;
+        [SerializeField] private LevelBuilder builder;
+        [SerializeField] private ScoreCalculator scoreCalculator;
 
         [Inject] private ImageFader sceneFader;
         [Inject] private WinService winService;
@@ -23,14 +21,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         [Inject] private ProjectAudioPlayer projectAudioPlayer;
         [Inject] private UIViewService uiViewService;
         [Inject] private SceneNavigation sceneNavigation;
-        [Inject] private DataHub dataHub;
 
-        private PlayerProgressData progressData;
-        
-        public int GetBestScore => progressData.BestScore;
-        
-        public event Action<int> OnChangeBest;
-        
         public void Start()
         {
             Initialize();
@@ -39,12 +30,13 @@ namespace Game.Scripts.Runtime.Feature.Level
 
         private void Initialize()
         {
-            progressData = dataHub.LoadData<PlayerProgressData>("Progress");
-            OnChangeBest?.Invoke(progressData.BestScore);
+            scoreCalculator.Initialize();
+            gameStatusHandler.OnMissedToHope += scoreCalculator.ResetData;
+            gameStatusHandler.OnTwoPointGoal +=  scoreCalculator.CalculateForTwo;
+            gameStatusHandler.OnThreePointGoal +=  scoreCalculator.CalculateForThree;
             
-            gameStatusHandler.OnMissedToHope += ScoreCalculator.ResetData;
-            gameStatusHandler.OnTwoPointGoal +=  ScoreCalculator.CalculateForTwo;
-            gameStatusHandler.OnThreePointGoal +=  ScoreCalculator.CalculateForThree;
+            builder.Initialize();
+            builder.CreateGameField();
         }
 
         private void RunAfterInitialize()

@@ -12,6 +12,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         
         public event Action<int> OnChangeMultiplayerScore; 
         public event Action<int> OnChangeScore; 
+        public event Action<int> OnChangeBestScore;
         public event Action<int> OnAddScore; 
 
 
@@ -43,6 +44,11 @@ namespace Game.Scripts.Runtime.Feature.Level
         public void NotifyAddScore(int value)
         {
             OnAddScore?.Invoke(value);
+        }
+
+        public void NotifyChangeBestScore(int value)
+        {
+            OnChangeBestScore?.Invoke(value);
         }
     }
 }

@@ -17,8 +17,10 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
         private Vector3 endPos; // Конечная позиция мяча
         private Rigidbody2D rb; // Компонент Rigidbody2D мяча
         private float startYScale; // Начальное значение масштаба мяча по оси Y
+        
         private bool isBallThrown;
         private bool isCanChangeScale;
+        private bool isClickBall;
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -27,48 +29,53 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
             startYScale = transform.localScale.y;
         }
 
+        private void OnMouseDown()
+        {
+            startYScale = transform.localScale.y;
+            isClickBall = true;
+        }
+
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (isClickBall && !isBallThrown)
             {
-                startYScale = transform.localScale.y; // Сохраняем начальное значение масштаба мяча
-            }
-
-            if (Input.GetMouseButtonUp(0) && !isBallThrown)
-            {
-                endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                var swipeDistance = Vector2.Distance(startPos, endPos);
-
-                if (swipeDistance >= MinSwipeDistance )
-                    ThrowBall();
-                
-                if (transform.position != startPos) 
-                    transform.position = Vector3.Lerp(transform.position, startPos, 1);
-            }
-
-            if (!isBallThrown && Input.GetMouseButton(0))
-            {
-                endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                
-                var swipeDistance = Vector2.Distance(startPos, endPos);
-                if (swipeDistance < MaxSwipeDistance)
+                if (Input.GetMouseButtonUp(0))
                 {
-                    transform.position = Vector3.Lerp(transform.position, new Vector3(endPos.x, endPos.y, transform.position.z), 3f * Time.deltaTime);
-                }
-                if (swipeDistance >= MaxSwipeDistance) 
-                    ThrowBall();
-            }
+                    endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            // Изменение масштаба мяча в полете
+                    var swipeDistance = Vector2.Distance(startPos, endPos);
+
+                    if (swipeDistance >= MinSwipeDistance)
+                    {
+                        ThrowBall();
+                    }
+
+                    if (transform.position != startPos)
+                    {
+                        transform.position = Vector3.Lerp(transform.position, startPos, 1);
+                    }
+                
+                    isClickBall = false;
+                }
+
+                if (Input.GetMouseButton(0))
+                {
+                    endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                
+                    var swipeDistance = Vector2.Distance(startPos, endPos);
+                    if (swipeDistance < MaxSwipeDistance)
+                    {
+                        transform.position = Vector3.Lerp(transform.position, new Vector3(endPos.x, endPos.y, transform.position.z), 3f * Time.deltaTime);
+                    }
+                    if (swipeDistance >= MaxSwipeDistance) 
+                        ThrowBall();
+                }
+                
+            }
+            
             ChangeScaleToPositionY();
         }
-
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            Debug.Log(col);
-        }
-
+        
         public void SetSprite(Sprite sprite) => 
             SpriteRenderer.sprite = sprite;
 
