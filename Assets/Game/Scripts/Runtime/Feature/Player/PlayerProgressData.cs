@@ -12,5 +12,8 @@ namespace Game.Scripts.Runtime.Feature.Player
         public int CurrentIDBallSkin;
 
         public List<int> AvailableSkins;
+        
+        public List<int> AvailableRegularColection;
+        public List<int> AvailableRareColection;
     }
 }

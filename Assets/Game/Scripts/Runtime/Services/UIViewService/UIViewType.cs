@@ -5,6 +5,7 @@ namespace Game.Scripts.Runtime.Services.UIViewService
         Settings,
         Shop,
         Result,
+        Collection,
         SelectLevel,
         LastChance,
         WinLose,

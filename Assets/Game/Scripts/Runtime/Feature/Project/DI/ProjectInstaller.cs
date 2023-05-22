@@ -35,6 +35,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         public LastChanceController LastChanceController;
         public ShopController ShopController;
         public ResultController ResultController;
+        public CollectionController CollectionController;
 
         private DIContainer container;
 
@@ -55,6 +56,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
             container.Register(LastChanceController);
             container.Register(ShopController);
             container.Register(ResultController);
+            container.Register(CollectionController);
         }
 
         private void RegisterServices()

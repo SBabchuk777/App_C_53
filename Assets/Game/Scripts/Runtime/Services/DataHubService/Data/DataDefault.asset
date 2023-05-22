@@ -26,3 +26,5 @@ MonoBehaviour:
     BestScore: 2
     CurrentIDBallSkin: 0
     AvailableSkins: 00000000
+    AvailableRegularColection: 0000000003000000
+    AvailableRareColection: 01000000
