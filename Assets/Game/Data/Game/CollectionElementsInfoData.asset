@@ -34,17 +34,20 @@ MonoBehaviour:
       ActiveElementImage: {fileID: 21300000, guid: eaf7c4c797bd940f1b14cf0b9a5a8c17, type: 3}
       ElementText: Basket
   RareElementsPathMap:
-    m_keys: 000000000100000002000000
+    m_keys: 00000000010000000200000003000000
     m_values:
     - InactiveElementImage: {fileID: 21300000, guid: 7f765b0ca51be4c6398797a2f1bad69f, type: 3}
       ActiveElementImage: {fileID: 21300000, guid: d27910f4babcf475ea1a7cc6c45374e1, type: 3}
       ElementText: "\u21161"
     - InactiveElementImage: {fileID: 21300000, guid: 090905a7f8c094e49b295434b6705812, type: 3}
       ActiveElementImage: {fileID: 21300000, guid: 0362165f47d504b9598cde12c2968185, type: 3}
-      ElementText: "\u21161"
+      ElementText: Worldwide Award
     - InactiveElementImage: {fileID: 21300000, guid: 00e0c97be8dcd4e3a9b160533da5c6ef, type: 3}
       ActiveElementImage: {fileID: 21300000, guid: 90cf6a156a58f4547a777a7fb5633874, type: 3}
-      ElementText: "\u21161"
+      ElementText: Legendary T-shirt
+    - InactiveElementImage: {fileID: 21300000, guid: ec096703f7fd643da89d8eca220f0597, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: 71e6caa07e5f64dcdad5ac6947746d37, type: 3}
+      ElementText: Fireball
   ActiveBackground: {fileID: 21300000, guid: 933490fcf71b940f89afb1c02076ee91, type: 3}
   ActiveRareBackground: {fileID: 21300000, guid: fb6844f0ba5e2458ea805f3981ec435d, type: 3}
   InactiveBackground: {fileID: 21300000, guid: 70a9d30b636c04eeba08dfc6627c03e8, type: 3}
