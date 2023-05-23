@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DataDefault
   m_EditorClassIdentifier: 
   Bank:
-    Coin: 9650
+    Coin: 9550
     Gem: 0
   Settings:
     IsSound: 1

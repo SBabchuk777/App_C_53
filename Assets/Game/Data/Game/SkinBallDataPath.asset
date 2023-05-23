@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkinBallDataPath
   m_EditorClassIdentifier: 
   PathMap:
-    m_keys: 00000000010000000200000003000000
+    m_keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c000000
     m_values:
     - Skin: {fileID: 21300000, guid: e0b115a7ae5894af5a184950fcab4b14, type: 3}
       Count: 0
@@ -23,3 +23,21 @@ MonoBehaviour:
       Count: 200
     - Skin: {fileID: 21300000, guid: 6918a99fd66dc4c14a6d7f30300d3e0f, type: 3}
       Count: 300
+    - Skin: {fileID: 21300000, guid: 5213f47eb38ec46508ac8d3a37f6c4e4, type: 3}
+      Count: 300
+    - Skin: {fileID: 21300000, guid: 789237d7bef1949d285c208a4d4793a5, type: 3}
+      Count: 400
+    - Skin: {fileID: 21300000, guid: fe7e17961817549d196a4bd75444f510, type: 3}
+      Count: 400
+    - Skin: {fileID: 21300000, guid: 87f4e0dfd950848f18111da983ed0836, type: 3}
+      Count: 500
+    - Skin: {fileID: 21300000, guid: 16533d27338c04e69ad4639bc75f2d7c, type: 3}
+      Count: 500
+    - Skin: {fileID: 21300000, guid: d1c5b402fdc2042bc898d9a4ad8a79d5, type: 3}
+      Count: 600
+    - Skin: {fileID: 21300000, guid: e9d0ab1e9169c4f45aa6a0283b8dfc39, type: 3}
+      Count: 700
+    - Skin: {fileID: 21300000, guid: d84e05a0fa560429794c8d1d557193dc, type: 3}
+      Count: 800
+    - Skin: {fileID: 21300000, guid: 2554dbcaade204d2ea8695777e2ef276, type: 3}
+      Count: 1000
