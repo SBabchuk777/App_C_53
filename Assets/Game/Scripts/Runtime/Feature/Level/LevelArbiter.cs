@@ -2,7 +2,6 @@ using System;
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Result;
-using Game.Scripts.Runtime.Feature.UIViews.Win;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
@@ -18,7 +17,6 @@ namespace Game.Scripts.Runtime.Feature.Level
         [SerializeField] private ScoreCalculator scoreCalculator;
 
         [Inject] private ImageFader sceneFader;
-        [Inject] private WinService winService;
         [Inject] private BankService bankService;
         [Inject] private ProjectAudioPlayer projectAudioPlayer;
         [Inject] private UIViewService uiViewService;

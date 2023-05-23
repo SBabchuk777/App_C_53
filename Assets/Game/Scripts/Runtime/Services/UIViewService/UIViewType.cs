@@ -8,9 +8,6 @@ namespace Game.Scripts.Runtime.Services.UIViewService
         Collection,
         ShopCollection,
         ShopCollectionPopUp,
-        SelectLevel,
-        LastChance,
-        WinLose,
-        First
+        Challenge
     }
 }

@@ -16,5 +16,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.LastChance
         public Color ActiveOutlineColor;
         public Color ActiveRareOutlineColor;
         public Color InactiveOutlineColor;
+
+        public float AllElementsCount => RegularElementsMap.Count + RareElementsPathMap.Count;
     }
 }

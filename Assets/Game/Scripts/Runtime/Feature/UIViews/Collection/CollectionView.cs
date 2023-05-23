@@ -53,7 +53,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.LastChance
             collectionController.OnUpdateView -= PrepareView;
         }
 
-        public void ClosePanel()
+        private void ClosePanel()
         {
             transform.DOLocalMoveX(-1080, 0.5f).Play().OnComplete(Close);
         }

@@ -1,16 +1,14 @@
 using Game.Scripts.Runtime.Feature.Project.Audio;
+using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using Game.Scripts.Runtime.Feature.UIViews.Collection;
-using Game.Scripts.Runtime.Feature.UIViews.LastChance;
 using Game.Scripts.Runtime.Feature.UIViews.Result;
 using Game.Scripts.Runtime.Feature.UIViews.Settings;
 using Game.Scripts.Runtime.Feature.UIViews.Shop;
 using Game.Scripts.Runtime.Feature.UIViews.ShopCollection;
-using Game.Scripts.Runtime.Feature.UIViews.Win;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.Audio;
 using Game.Scripts.Runtime.Services.Bank;
-using Game.Scripts.Runtime.Services.Bonus;
 using Game.Scripts.Runtime.Services.Pause;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
 using Game.Scripts.Runtime.Services.UIViewService;
@@ -22,7 +20,6 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
     {
         public ImageFader SceneFader;
         public BankService BankService;
-        public BonusService BonusService;
         public AudioService AudioService;
         public SettingService SettingService;
         public SceneNavigation SceneNavigation;
@@ -33,12 +30,11 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         public DataHub DataHub;
 
         [Header("Controllers in MVC")]
-        public WinService WinService;
-        public LastChanceController LastChanceController;
         public ShopController ShopController;
         public ResultController ResultController;
         public CollectionController CollectionController;
         public ShopCollectionController ShopCollectionController;
+        public ChallengeController ChallengeController;
 
         private DIContainer container;
 
@@ -55,19 +51,17 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
 
         private void RegisterControllers()
         {
-            container.Register(WinService);
-            container.Register(LastChanceController);
             container.Register(ShopController);
             container.Register(ResultController);
             container.Register(CollectionController);
             container.Register(ShopCollectionController);
+            container.Register(ChallengeController);
         }
 
         private void RegisterServices()
         {
             container.Register(SceneFader);
             container.Register(BankService);
-            container.Register(BonusService);
             container.Register(AudioService);
             container.Register(SettingService);
             container.Register(SceneNavigation);
