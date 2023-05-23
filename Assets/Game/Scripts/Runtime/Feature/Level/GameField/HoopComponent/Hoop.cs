@@ -15,6 +15,8 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
         [SerializeField] private BallDetector leftDetector;
         [SerializeField] private BallDetector rightDetector;
 
+        [SerializeField] private SpriteRenderer circleRenderer;
+
         public Transform StarAnchor;
 
         private Star Star { get; set; }
@@ -68,6 +70,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
 
             goalDetector.ActivateCollider();
             missDetector.ActivateCollider();
+            circleRenderer.sortingOrder = 5;
 
             if (Star != null)
             {
@@ -82,6 +85,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
 
             goalDetector.DeactivateCollider();
             missDetector.DeactivateCollider();
+            circleRenderer.sortingOrder = 4;
 
             if (Star != null)
             {

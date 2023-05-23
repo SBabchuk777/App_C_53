@@ -24,6 +24,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         protected override void Subscribe()
         {
             reloadButton.onClick.AddListener(ClosePanelAfterReload);
+            closeButton.onClick.AddListener(BackMenu);
         }
 
         protected override void Initialize()
@@ -47,6 +48,12 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
             view.transform
                 .DOScaleX(0, 0.3f)
                 .OnComplete(() => fader.FadeOut(0.3f, Close))
+                .Play();
+        }
+        private void BackMenu()
+        {
+            resultController.BackToMenu();
+            DOTween.Sequence().Append(DOVirtual.DelayedCall(0.8f, Close))
                 .Play();
         }
 
