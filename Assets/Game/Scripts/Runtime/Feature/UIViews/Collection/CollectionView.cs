@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Feature.UIViews.Collection;
 using Game.Scripts.Runtime.Feature.UIViews.Shop;
 using Game.Scripts.Runtime.Services.UIViewService;
 using UnityEngine;
@@ -19,14 +20,21 @@ namespace Game.Scripts.Runtime.Feature.UIViews.LastChance
         protected override void Subscribe()
         {
             closeButton.onClick.AddListener(ClosePanel);
+            collectionController.OnUpdateView += PrepareView;
         }
 
         protected override void Initialize()
+        {
+            PrepareView();
+        }
+
+        private void PrepareView()
         {
             for (var i = 0; i < collectionController.RegularElementCollections.Count; i++)
             {
                 regularElementCollections[i].SetElement(collectionController.RegularElementCollections[i]);
             }
+
             for (var i = 0; i < collectionController.RareElementCollections.Count; i++)
             {
                 rareElementCollections[i].SetElement(collectionController.RareElementCollections[i]);
@@ -42,6 +50,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.LastChance
         protected override void Unsubscribe()
         {
             closeButton.onClick.RemoveAllListeners();
+            collectionController.OnUpdateView -= PrepareView;
         }
 
         public void ClosePanel()

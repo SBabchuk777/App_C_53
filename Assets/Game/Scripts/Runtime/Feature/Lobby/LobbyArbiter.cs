@@ -1,6 +1,7 @@
 using Game.Scripts.Runtime.Feature.Level;
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Feature.UIViews.Collection;
 using Game.Scripts.Runtime.Feature.UIViews.LastChance;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.SceneLoaderService;

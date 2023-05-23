@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Feature.UIViews.LastChance;
 using UnityEngine;
 
-namespace Game.Scripts.Runtime.Feature.UIViews.LastChance
+namespace Game.Scripts.Runtime.Feature.UIViews.Collection
 {
     public class CollectionController : MonoBehaviour, IProjectInitializable
     {
@@ -11,7 +13,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.LastChance
         
         [Inject] private DataHub dataHub;
         private PlayerProgressData progressData;
-        
+        public event Action OnUpdateView;
+
         public List<ElementPanelInfo> RegularElementCollections { get; private set; }
         public List<ElementPanelInfo> RareElementCollections { get; private set; }
 
@@ -27,6 +30,12 @@ namespace Game.Scripts.Runtime.Feature.UIViews.LastChance
 
             SetRegular();
             SetRare();
+        }
+
+        public void UpdateView()
+        {
+            PrepareView();
+            OnUpdateView?.Invoke();
         }
 
         private void SetRare()

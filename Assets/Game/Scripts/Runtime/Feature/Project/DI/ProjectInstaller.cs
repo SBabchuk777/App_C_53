@@ -1,8 +1,10 @@
 using Game.Scripts.Runtime.Feature.Project.Audio;
+using Game.Scripts.Runtime.Feature.UIViews.Collection;
 using Game.Scripts.Runtime.Feature.UIViews.LastChance;
 using Game.Scripts.Runtime.Feature.UIViews.Result;
 using Game.Scripts.Runtime.Feature.UIViews.Settings;
 using Game.Scripts.Runtime.Feature.UIViews.Shop;
+using Game.Scripts.Runtime.Feature.UIViews.ShopCollection;
 using Game.Scripts.Runtime.Feature.UIViews.Win;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.ADSUnity;
@@ -36,6 +38,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         public ShopController ShopController;
         public ResultController ResultController;
         public CollectionController CollectionController;
+        public ShopCollectionController ShopCollectionController;
 
         private DIContainer container;
 
@@ -57,6 +60,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
             container.Register(ShopController);
             container.Register(ResultController);
             container.Register(CollectionController);
+            container.Register(ShopCollectionController);
         }
 
         private void RegisterServices()
