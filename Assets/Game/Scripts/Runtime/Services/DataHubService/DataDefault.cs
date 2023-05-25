@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Game.Scripts.Runtime.Feature.Player;
+using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using Game.Scripts.Runtime.Feature.UIViews.Settings;
 using Game.Scripts.Runtime.Services.Bank;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         public BankData Bank;
         public SettingsData Settings;
         public PlayerProgressData Progress;
+        public ChallengeData Challenge;
 
         public Dictionary<string, DataPayload> DatesMap()
         {
@@ -20,6 +22,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
             datesMap.Add("Bank", Bank);
             datesMap.Add("Settings", Settings);
             datesMap.Add("Progress", Progress);
+            datesMap.Add("Challenge", Challenge);
             
             return datesMap;
         }

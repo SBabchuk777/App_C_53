@@ -28,11 +28,13 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
 
         public void SetActive()
         {
+            inactive.SetActive(false);
             active.gameObject.SetActive(true);
         }
 
         public void SetInactive()
         {
+            active.gameObject.SetActive(false);
             inactive.SetActive(true);
         }
 

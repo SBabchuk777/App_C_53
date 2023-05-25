@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DataDefault
   m_EditorClassIdentifier: 
   Bank:
-    Coin: 9550
+    Coin: 10000
     Gem: 0
   Settings:
     IsSound: 1
@@ -28,3 +28,8 @@ MonoBehaviour:
     AvailableSkins: 00000000
     AvailableRegularColection: 
     AvailableRareColection: 
+  Challenge:
+    IsActiveButtons: 0101
+    CountLastTime:
+    - 0
+    - 0

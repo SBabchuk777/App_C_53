@@ -1,6 +1,7 @@
 using Game.Scripts.Runtime.Feature.Level;
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using Game.Scripts.Runtime.Feature.UIViews.Collection;
 using Game.Scripts.Runtime.Feature.UIViews.LastChance;
 using Game.Scripts.Runtime.Services;
@@ -13,13 +14,13 @@ namespace Game.Scripts.Runtime.Feature.Lobby
 {
     public class LobbyArbiter : MonoBehaviour
     {
-        [SerializeField] private Button collectionButton;
         
         [Inject] private ImageFader sceneFader;
         [Inject] private SceneNavigation sceneNavigation ;
         [Inject] private ProjectAudioPlayer projectAudioPlayer;
         [Inject] private UIViewService uiViewService;
         [Inject] private CollectionController collectionController;
+        [Inject] private ChallengeController challengeController;
         
         private LevelGameData LevelGameData => 
             ProjectContext.Instance.GetDependence<DataHub>().LevelGameData;
@@ -32,7 +33,7 @@ namespace Game.Scripts.Runtime.Feature.Lobby
 
         private void Initialize()
         {
-            collectionButton.onClick.AddListener(OpenCollectionView);
+            
         }
 
         private void RunAfterInitialize()
@@ -45,13 +46,17 @@ namespace Game.Scripts.Runtime.Feature.Lobby
             collectionController.PrepareView();
             uiViewService.Instantiate(UIViewType.Collection);
         }
+        public void OpenChallengeView()
+        {
+            challengeController.PrepareView();
+            uiViewService.Instantiate(UIViewType.Challenge);
+        }
         
         public void StartGame() => sceneNavigation.LoadLevel();
 
         public void OnDestroy()
         {
             projectAudioPlayer.StopAudioAmbientOnLobby();
-            collectionButton.onClick.RemoveAllListeners();
         }
     }
 }
