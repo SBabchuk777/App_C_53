@@ -1,3 +1,4 @@
+using Game.Scripts.Runtime.Feature.Level;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
 using UnityEngine;
@@ -12,10 +13,17 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         public int BestScoreCount { get; private set; }
         public int ScoreCount { get; private set; }
         
+        public GameStatusType GameStatusType { get; set; }
         public void PrepareView(int scoreCount, int bestScoreCount)
         {
             ScoreCount = scoreCount;
             BestScoreCount = bestScoreCount;
+        }
+        
+        public void PrepareNewBallView(GameStatusType statusType)
+        {
+            GameStatusType = statusType;
+            //logic get new ball
         }
         public void BackToMenu()
         {

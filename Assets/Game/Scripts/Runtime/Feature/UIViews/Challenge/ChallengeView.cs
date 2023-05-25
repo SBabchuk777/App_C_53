@@ -10,31 +10,31 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
     public class ChallengeView : BaseView
     {
         [SerializeField] private Button closeButton;
-        [SerializeField] private SerializableDictionary<ChallengeType, ChallengeButton> challengeButtons;
+        [SerializeField] private SerializableDictionary<GameModeType, ChallengeButton> challengeButtons;
         
         [Inject] private ChallengeController challengeController;
         protected override void Subscribe()
         {
             closeButton.onClick.AddListener(ClosePanel);
-            challengeButtons[ChallengeType.Collect].SetActiveButton(challengeController.OpenCollectionView);
+            challengeButtons[GameModeType.Collect].SetActiveButton(challengeController.OpenCollectionView);
             
-            challengeController.OnTimerTick[0] += challengeButtons[ChallengeType.NewBall].SetTimerText;
-            challengeController.OnTimerTick[1] += challengeButtons[ChallengeType.Time].SetTimerText;
+            challengeController.OnTimerTick[0] += challengeButtons[GameModeType.NewBall].SetTimerText;
+            challengeController.OnTimerTick[1] += challengeButtons[GameModeType.Time].SetTimerText;
         }
 
         protected override void Initialize()
         {
-            challengeButtons[ChallengeType.Collect].SetProgressBar(challengeController.GetProgressValueCollectButton());
+            challengeButtons[GameModeType.Collect].SetProgressBar(challengeController.GetProgressValueCollectButton());
 
             for (var i = 0; i < 2; i++)
             {
                 if (challengeController.ChallengeData.IsActiveButtons[i])
                 {
-                    ActivateButton((ChallengeType)i);
+                    ActivateButton((GameModeType)i);
                 }
                 else
                 {
-                    InactivateButton((ChallengeType)i);
+                    InactivateButton((GameModeType)i);
                 }
             }
         }
@@ -48,19 +48,19 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         protected override void Unsubscribe()
         {
             closeButton.onClick.RemoveAllListeners();
-            challengeButtons[ChallengeType.Collect].ResetButton();
+            challengeButtons[GameModeType.Collect].ResetButton();
             
-            challengeController.OnTimerTick[0] -= challengeButtons[ChallengeType.NewBall].SetTimerText;
-            challengeController.OnTimerTick[1] -= challengeButtons[ChallengeType.Time].SetTimerText;
+            challengeController.OnTimerTick[0] -= challengeButtons[GameModeType.NewBall].SetTimerText;
+            challengeController.OnTimerTick[1] -= challengeButtons[GameModeType.Time].SetTimerText;
         }
 
-        private void ActivateButton(ChallengeType type)
+        private void ActivateButton(GameModeType type)
         {
             challengeButtons[type].SetActive();
             //challengeButtons[type].SetActiveButton();
         }
 
-        private void InactivateButton(ChallengeType type)
+        private void InactivateButton(GameModeType type)
         {
             challengeButtons[type].SetInactive();
         }
@@ -68,12 +68,5 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         {
             transform.DOLocalMoveX(-1080, 0.5f).Play().OnComplete(Close);
         }
-    }
-
-    public enum ChallengeType
-    {
-        NewBall,
-        Time,
-        Collect
     }
 }

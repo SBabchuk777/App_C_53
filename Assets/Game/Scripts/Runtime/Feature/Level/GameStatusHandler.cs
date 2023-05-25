@@ -1,4 +1,5 @@
 using System;
+using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime.Feature.Level
@@ -7,13 +8,14 @@ namespace Game.Scripts.Runtime.Feature.Level
     {
         public event Action OnTwoPointGoal;
         public event Action OnThreePointGoal;
-        
+
         public event Action OnMissedToHope;
-        
-        public event Action<int> OnChangeMultiplayerScore; 
-        public event Action<int> OnChangeScore; 
+        public event Action<GameStatusType> OnFinishBallGame;
+
+        public event Action<int> OnChangeMultiplayerScore;
+        public event Action<int> OnChangeScore;
         public event Action<int> OnChangeBestScore;
-        public event Action<int> OnAddScore; 
+        public event Action<int> OnAddScore;
 
 
         public void NotifyTwoPointGoal()
@@ -26,7 +28,7 @@ namespace Game.Scripts.Runtime.Feature.Level
             OnThreePointGoal?.Invoke();
         }
 
-        public void NotifyMissedToHope()
+        public void NotifyMissedToHope(GameModeType type)
         {
             OnMissedToHope?.Invoke();
         }
@@ -49,6 +51,11 @@ namespace Game.Scripts.Runtime.Feature.Level
         public void NotifyChangeBestScore(int value)
         {
             OnChangeBestScore?.Invoke(value);
+        }
+
+        public void NotifyFinishBallGame(GameStatusType statusType)
+        {
+            OnFinishBallGame?.Invoke(statusType);
         }
     }
 }

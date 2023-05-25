@@ -1,6 +1,7 @@
 using System;
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using Game.Scripts.Runtime.Feature.UIViews.Result;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.Bank;
@@ -22,6 +23,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         [Inject] private UIViewService uiViewService;
         [Inject] private SceneNavigation sceneNavigation;
         [Inject] private ResultController resultController;
+        [Inject] private DataHub dataHub;
 
         public void Start()
         {
@@ -32,27 +34,43 @@ namespace Game.Scripts.Runtime.Feature.Level
         private void Initialize()
         {
             scoreCalculator.Initialize();
-            gameStatusHandler.OnMissedToHope += FinishGame;
-            gameStatusHandler.OnTwoPointGoal +=  scoreCalculator.CalculateForTwo;
-            gameStatusHandler.OnThreePointGoal +=  scoreCalculator.CalculateForThree;
+            if (dataHub.LevelGameData.GameModeType == GameModeType.Default)
+            {
+                gameStatusHandler.OnMissedToHope += FinishDefaultGame;
+            }
             
+            if (dataHub.LevelGameData.GameModeType == GameModeType.NewBall)
+            {
+                gameStatusHandler.OnFinishBallGame += FinishNewBallGame;
+            }
+            
+            gameStatusHandler.OnTwoPointGoal += scoreCalculator.CalculateForTwo;
+            gameStatusHandler.OnThreePointGoal += scoreCalculator.CalculateForThree;
+
             builder.Initialize();
             builder.CreateGameField();
         }
 
-        private void FinishGame()
+        private void FinishDefaultGame()
         {
             resultController.PrepareView(scoreCalculator.CurrentScore, scoreCalculator.BestScore);
             uiViewService.Instantiate(UIViewType.Result);
             scoreCalculator.ResetData();
+        }
+        
+        private void FinishNewBallGame(GameStatusType statusType)
+        {
+            resultController.PrepareNewBallView(statusType);
+            uiViewService.Instantiate(UIViewType.Result);
+            scoreCalculator.ResetData();
+            builder.ResetNewBallGame();
         }
 
         private void RunAfterInitialize()
         {
         }
 
-        public void BackLobby() => 
+        public void BackLobby() =>
             sceneFader.FadeTo(0.8f, () => sceneNavigation.LoadLobby());
-        
     }
 }

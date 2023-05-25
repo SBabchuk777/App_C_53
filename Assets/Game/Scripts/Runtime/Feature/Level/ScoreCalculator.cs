@@ -32,9 +32,10 @@ namespace Game.Scripts.Runtime.Feature.Level
             CurrentScore += TwoPointShot;
 
             CheckBestScore();
-            
+
             statusHandler.NotifyAddScore(TwoPointShot);
             statusHandler.NotifyChangeScore(CurrentScore);
+            statusHandler.NotifyChangeMultiplayerScore(1);
         }
 
         public void CalculateForThree()
@@ -46,7 +47,7 @@ namespace Game.Scripts.Runtime.Feature.Level
 
             CurrentScore += score;
             CheckBestScore();
-            
+
             statusHandler.NotifyAddScore(score);
             statusHandler.NotifyChangeScore(CurrentScore);
         }
@@ -68,6 +69,7 @@ namespace Game.Scripts.Runtime.Feature.Level
             CurrentScore = 0;
             
             statusHandler.NotifyChangeScore(CurrentScore);
+            statusHandler.NotifyChangeMultiplayerScore(1);
         }
 
         private void CheckBestScore()
