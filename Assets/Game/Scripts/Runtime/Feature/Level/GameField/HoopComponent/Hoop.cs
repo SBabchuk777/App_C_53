@@ -90,7 +90,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
 
             goalDetector.ActivateCollider();
             missDetector.ActivateCollider();
-            circleRenderer.sortingOrder = 5;
+            circleRenderer.sortingOrder = 6;
 
             if (Star != null)
             {
@@ -105,7 +105,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
 
             goalDetector.DeactivateCollider();
             missDetector.DeactivateCollider();
-            circleRenderer.sortingOrder = 3;
+            circleRenderer.sortingOrder = 4;
 
             if (Star != null)
             {

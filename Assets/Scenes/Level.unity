@@ -1761,6 +1761,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2768605982948244661, guid: 865de144f980e4607a652c6a62d9258d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768605983871634922, guid: 865de144f980e4607a652c6a62d9258d, type: 3}
+      propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2768605983871634925, guid: 865de144f980e4607a652c6a62d9258d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6377303276575844002, guid: 865de144f980e4607a652c6a62d9258d, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -2131,7 +2143,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.36220375, y: 0.87900007}
   m_AnchorMax: {x: 0.628, y: 0.9502915}
-  m_AnchoredPosition: {x: -0.020019531, y: -0.05999756}
+  m_AnchoredPosition: {x: -0.020019531, y: -0.059936523}
   m_SizeDelta: {x: -1.4700012, y: 0.17999268}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1271766213
@@ -3246,7 +3258,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.15956251}
-  m_AnchoredPosition: {x: 0, y: -64.19618}
+  m_AnchoredPosition: {x: 0, y: -64.19617}
   m_SizeDelta: {x: 316.32996, y: 127.23999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1884347997
@@ -3670,7 +3682,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3dabf9097124ca2a456e86d3167ef39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameType: 0
   gameStatusHandler: {fileID: 1150414897}
   scoreCalculator: {fileID: 1925610812}
   newBallChallengeSettings:

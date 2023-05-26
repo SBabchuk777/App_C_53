@@ -42,6 +42,7 @@ namespace Game.Scripts.Runtime.Feature.Level
             if (dataHub.LevelGameData.GameModeType == GameModeType.NewBall)
             {
                 gameStatusHandler.OnFinishBallGame += FinishNewBallGame;
+                uiViewService.Instantiate(UIViewType.LevelPreview);
             }
             
             gameStatusHandler.OnTwoPointGoal += scoreCalculator.CalculateForTwo;

@@ -4,6 +4,6 @@ namespace Game.Scripts.Runtime.Feature.Level
 {
     public class LevelGameData
     {
-        public GameModeType GameModeType = GameModeType.Default;
+        public GameModeType GameModeType = GameModeType.NewBall;
     }
 }

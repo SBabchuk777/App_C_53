@@ -93,7 +93,6 @@ namespace Game.Scripts.Runtime.Feature.Level
 
             if (stick.IsTouch)
             {
-                newBallChallengeSettings.CountAnchor++;
                 stick.ResetStick();
             }
             else
@@ -110,6 +109,7 @@ namespace Game.Scripts.Runtime.Feature.Level
 
             stick.MoveTo(newBallChallengeSettings.GetStickPosition);
             Hoop.MoveTo(newBallChallengeSettings.GetHoopPosition);
+            newBallChallengeSettings.CountAnchor++;
         }
 
         private void MoveHoop()
