@@ -11,5 +11,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         public DateTime LastDateTime;
 
         public float[] CountLastTime;
+
+        public int CountPlayGameInNewBall { get; set; }
     }
 }

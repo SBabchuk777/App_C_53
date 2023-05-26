@@ -1653,18 +1653,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5382205038858697716, guid: 865de144f980e4607a652c6a62d9258d, type: 3}
-      propertyPath: maxGetTime.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5382205038858697716, guid: 865de144f980e4607a652c6a62d9258d, type: 3}
-      propertyPath: maxGetTime.Array.data[0]
-      value: 21600
-      objectReference: {fileID: 0}
-    - target: {fileID: 5382205038858697716, guid: 865de144f980e4607a652c6a62d9258d, type: 3}
-      propertyPath: maxGetTime.Array.data[1]
-      value: 10800
-      objectReference: {fileID: 0}
     - target: {fileID: 6377303276575844002, guid: 865de144f980e4607a652c6a62d9258d, type: 3}
       propertyPath: m_RootOrder
       value: 4

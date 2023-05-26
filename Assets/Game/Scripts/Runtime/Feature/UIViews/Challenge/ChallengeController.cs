@@ -4,6 +4,7 @@ using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Collection;
 using Game.Scripts.Runtime.Feature.UIViews.LastChance;
+using Game.Scripts.Runtime.Services.SceneLoaderService;
 using Game.Scripts.Runtime.Services.Timer;
 using Game.Scripts.Runtime.Services.UIViewService;
 using UnityEngine;
@@ -18,6 +19,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         [Inject] private CollectionController collectionController;
         [Inject] private UIViewService uiViewService;
         [Inject] private DataHub dataHub;
+        [Inject] private SceneNavigation sceneNavigation;
 
         public Action<string>[] OnTimerTick = new Action<string>[2];
         public Action[] OnTimerFinish = new Action[2];
@@ -26,6 +28,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         private TimeConverter timeConverter = new();
 
         public ChallengeData ChallengeData { get; private set; }
+
+        public event Action OnClosePanel;
 
         public void Initialize()
         {
@@ -37,12 +41,24 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             collectionController.PrepareView();
             uiViewService.Instantiate(UIViewType.Collection);
         }
+        public void OpenNewBallGame()
+        {
+            dataHub.LevelGameData.GameModeType = GameModeType.NewBall;
+            sceneNavigation.LoadLevel();
+            OnClosePanel?.Invoke();
+        }
 
         public int GetProgressValueCollectButton()
         {
             var progressData = dataHub.LoadData<PlayerProgressData>("Progress");
             float allAvailableCount = progressData.AvailableRareColection.Count + progressData.AvailableRegularColection.Count;
             var value = allAvailableCount / collectionElementsInfoData.AllElementsCount * 100;
+            
+            return Mathf.FloorToInt(value);
+        }
+        public int GetProgressValueNewBallButton()
+        {
+            var value = ChallengeData.CountPlayGameInNewBall / 5f * 100;
             
             return Mathf.FloorToInt(value);
         }

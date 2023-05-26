@@ -97,9 +97,9 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
             
             if (direction.y < 0.02)
                 return;
-            if (direction.x < -0.01f)
+            if (direction.x < -0.015f)
                 return;
-            if (direction.x > 0.01)
+            if (direction.x > 0.015f)
                 return;
             
             var distanceMultiplier = distance / Vector2.Distance(startPos, endPos); // Множитель для задания фиксированного расстояния полета

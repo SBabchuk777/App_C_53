@@ -1,6 +1,7 @@
 using System;
 using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime.Feature.Level
@@ -74,13 +75,15 @@ namespace Game.Scripts.Runtime.Feature.Level
 
         private void CheckBestScore()
         {
-            if (CurrentScore > progressData.BestScore)
+            if (dataHub.LevelGameData.GameModeType != GameModeType.Default || CurrentScore <= progressData.BestScore)
             {
-                progressData.BestScore = CurrentScore;
-                statusHandler.NotifyChangeBestScore(CurrentScore);
-                
-                dataHub.SaveData("Progress" ,progressData);
+                return;
             }
+            
+            progressData.BestScore = CurrentScore;
+            statusHandler.NotifyChangeBestScore(CurrentScore);
+                
+            dataHub.SaveData("Progress" ,progressData);
         }
     }
 }

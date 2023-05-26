@@ -10,16 +10,22 @@ namespace Game.Scripts.Runtime.Feature.Level
         [SerializeField] private Text currentScoreText;
         
         [SerializeField] private Button homeButton;
+        [SerializeField] private GameObject scorePanel;
         
         [SerializeField] private LevelArbiter levelArbiter;
         [SerializeField] private GameStatusHandler gameStatusHandler;
 
-        public void Awake()
+        public void Start()
         {
             homeButton.onClick.AddListener(levelArbiter.BackLobby);
 
             gameStatusHandler.OnChangeScore += ChangeCurrenText;
             gameStatusHandler.OnChangeBestScore += ChangeBestText;
+
+            if (levelArbiter.IsActiveScorePanel)
+            {
+                scorePanel.SetActive(true);
+            }
         }
 
         private void ChangeBestText(int value) => 

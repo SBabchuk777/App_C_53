@@ -21,7 +21,7 @@ namespace Game.Scripts.Runtime.Feature.Lobby
         [Inject] private UIViewService uiViewService;
         [Inject] private CollectionController collectionController;
         [Inject] private ChallengeController challengeController;
-        
+
         private LevelGameData LevelGameData => 
             ProjectContext.Instance.GetDependence<DataHub>().LevelGameData;
         
@@ -52,7 +52,11 @@ namespace Game.Scripts.Runtime.Feature.Lobby
             uiViewService.Instantiate(UIViewType.Challenge);
         }
         
-        public void StartGame() => sceneNavigation.LoadLevel();
+        public void StartGame()
+        {
+            LevelGameData.GameModeType = GameModeType.Default;
+            sceneNavigation.LoadLevel();
+        }
 
         public void OnDestroy()
         {

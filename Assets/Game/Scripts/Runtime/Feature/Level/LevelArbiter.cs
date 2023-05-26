@@ -1,4 +1,4 @@
-using System;
+using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Challenge;
@@ -23,8 +23,11 @@ namespace Game.Scripts.Runtime.Feature.Level
         [Inject] private UIViewService uiViewService;
         [Inject] private SceneNavigation sceneNavigation;
         [Inject] private ResultController resultController;
+        [Inject] private ChallengeController challengeController;
         [Inject] private DataHub dataHub;
 
+        public bool IsActiveScorePanel => dataHub.LevelGameData.GameModeType == GameModeType.Default;
+        
         public void Start()
         {
             Initialize();
@@ -34,6 +37,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         private void Initialize()
         {
             scoreCalculator.Initialize();
+            
             if (dataHub.LevelGameData.GameModeType == GameModeType.Default)
             {
                 gameStatusHandler.OnMissedToHope += FinishDefaultGame;
@@ -61,8 +65,20 @@ namespace Game.Scripts.Runtime.Feature.Level
         
         private void FinishNewBallGame(GameStatusType statusType)
         {
-            resultController.PrepareNewBallView(statusType);
-            uiViewService.Instantiate(UIViewType.Result);
+            var challengeData = dataHub.LoadData<ChallengeData>("Challenge");
+            challengeData.CountPlayGameInNewBall++;
+            var isCanResume = true;
+            if (challengeData.CountPlayGameInNewBall == 5)
+            {
+                challengeController.NotifyCompleteBonusGame(0);
+                challengeData.CountPlayGameInNewBall = 0;
+                isCanResume = false;
+            }
+            
+            dataHub.SaveData("Challenge", challengeData);
+            
+            resultController.PrepareNewBallView(statusType, isCanResume);
+            uiViewService.Instantiate(UIViewType.ResultNewBall);
             scoreCalculator.ResetData();
             builder.ResetNewBallGame();
         }

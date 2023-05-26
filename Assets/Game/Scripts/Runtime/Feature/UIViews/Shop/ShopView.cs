@@ -74,8 +74,11 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
             RightArrow.gameObject.SetActive(true);
         }
 
-        protected override void Initialize() => 
+        protected override void Initialize()
+        {
+            shopController.UpdateView();
             ChangeSkin(shopController.GetFirstSkinIfo);
+        }
 
         protected override void Open()
         {

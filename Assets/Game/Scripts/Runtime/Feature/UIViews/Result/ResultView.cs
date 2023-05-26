@@ -25,6 +25,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         {
             reloadButton.onClick.AddListener(ClosePanelAfterReload);
             closeButton.onClick.AddListener(BackMenu);
+            bonusButton.onClick.AddListener(resultController.LoadBonusGame);
         }
 
         protected override void Initialize()
@@ -41,6 +42,13 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
                 .DOScaleX(1, 0.3f)
                 .SetEase(Ease.OutBounce)
                 .Play());
+        }
+
+        protected override void Unsubscribe()
+        {
+            reloadButton.onClick.RemoveAllListeners();
+            closeButton.onClick.RemoveAllListeners();
+            bonusButton.onClick.RemoveAllListeners();
         }
 
         private void ClosePanelAfterReload()

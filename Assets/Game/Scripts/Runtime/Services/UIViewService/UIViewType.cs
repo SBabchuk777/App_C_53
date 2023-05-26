@@ -9,6 +9,8 @@ namespace Game.Scripts.Runtime.Services.UIViewService
         ShopCollection,
         ShopCollectionPopUp,
         Challenge,
-        LevelPreview
+        LevelPreview,
+        ResultNewBall,
+        ResultTime
     }
 }

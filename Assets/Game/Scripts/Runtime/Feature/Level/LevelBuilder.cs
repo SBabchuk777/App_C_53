@@ -60,6 +60,7 @@ namespace Game.Scripts.Runtime.Feature.Level
 
             stick.MoveTo(newBallChallengeSettings.GetStickPosition);
             Hoop.MoveTo(newBallChallengeSettings.GetHoopPosition);
+            
         }
 
         private void CreateFieldForDefaultGame()
@@ -76,8 +77,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         private void CreateFieldForNewBallGame()
         {
             DestroyBall();
-            Hoop.Reset();
-
+            CheckNotifyFinish();
             CreateBall();
             MoveComponentsForNewBallGame();
             Hoop.DeactivateAllCollider();
@@ -90,26 +90,34 @@ namespace Game.Scripts.Runtime.Feature.Level
                 newBallChallengeSettings.CountAnchor++;
                 return;
             }
-
-            if (stick.IsTouch)
-            {
-                stick.ResetStick();
-            }
-            else
-            {
-                gameStatusHandler.NotifyFinishBallGame(GameStatusType.Lose);
-                return;
-            }
-
-            if (newBallChallengeSettings.CountAnchor > 4)
-            {
-                gameStatusHandler.NotifyFinishBallGame(GameStatusType.Win);
-                return;
-            }
-
+            
             stick.MoveTo(newBallChallengeSettings.GetStickPosition);
             Hoop.MoveTo(newBallChallengeSettings.GetHoopPosition);
+
             newBallChallengeSettings.CountAnchor++;
+        }
+
+        private void CheckNotifyFinish()
+        {
+            if (newBallChallengeSettings.CountAnchor == 0)
+            {
+                return;
+            }
+            if (stick.IsTouch && Hoop.IsGoal)
+            {
+                stick.ResetStick();
+                Hoop.Reset();
+
+                if (newBallChallengeSettings.CountAnchor == 4)
+                {
+                    gameStatusHandler.NotifyFinishBallGame(GameStatusType.Win);
+                    return;
+                }
+                
+                return;
+            }
+            
+            gameStatusHandler.NotifyFinishBallGame(GameStatusType.Lose);
         }
 
         private void MoveHoop()
@@ -134,7 +142,7 @@ namespace Game.Scripts.Runtime.Feature.Level
             if (Random.Range(0, 100) < 30)
                 return;
 
-            var instance = Instantiate(StarPrefab, Hoop.StarAnchor.position, Quaternion.identity, InstanceParent);
+            var instance = Instantiate(StarPrefab, Hoop.StarAnchor.position, Quaternion.identity, Hoop.StarAnchor);
             Hoop.SetStar(instance);
             Injector.InjectDependenciesInObject(instance);
         }

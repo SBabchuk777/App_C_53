@@ -26,7 +26,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
         private Star Star { get; set; }
 
         private bool isTouchHoop;
-        private bool isGoal;
+        public bool IsGoal { get; set; }
 
         private void Awake()
         {
@@ -57,10 +57,9 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
         }
         private void NotifyMiss()
         {
-            if (!isGoal)
+            if (!IsGoal)
             {
                 gameStatusHandler.NotifyMissedToHope(dataHub.LevelGameData.GameModeType);
-                gameStatusHandler.NotifyFinishBallGame(GameStatusType.Lose);
             }
         }
 
@@ -72,7 +71,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
         public void Reset()
         {
             isTouchHoop = false;
-            isGoal = false;
+            IsGoal = false;
 
             if (Star != null)
             {
@@ -115,7 +114,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
 
         private void NotifyGoal()
         {
-            isGoal = true;
+            IsGoal = true;
 
             if (isTouchHoop)
             {

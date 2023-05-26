@@ -16,15 +16,20 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         protected override void Subscribe()
         {
             closeButton.onClick.AddListener(ClosePanel);
-            challengeButtons[GameModeType.Collect].SetActiveButton(challengeController.OpenCollectionView);
             
             challengeController.OnTimerTick[0] += challengeButtons[GameModeType.NewBall].SetTimerText;
             challengeController.OnTimerTick[1] += challengeButtons[GameModeType.Time].SetTimerText;
+            
+            challengeController.OnClosePanel += ClosePanelAfterStartGame;
         }
-
+        
         protected override void Initialize()
         {
+            challengeButtons[GameModeType.Collect].SetActiveButton(challengeController.OpenCollectionView);
+            challengeButtons[GameModeType.NewBall].SetActiveButton(challengeController.OpenNewBallGame);
+            
             challengeButtons[GameModeType.Collect].SetProgressBar(challengeController.GetProgressValueCollectButton());
+            challengeButtons[GameModeType.NewBall].SetProgressBar(challengeController.GetProgressValueNewBallButton());
 
             for (var i = 0; i < 2; i++)
             {
@@ -52,12 +57,12 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             
             challengeController.OnTimerTick[0] -= challengeButtons[GameModeType.NewBall].SetTimerText;
             challengeController.OnTimerTick[1] -= challengeButtons[GameModeType.Time].SetTimerText;
+            challengeController.OnClosePanel -= ClosePanelAfterStartGame;
         }
 
         private void ActivateButton(GameModeType type)
         {
             challengeButtons[type].SetActive();
-            //challengeButtons[type].SetActiveButton();
         }
 
         private void InactivateButton(GameModeType type)
@@ -67,6 +72,10 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         private void ClosePanel()
         {
             transform.DOLocalMoveX(-1080, 0.5f).Play().OnComplete(Close);
+        }
+        private void ClosePanelAfterStartGame()
+        {
+            DOTween.Sequence().Append(DOVirtual.DelayedCall(0.8f, Close)).Play();
         }
     }
 }

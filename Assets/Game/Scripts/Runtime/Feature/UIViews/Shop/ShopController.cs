@@ -29,7 +29,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
         public void Initialize()
         {
             progressData = dataHub.LoadData<PlayerProgressData>("Progress");
-            GetCurrentSkinInfo();
         }
 
         public void Reset() => currentId = 0;
@@ -59,11 +58,15 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
                 SetCurrentSkin(skinInfo.ID);
             }
 
-            GetCurrentSkinInfo();
+            
 
             sceneNavigation.LoadLevel();
         }
 
+        public void UpdateView()
+        {
+            GetCurrentSkinInfo();
+        }
         private void NotifyHideOrShowArrow()
         {
             if (currentId == 0)
