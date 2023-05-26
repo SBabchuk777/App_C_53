@@ -3,6 +3,7 @@ using Game.Scripts.Runtime.Feature.Level.GameField;
 using Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Challenge;
+using Game.Scripts.Runtime.Services.Timer;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -28,8 +29,9 @@ namespace Game.Scripts.Runtime.Feature.Level
 
         private Ball ball;
         private Stick stick;
-
+       
         private Injector Injector => ProjectContext.Instance.Injector;
+
 
         public void Initialize()
         {
@@ -44,23 +46,33 @@ namespace Game.Scripts.Runtime.Feature.Level
 
         public void CreateGameField()
         {
-            if (dataHub.LevelGameData.GameModeType == GameModeType.NewBall)
+            switch (dataHub.LevelGameData.GameModeType)
             {
-                CreateFieldForNewBallGame();
+                case GameModeType.NewBall:
+                    CreateFieldForNewBallGame();
+                    break;
+                case GameModeType.Default:
+                    CreateFieldForDefaultGame();
+                    break;
+                case GameModeType.Time:
+                    CreateFieldForTimeGame();
+                    break;
             }
-            else
-            {
-                CreateFieldForDefaultGame();
-            }
+            
         }
 
         public void ResetNewBallGame()
         {
-            newBallChallengeSettings.Reset();
+            newBallChallengeSettings.ResetForNewBall();
 
             stick.MoveTo(newBallChallengeSettings.GetStickPosition);
             Hoop.MoveTo(newBallChallengeSettings.GetHoopPosition);
             
+        }
+        public void ResetTimeGame()
+        {
+            newBallChallengeSettings.ResetForTime();
+            Hoop.MoveToDefaultAnchor();
         }
 
         private void CreateFieldForDefaultGame()
@@ -73,11 +85,22 @@ namespace Game.Scripts.Runtime.Feature.Level
             MoveHoop();
             Hoop.DeactivateAllCollider();
         }
+        
+        private void CreateFieldForTimeGame()
+        {
+            DestroyBall();
+            Hoop.Reset();
+
+            CreateBall();
+            
+            MoveHoopForTimeGame();
+            Hoop.DeactivateAllCollider();
+        }
 
         private void CreateFieldForNewBallGame()
         {
             DestroyBall();
-            CheckNotifyFinish();
+            CheckNotifyFinishForNewBallGame();
             CreateBall();
             MoveComponentsForNewBallGame();
             Hoop.DeactivateAllCollider();
@@ -97,7 +120,7 @@ namespace Game.Scripts.Runtime.Feature.Level
             newBallChallengeSettings.CountAnchor++;
         }
 
-        private void CheckNotifyFinish()
+        private void CheckNotifyFinishForNewBallGame()
         {
             if (newBallChallengeSettings.CountAnchor == 0)
             {
@@ -123,6 +146,17 @@ namespace Game.Scripts.Runtime.Feature.Level
         private void MoveHoop()
         {
             if (scoreCalculator.CurrentScore >= 10)
+            {
+                Hoop.MoveToRandomAnchor();
+            }
+            else
+            {
+                Hoop.MoveToDefaultAnchor();
+            }
+        }
+        private void MoveHoopForTimeGame()
+        {
+            if (scoreCalculator.CurrentScore >= 6)
             {
                 Hoop.MoveToRandomAnchor();
             }

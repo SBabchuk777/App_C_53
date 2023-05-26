@@ -11,13 +11,19 @@ namespace Game.Scripts.Runtime.Feature.Level
         [SerializeField] private List<Transform> NewBallChallengeHoopPositions;
 
         public int CountAnchor { get; set; }
+        public int CountStrikeBall { get; set; }
 
         public Transform GetHoopPosition => NewBallChallengeHoopPositions[CountAnchor];
         public Transform GetStickPosition => StickPositions[CountAnchor];
 
-        public void Reset()
+        public void ResetForNewBall()
         {
             CountAnchor = 0;
+        }
+
+        public void ResetForTime()
+        {
+            
         }
     }
 }

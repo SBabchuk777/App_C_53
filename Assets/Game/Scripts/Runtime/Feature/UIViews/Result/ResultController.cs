@@ -2,6 +2,7 @@ using Game.Scripts.Runtime.Feature.Level;
 using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Shop;
+using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
 using Game.Scripts.Runtime.Tools.SerializableComponent;
 using UnityEngine;
@@ -16,12 +17,14 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         
         [Inject] private SceneNavigation sceneNavigation;
         [Inject] private DataHub dataHub;
+        [Inject] private BankService bank;
 
         public int BestScoreCount { get; private set; }
         public int ScoreCount { get; private set; }
         public bool IsCanResumeNewBallGame { get; private set; }
+        public bool IsCanResumeTimeGame { get; private set; }
 
-        private GameStatusType gameStatusType;
+        public GameStatusType GameStatusType { get; set; }
         public void PrepareView(int scoreCount, int bestScoreCount)
         {
             ScoreCount = scoreCount;
@@ -30,8 +33,18 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         
         public void PrepareNewBallView(GameStatusType statusType, bool isCanResume)
         {
-            gameStatusType = statusType;
+            GameStatusType = statusType;
             IsCanResumeNewBallGame = isCanResume;
+        }
+        public void PrepareTimeView(GameStatusType statusType, bool isCanResume)
+        {
+            GameStatusType = statusType;
+            IsCanResumeTimeGame = isCanResume;
+
+            if (statusType == GameStatusType.Win)
+            {
+                bank.AddCoin(20);
+            }
         }
         public void BackToMenu()
         {
@@ -45,7 +58,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         
         public Sprite GetRandomSkin()
         {
-            if (gameStatusType == GameStatusType.Lose)
+            if (GameStatusType == GameStatusType.Lose)
             {
                 return null;
             }
@@ -63,7 +76,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
 
         public string GetWinLoseText()
         {
-            return contentTextMap[gameStatusType];
+            return contentTextMap[GameStatusType];
         }
     }
 }

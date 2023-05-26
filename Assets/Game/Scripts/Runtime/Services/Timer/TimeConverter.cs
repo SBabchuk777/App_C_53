@@ -10,8 +10,8 @@ namespace Game.Scripts.Runtime.Services.Timer
             if (timeRemaining > 3600)
                 Debug.LogException(new Exception("Time remaining exceeds one hour."));
 
-            var minutes = $"{Mathf.FloorToInt(timeRemaining / 60)}";
-            var seconds = $"{Mathf.FloorToInt(timeRemaining % 60)}";
+            var minutes = Mathf.FloorToInt(timeRemaining / 60);
+            var seconds = Mathf.FloorToInt(timeRemaining % 60);
 
             return $"{minutes:00}:{seconds:00}";
         }

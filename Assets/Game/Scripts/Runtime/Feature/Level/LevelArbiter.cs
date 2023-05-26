@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
@@ -6,6 +8,7 @@ using Game.Scripts.Runtime.Feature.UIViews.Result;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
+using Game.Scripts.Runtime.Services.Timer;
 using Game.Scripts.Runtime.Services.UIViewService;
 using UnityEngine;
 
@@ -25,8 +28,15 @@ namespace Game.Scripts.Runtime.Feature.Level
         [Inject] private ResultController resultController;
         [Inject] private ChallengeController challengeController;
         [Inject] private DataHub dataHub;
+        
+        private ITimer timer;
+        private TimeConverter converter;
+        private BaseView preview;
+        private ChallengeData challengeData;
+        public event Action<string> OnChangeTimer;
 
         public bool IsActiveScorePanel => dataHub.LevelGameData.GameModeType == GameModeType.Default;
+        public bool IsActiveTimerPanel => dataHub.LevelGameData.GameModeType == GameModeType.Time;
         
         public void Start()
         {
@@ -37,7 +47,8 @@ namespace Game.Scripts.Runtime.Feature.Level
         private void Initialize()
         {
             scoreCalculator.Initialize();
-            
+            converter = new TimeConverter();
+            challengeData = dataHub.LoadData<ChallengeData>("Challenge");
             if (dataHub.LevelGameData.GameModeType == GameModeType.Default)
             {
                 gameStatusHandler.OnMissedToHope += FinishDefaultGame;
@@ -48,12 +59,48 @@ namespace Game.Scripts.Runtime.Feature.Level
                 gameStatusHandler.OnFinishBallGame += FinishNewBallGame;
                 uiViewService.Instantiate(UIViewType.LevelPreview);
             }
+            if (dataHub.LevelGameData.GameModeType == GameModeType.Time)
+            {
+                gameStatusHandler.OnFinishTimeGame += FinishTimeGame;
+                gameStatusHandler.OnMissedToHope += scoreCalculator.ResetData;;
+                challengeData.CountPlayGameInTime++;
+                
+                preview = uiViewService.Instantiate(UIViewType.LevelPreview);
+                preview.OnCloseView += StartTimer;
+            }
             
             gameStatusHandler.OnTwoPointGoal += scoreCalculator.CalculateForTwo;
             gameStatusHandler.OnThreePointGoal += scoreCalculator.CalculateForThree;
 
             builder.Initialize();
             builder.CreateGameField();
+        }
+
+        private void StartTimer()
+        {
+            timer = new TimerService();
+            timer.StartCountdown(61, CancellationToken.None);
+            timer.OnSecondPassed += NotifyTimerTick;
+            timer.OnTimerFinished += NotifyTimeLose;
+        }
+        private void StopTimer()
+        {
+            timer.Stop();
+            
+            timer.OnSecondPassed -= NotifyTimerTick;
+            timer.OnTimerFinished -= NotifyTimeLose;
+
+            timer = null;
+        }
+
+        private void NotifyTimeLose()
+        {
+            gameStatusHandler.NotifyFinishTimeGame(GameStatusType.Lose);
+        }
+
+        private void NotifyTimerTick(float value)
+        {
+            OnChangeTimer?.Invoke(converter.FormatSecondsToMMSS(value));
         }
 
         private void FinishDefaultGame()
@@ -65,7 +112,6 @@ namespace Game.Scripts.Runtime.Feature.Level
         
         private void FinishNewBallGame(GameStatusType statusType)
         {
-            var challengeData = dataHub.LoadData<ChallengeData>("Challenge");
             challengeData.CountPlayGameInNewBall++;
             var isCanResume = true;
             if (challengeData.CountPlayGameInNewBall == 5)
@@ -82,12 +128,37 @@ namespace Game.Scripts.Runtime.Feature.Level
             scoreCalculator.ResetData();
             builder.ResetNewBallGame();
         }
+        private void FinishTimeGame(GameStatusType statusType)
+        {
+            StopTimer();
+            var isCanResume = true;
+            if (challengeData.CountPlayGameInTime == 5)
+            {
+                challengeController.NotifyCompleteBonusGame(1);
+                challengeData.CountPlayGameInTime = 0;
+                isCanResume = false;
+            }
+            
+            dataHub.SaveData("Challenge", challengeData);
+            
+            resultController.PrepareTimeView(statusType, isCanResume);
+            var result = uiViewService.Instantiate(UIViewType.ResultTime) as TimeChallengeResultView;
+            
+            result.OnCloseAfterReload += StartTimer;
+            result.OnCloseView -= StartTimer;
+
+            scoreCalculator.ResetData();
+            builder.ResetTimeGame();
+        }
 
         private void RunAfterInitialize()
         {
         }
 
-        public void BackLobby() =>
+        public void BackLobby()
+        {
+            gameStatusHandler.UnsubscribeAllEventHandlers();
             sceneFader.FadeTo(0.8f, () => sceneNavigation.LoadLobby());
+        }
     }
 }

@@ -47,6 +47,12 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             sceneNavigation.LoadLevel();
             OnClosePanel?.Invoke();
         }
+        public void OpenTimeGame()
+        {
+            dataHub.LevelGameData.GameModeType = GameModeType.Time;
+            sceneNavigation.LoadLevel();
+            OnClosePanel?.Invoke();
+        }
 
         public int GetProgressValueCollectButton()
         {
@@ -59,6 +65,12 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         public int GetProgressValueNewBallButton()
         {
             var value = ChallengeData.CountPlayGameInNewBall / 5f * 100;
+            
+            return Mathf.FloorToInt(value);
+        }
+        public int GetProgressValueTimeButton()
+        {
+            var value = ChallengeData.CountPlayGameInTime / 5f * 100;
             
             return Mathf.FloorToInt(value);
         }

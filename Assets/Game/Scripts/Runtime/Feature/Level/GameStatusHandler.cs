@@ -11,6 +11,7 @@ namespace Game.Scripts.Runtime.Feature.Level
 
         public event Action OnMissedToHope;
         public event Action<GameStatusType> OnFinishBallGame;
+        public event Action<GameStatusType> OnFinishTimeGame;
 
         public event Action<int> OnChangeMultiplayerScore;
         public event Action<int> OnChangeScore;
@@ -57,5 +58,24 @@ namespace Game.Scripts.Runtime.Feature.Level
         {
             OnFinishBallGame?.Invoke(statusType);
         }
+        
+        public void NotifyFinishTimeGame(GameStatusType statusType)
+        {
+            OnFinishTimeGame?.Invoke(statusType);
+        }
+        
+        public void UnsubscribeAllEventHandlers()
+        {
+            OnTwoPointGoal = null;
+            OnThreePointGoal = null;
+            OnMissedToHope = null;
+            OnFinishBallGame = null;
+            OnFinishTimeGame = null;
+            OnChangeMultiplayerScore = null;
+            OnChangeScore = null;
+            OnChangeBestScore = null;
+            OnAddScore = null;
+        }
+
     }
 }

@@ -8,9 +8,11 @@ namespace Game.Scripts.Runtime.Feature.Level
     {
         [SerializeField] private Text bestScoreText;
         [SerializeField] private Text currentScoreText;
+        [SerializeField] private Text timerText;
         
         [SerializeField] private Button homeButton;
         [SerializeField] private GameObject scorePanel;
+        [SerializeField] private GameObject timerPanel;
         
         [SerializeField] private LevelArbiter levelArbiter;
         [SerializeField] private GameStatusHandler gameStatusHandler;
@@ -21,10 +23,16 @@ namespace Game.Scripts.Runtime.Feature.Level
 
             gameStatusHandler.OnChangeScore += ChangeCurrenText;
             gameStatusHandler.OnChangeBestScore += ChangeBestText;
+            levelArbiter.OnChangeTimer += ChangeTimerText;
 
             if (levelArbiter.IsActiveScorePanel)
             {
                 scorePanel.SetActive(true);
+            } 
+            
+            if (levelArbiter.IsActiveTimerPanel)
+            {
+                timerPanel.SetActive(true);
             }
         }
 
@@ -33,6 +41,8 @@ namespace Game.Scripts.Runtime.Feature.Level
 
         private void ChangeCurrenText(int value) => 
             currentScoreText.text = value.ToString();
+        private void ChangeTimerText(string value) => 
+            timerText.text = value;
 
         public void OnDestroy()
         {

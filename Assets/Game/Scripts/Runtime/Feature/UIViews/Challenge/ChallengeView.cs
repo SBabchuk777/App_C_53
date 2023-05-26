@@ -27,9 +27,11 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         {
             challengeButtons[GameModeType.Collect].SetActiveButton(challengeController.OpenCollectionView);
             challengeButtons[GameModeType.NewBall].SetActiveButton(challengeController.OpenNewBallGame);
+            challengeButtons[GameModeType.Time].SetActiveButton(challengeController.OpenTimeGame);
             
             challengeButtons[GameModeType.Collect].SetProgressBar(challengeController.GetProgressValueCollectButton());
             challengeButtons[GameModeType.NewBall].SetProgressBar(challengeController.GetProgressValueNewBallButton());
+            challengeButtons[GameModeType.Time].SetProgressBar(challengeController.GetProgressValueTimeButton());
 
             for (var i = 0; i < 2; i++)
             {

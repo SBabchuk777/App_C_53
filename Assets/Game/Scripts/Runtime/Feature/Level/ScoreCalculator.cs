@@ -59,6 +59,11 @@ namespace Game.Scripts.Runtime.Feature.Level
             {
                 multiplierScore++;
             }
+
+            if (dataHub.LevelGameData.GameModeType == GameModeType.Time && multiplierScore == 3)
+            {
+                statusHandler.NotifyFinishTimeGame(GameStatusType.Win);
+            }
             
             statusHandler.NotifyChangeMultiplayerScore(multiplierScore);
         }

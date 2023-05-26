@@ -17,6 +17,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews
 
         [Inject] private DataHub dataHub;
 
+        
         protected override void Subscribe()
         {
             playButton.onClick.AddListener(Close);

@@ -57,7 +57,7 @@ MonoBehaviour:
     m_keys: 0000000001000000
     m_values:
     - Try to bounce off the crossbar and get into basket
-    - Try to get 3 times streak in 30 sec
+    - Try to get 3 times streak in 60 sec
   infoText: {fileID: 1729171439853262623}
   playButton: {fileID: 1729171439157363656}
 --- !u!61 &1474785876
