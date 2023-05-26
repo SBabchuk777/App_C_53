@@ -15,5 +15,15 @@ namespace Game.Scripts.Runtime.Feature.Player
         
         public List<int> AvailableRegularColection;
         public List<int> AvailableRareColection;
+
+        public void AddSkin(int value)
+        {
+            if (AvailableSkins.Contains(value))
+            {
+                return;
+            }
+            
+            AvailableSkins.Add(value);
+        }
     }
 }
