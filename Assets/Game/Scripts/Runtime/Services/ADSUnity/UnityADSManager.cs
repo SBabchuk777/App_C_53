@@ -1,10 +1,12 @@
 using System;
+using Game.Scripts.Runtime.Feature.Project.DI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
 namespace Game.Scripts.Runtime.Services.ADSUnity
 {
-    public class UnityADSManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
+    public class UnityADSManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener, IProjectInitializable
     {
         [SerializeField] private string GameIDAndroid;
         [SerializeField] private string GameIDIOS;
@@ -15,7 +17,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         
         public event Action OnShowCompleteAds;
         public event Action OnAdsLoaded;
-        public bool IsAdsLoaded;
+        public bool IsAdsLoaded { get; set; }
         public event Action OnAdsFailedLoaded;
 
         public delegate void DebugEvent(string msg);
@@ -30,8 +32,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
 #if UNITY_IOS
             currentIdInitialize = GameIDIOS;
             currentIdShow = RewardedVideoPlacementIOS;
-#endif
-#if UNITY_ANDROID
+#elif UNITY_ANDROID
             currentIdInitialize = GameIDAndroid;
             currentIdShow = RewardedVideoPlacementAndroid;
 #endif
@@ -47,6 +48,13 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         {
             IsAdsLoaded = false;
             Advertisement.Load(currentIdShow, this);
+        }
+
+        public void UnsubscribeAllEvent()
+        {
+            OnShowCompleteAds = null; 
+            OnAdsLoaded = null;
+            OnAdsFailedLoaded = null;
         }
 
         public void ShowRewardedAd()

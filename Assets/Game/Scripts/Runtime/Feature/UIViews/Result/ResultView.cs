@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Services;
+using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.UIViewService;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         [SerializeField] private GameObject view;
 
         [Inject] private ResultController resultController;
+        [Inject] private UnityADSManager unityAds;
 
         protected override void Subscribe()
         {
@@ -49,6 +51,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
             reloadButton.onClick.RemoveAllListeners();
             closeButton.onClick.RemoveAllListeners();
             bonusButton.onClick.RemoveAllListeners();
+            
+            unityAds.UnsubscribeAllEvent();
         }
 
         private void ClosePanelAfterReload()

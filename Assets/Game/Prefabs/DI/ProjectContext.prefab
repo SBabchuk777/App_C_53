@@ -600,7 +600,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7364624266251717919
 Transform:
   m_ObjectHideFlags: 0
@@ -628,12 +628,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eabe9424772a465baba37ddfac82cd70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GameIDAndroid: 5249525
-  GameIDIOS: 5249524
+  GameIDAndroid: 5289701
+  GameIDIOS: 5289700
   TestMode: 1
   RewardedVideoPlacementAndroid: Rewarded_Android
   RewardedVideoPlacementIOS: Rewarded_iOS
-  IsAdsLoaded: 0
 --- !u!1 &3406210909211214343
 GameObject:
   m_ObjectHideFlags: 0
