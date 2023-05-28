@@ -4,6 +4,7 @@ using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Collection;
 using Game.Scripts.Runtime.Feature.UIViews.LastChance;
+using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
 using Game.Scripts.Runtime.Services.Timer;
 using Game.Scripts.Runtime.Services.UIViewService;
@@ -15,15 +16,16 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
     {
         [SerializeField] private CollectionElementsInfoData collectionElementsInfoData;
         [SerializeField] private float[] maxGetTime;
-        
+
         [Inject] private CollectionController collectionController;
         [Inject] private UIViewService uiViewService;
         [Inject] private DataHub dataHub;
         [Inject] private SceneNavigation sceneNavigation;
+        [Inject] private UnityADSManager unityAds;
 
         public Action<string>[] OnTimerTick = new Action<string>[3];
         public Action[] OnTimerFinish = new Action[3];
-        
+
         private ITimer[] timers = new ITimer[] { new TimerService(), new TimerService(), new TimerService() };
         private TimeConverter timeConverter = new();
 
@@ -41,12 +43,14 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             collectionController.PrepareView();
             uiViewService.Instantiate(UIViewType.Collection);
         }
+
         public void OpenNewBallGame()
         {
             dataHub.LevelGameData.GameModeType = GameModeType.NewBall;
             sceneNavigation.LoadLevel();
             OnClosePanel?.Invoke();
         }
+
         public void OpenTimeGame()
         {
             dataHub.LevelGameData.GameModeType = GameModeType.Time;
@@ -57,29 +61,38 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         public int GetProgressValueCollectButton()
         {
             var progressData = dataHub.LoadData<PlayerProgressData>("Progress");
-            float allAvailableCount = progressData.AvailableRareColection.Count + progressData.AvailableRegularColection.Count;
+            float allAvailableCount =
+                progressData.AvailableRareColection.Count + progressData.AvailableRegularColection.Count;
             var value = allAvailableCount / collectionElementsInfoData.AllElementsCount * 100;
-            
+
             return Mathf.FloorToInt(value);
         }
+
         public int GetProgressValueNewBallButton()
         {
             var value = ChallengeData.CountPlayGameInNewBall / 5f * 100;
-            
+
             return Mathf.FloorToInt(value);
         }
+
         public int GetProgressValueTimeButton()
         {
             var value = ChallengeData.CountPlayGameInTime / 5f * 100;
-            
+
             return Mathf.FloorToInt(value);
         }
+
         public void PrepareView()
         {
+            unityAds.LoadRewardedAd();
+            
             var elapsedTime = (float)(DateTime.Now - ChallengeData.LastDateTime).TotalSeconds;
 
             for (var i = 0; i < maxGetTime.Length; i++)
             {
+                if (ChallengeData.IsActiveButtons[i]) 
+                    continue;
+                
                 var currentTime = Mathf.Clamp(ChallengeData.CountLastTime[i] - elapsedTime, 0.0f, maxGetTime[i]);
 
                 if (currentTime > 0)
@@ -87,6 +100,23 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
                 else
                     ResetDataForTimer(i);
             }
+        }
+
+        public void UpdateTimerAfterWatchAds(int index)
+        {
+            var currentTime = timers[index].CurrentSeconds;
+            
+            timers[index].Pause();
+            timers[index].SetSeconds(currentTime - 1800);
+            timers[index].Resume();
+        }
+
+        public void ClosePanel()
+        {
+            SaveTimeData();
+
+            foreach (var timer in timers)
+                timer.Stop();
         }
 
         private void ResetDataForTimer(int i)
@@ -110,16 +140,16 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         {
             var timer = timers[index];
             timer.StartCountdown(time, CancellationToken.None);
-            
+
             OnTimerTick[index]?.Invoke(timeConverter.FormatSecondsToHHMMSS(time));
-            
+
             SubscribeTimer(timer, index);
         }
 
         private void SubscribeTimer(ITimer timer, int index)
         {
             timer.OnSecondPassed += seconds => OnTimerTick[index]?.Invoke(timeConverter.FormatSecondsToHHMMSS(seconds));
-            
+
             timer.OnTimerFinished += () =>
             {
                 ResetDataForTimer(index);
@@ -141,7 +171,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
 
             SaveData();
         }
-        
+
         private void SaveData()
         {
             dataHub.SaveData("Challenge", ChallengeData);

@@ -9,7 +9,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
     {
         [Inject] private UnityADSManager unityAdsManager;
         private Button WatchButton => GetComponent<Button>();
-
+        
         private void Start()
         {
             TurnOffButton();
@@ -20,6 +20,8 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
                 TurnOnButton();
             else
                 unityAdsManager.OnAdsLoaded += TurnOnButton;
+
+            unityAdsManager.OnShowCompleteAds += TurnOffButton;
         }
 
         private void TurnOnButton() => 

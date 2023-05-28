@@ -54,6 +54,9 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
             {
                 bank.AddCoin(20);
             }
+            
+            unityAds.LoadRewardedAd();
+            unityAds.OnShowCompleteAds += AddRewardForWatch;
         }
         public void BackToMenu()
         {

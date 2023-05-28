@@ -27,8 +27,10 @@ namespace Game.Scripts.Runtime.Services.Timer
             await UpdateTimer(cancellationToken);
         }
 
-        public void SetSeconds(float time) => 
+        public void SetSeconds(float time)
+        {
             CurrentSeconds = time;
+        }
 
         public async void StartCountdown(float time, CancellationToken cancellationToken)
         {

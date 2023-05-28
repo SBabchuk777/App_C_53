@@ -128,9 +128,8 @@ namespace Game.Scripts.Runtime.Feature.Level
             }
             if (stick.IsTouch && Hoop.IsGoal)
             {
-                stick.ResetStick();
                 Hoop.Reset();
-
+                
                 if (newBallChallengeSettings.CountAnchor == 4)
                 {
                     gameStatusHandler.NotifyFinishBallGame(GameStatusType.Win);
@@ -139,7 +138,8 @@ namespace Game.Scripts.Runtime.Feature.Level
                 
                 return;
             }
-            
+            stick.ResetStick();
+
             gameStatusHandler.NotifyFinishBallGame(GameStatusType.Lose);
         }
 

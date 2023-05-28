@@ -17,15 +17,16 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         
         public event Action OnShowCompleteAds;
         public event Action OnAdsLoaded;
-        public bool IsAdsLoaded { get; set; }
         public event Action OnAdsFailedLoaded;
 
         public delegate void DebugEvent(string msg);
 
+
         public static event DebugEvent OnDebugLog;
 
         private string currentIdInitialize;
-        private string currentIdShow;
+        public string CurrentIdShow { get; private set; }
+        public bool IsAdsLoaded { get; private set; }
 
         public void Initialize()
         {
@@ -34,7 +35,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
             currentIdShow = RewardedVideoPlacementIOS;
 #elif UNITY_ANDROID
             currentIdInitialize = GameIDAndroid;
-            currentIdShow = RewardedVideoPlacementAndroid;
+            CurrentIdShow = RewardedVideoPlacementAndroid;
 #endif
             if (Advertisement.isSupported)
             {
@@ -47,7 +48,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         public void LoadRewardedAd()
         {
             IsAdsLoaded = false;
-            Advertisement.Load(currentIdShow, this);
+            Advertisement.Load(CurrentIdShow, this);
         }
 
         public void UnsubscribeAllEvent()
@@ -59,7 +60,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
 
         public void ShowRewardedAd()
         {
-            Advertisement.Show(currentIdShow, this);
+            Advertisement.Show(CurrentIdShow, this);
         }
 
         #region Interface Implementations
@@ -105,7 +106,12 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
         {
             DebugLog($"OnUnityAdsShowComplete: [{showCompletionState}]: {placementId}");
-            OnShowCompleteAds?.Invoke();
+
+            if (showCompletionState == UnityAdsShowCompletionState.COMPLETED)
+            {
+                OnShowCompleteAds?.Invoke();
+            }
+            
         }
 
         #endregion

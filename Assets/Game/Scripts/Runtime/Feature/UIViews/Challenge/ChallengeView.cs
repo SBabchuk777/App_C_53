@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.UIViewService;
 using Game.Scripts.Runtime.Tools.SerializableComponent;
 using UnityEngine;
@@ -10,6 +12,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
     public class ChallengeView : BaseView
     {
         [SerializeField] private Button closeButton;
+        [SerializeField] private List<UnityAdsButtonListener> unityAdsButton;
         [SerializeField] private SerializableDictionary<GameModeType, ChallengeButton> challengeButtons;
         
         [Inject] private ChallengeController challengeController;
@@ -19,6 +22,11 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             
             challengeController.OnTimerTick[0] += challengeButtons[GameModeType.NewBall].SetTimerText;
             challengeController.OnTimerTick[1] += challengeButtons[GameModeType.Time].SetTimerText;
+            challengeController.OnTimerFinish[0] += ActiveNewBallButtonAfterFinishTimer;
+            challengeController.OnTimerFinish[1] += ActiveTimeButtonAfterFinishTimer;
+            
+            unityAdsButton[0].OnShowCompleteAds += () => challengeController.UpdateTimerAfterWatchAds(0);
+            unityAdsButton[1].OnShowCompleteAds += () => challengeController.UpdateTimerAfterWatchAds(1);
             
             challengeController.OnClosePanel += ClosePanelAfterStartGame;
         }
@@ -59,9 +67,25 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             
             challengeController.OnTimerTick[0] -= challengeButtons[GameModeType.NewBall].SetTimerText;
             challengeController.OnTimerTick[1] -= challengeButtons[GameModeType.Time].SetTimerText;
+            
+            challengeController.OnTimerFinish[0] -= ActiveNewBallButtonAfterFinishTimer;
+            challengeController.OnTimerFinish[1] -= ActiveTimeButtonAfterFinishTimer;
+            
             challengeController.OnClosePanel -= ClosePanelAfterStartGame;
+            challengeController.ClosePanel();
+
         }
 
+        private void ActiveNewBallButtonAfterFinishTimer()
+        {
+            challengeButtons[GameModeType.NewBall].SetActive();
+            challengeButtons[GameModeType.NewBall].SetInactive();
+        }
+        private void ActiveTimeButtonAfterFinishTimer()
+        {
+            challengeButtons[GameModeType.Time].SetActive();
+            challengeButtons[GameModeType.Time].SetInactive();
+        }
         private void ActivateButton(GameModeType type)
         {
             challengeButtons[type].SetActive();
