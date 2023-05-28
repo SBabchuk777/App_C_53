@@ -20,10 +20,11 @@ namespace Game.Scripts.Runtime.Services.UIViewService
                 .GetComponent<BaseView>();
             
             instance.transform.localPosition = Vector3.zero;
+            foreach (var component in instance.GetComponentsInChildren<MonoBehaviour>())
+            {
+                Injector.InjectDependenciesInObject(component);
+            }
             
-            Injector.InjectDependenciesInObject(instance);
-
-
             return instance;
         }
     }

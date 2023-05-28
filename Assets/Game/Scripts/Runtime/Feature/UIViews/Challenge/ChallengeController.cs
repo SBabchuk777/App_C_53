@@ -21,10 +21,10 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         [Inject] private DataHub dataHub;
         [Inject] private SceneNavigation sceneNavigation;
 
-        public Action<string>[] OnTimerTick = new Action<string>[2];
-        public Action[] OnTimerFinish = new Action[2];
+        public Action<string>[] OnTimerTick = new Action<string>[3];
+        public Action[] OnTimerFinish = new Action[3];
         
-        private ITimer[] timers = new ITimer[] { new TimerService(), new TimerService() };
+        private ITimer[] timers = new ITimer[] { new TimerService(), new TimerService(), new TimerService() };
         private TimeConverter timeConverter = new();
 
         public ChallengeData ChallengeData { get; private set; }

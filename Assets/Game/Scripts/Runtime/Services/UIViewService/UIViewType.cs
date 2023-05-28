@@ -11,6 +11,7 @@ namespace Game.Scripts.Runtime.Services.UIViewService
         Challenge,
         LevelPreview,
         ResultNewBall,
-        ResultTime
+        ResultTime,
+        BonusGame
     }
 }

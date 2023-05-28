@@ -29,7 +29,8 @@ MonoBehaviour:
     AvailableRegularColection: 
     AvailableRareColection: 
   Challenge:
-    IsActiveButtons: 0101
+    IsActiveButtons: 010101
     CountLastTime:
+    - 0
     - 0
     - 0

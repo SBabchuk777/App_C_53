@@ -1,9 +1,11 @@
 using Game.Scripts.Runtime.Feature.Level;
 using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using Game.Scripts.Runtime.Feature.UIViews.Shop;
 using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
+using Game.Scripts.Runtime.Services.UIViewService;
 using Game.Scripts.Runtime.Tools.SerializableComponent;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +20,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         [Inject] private SceneNavigation sceneNavigation;
         [Inject] private DataHub dataHub;
         [Inject] private BankService bank;
+        [Inject] private UIViewService uiViewService;
+        [Inject] private ChallengeController challengeController;
 
         public int BestScoreCount { get; private set; }
         public int ScoreCount { get; private set; }
@@ -53,7 +57,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
 
         public void LoadBonusGame()
         {
-            
+            challengeController.PrepareView();
+            uiViewService.Instantiate(UIViewType.BonusGame);
         }
         
         public Sprite GetRandomSkin()

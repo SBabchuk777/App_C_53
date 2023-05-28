@@ -1151,6 +1151,7 @@ MonoBehaviour:
   maxGetTime:
   - 21600
   - 10800
+  - 21600
 --- !u!1 &9147202762282295084
 GameObject:
   m_ObjectHideFlags: 0
