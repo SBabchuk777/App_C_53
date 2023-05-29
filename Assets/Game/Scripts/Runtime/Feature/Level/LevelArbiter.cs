@@ -70,7 +70,11 @@ namespace Game.Scripts.Runtime.Feature.Level
             }
             
             gameStatusHandler.OnTwoPointGoal += scoreCalculator.CalculateForTwo;
+            gameStatusHandler.OnTwoPointGoal += () => projectAudioPlayer.PlayAudioSfx(ProjectAudioType.GoalHoop);
+            
             gameStatusHandler.OnThreePointGoal += scoreCalculator.CalculateForThree;
+            gameStatusHandler.OnThreePointGoal += () => projectAudioPlayer.PlayAudioSfx(ProjectAudioType.Strike);
+            gameStatusHandler.OnThreePointGoal += () => projectAudioPlayer.PlayAudioSfx(ProjectAudioType.GoalHoop);
 
             builder.Initialize();
             builder.CreateGameField();

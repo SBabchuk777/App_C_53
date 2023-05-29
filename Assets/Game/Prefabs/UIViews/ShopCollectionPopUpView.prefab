@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 8600438959406353250}
   - component: {fileID: 8600438959406353251}
   - component: {fileID: 8600438959406353276}
+  - component: {fileID: 8187730141348092751}
   m_Layer: 5
   m_Name: BuyButton
   m_TagString: Untagged
@@ -278,6 +279,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8187730141348092751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8600438959406353278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8600438959412196344
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,6 +761,7 @@ GameObject:
   - component: {fileID: 8600438959937574937}
   - component: {fileID: 8600438959937574938}
   - component: {fileID: 8600438959937574936}
+  - component: {fileID: 3002376254479289003}
   m_Layer: 5
   m_Name: CoolButton
   m_TagString: Untagged
@@ -858,6 +872,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3002376254479289003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8600438959937574932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8600438960072152535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1258,6 +1284,7 @@ GameObject:
   - component: {fileID: 8600438960988702914}
   - component: {fileID: 8600438960988702915}
   - component: {fileID: 8600438960988702913}
+  - component: {fileID: 7377492379432338704}
   m_Layer: 5
   m_Name: BuyButton
   m_TagString: Untagged
@@ -1368,3 +1395,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7377492379432338704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8600438960988702941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -30,7 +30,7 @@ namespace Game.Scripts.Runtime.Services
                 OnButtonHold?.Invoke();
 
             if (ProjectAudioPlayer != null) 
-                ProjectAudioPlayer.PlayAudioClick();
+                ProjectAudioPlayer.PlayAudioSfx(ProjectAudioType.Click);
         }
     }
 }

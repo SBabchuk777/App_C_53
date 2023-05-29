@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using DG.Tweening;
+using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
         [SerializeField] private SpriteRenderer circleRenderer;
 
         [Inject] private DataHub dataHub; 
+        [Inject] private ProjectAudioPlayer projectAudioPlayer; 
         public Transform StarAnchor;
 
         private Star Star { get; set; }
@@ -79,8 +81,11 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
             }
         }
 
-        private void SetIsTouch() =>
+        private void SetIsTouch()
+        {
             isTouchHoop = true;
+            projectAudioPlayer.PlayAudioSfx(ProjectAudioType.Hit);
+        }
 
         private void ActivateAllCollider()
         {

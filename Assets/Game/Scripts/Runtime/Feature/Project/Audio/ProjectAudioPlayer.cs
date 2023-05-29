@@ -11,19 +11,19 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
     public class ProjectAudioPlayer : MonoBehaviour, IProjectInitializable
     {
         public ProjectAudioPath ProjectAudioPath;
-        
+
         [Inject] private AudioService audioService;
         [Inject] private DataHub dataHub;
-        
+
         private AudioSource lobbyAmbientSource;
         private AudioSource levelAmbientSource;
 
         private SettingsData SettingsData { get; set; }
 
-        public void Initialize() => 
+        public void Initialize() =>
             SettingsData = dataHub.LoadData<SettingsData>("Settings");
 
-        public void UpdateData(SettingsData settingsData) => 
+        public void UpdateData(SettingsData settingsData) =>
             SettingsData = settingsData;
 
         public void Start()
@@ -34,11 +34,10 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
 
             if (!SettingsData.IsSliderActive)
                 return;
-            
+
             audioService.SetVolume(AudioType.Background, SettingsData.MusicVolumeCount);
             audioService.SetVolume(AudioType.Music, SettingsData.SoundVolumeCount);
             audioService.SetVolume(AudioType.Sfx, SettingsData.SoundVolumeCount);
-            
         }
 
         public void OnDestroy() =>
@@ -46,7 +45,7 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
 
         public void PlayAudioAmbientOnLobby()
         {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["LobbyAmbient"];
+            var audioClip = ProjectAudioPath.ProjectAudioPathMap[ProjectAudioType.LobbyAmbient];
 
             lobbyAmbientSource = audioService.Play(new Tune(audioClip, AudioType.Background, true));
             lobbyAmbientSource.volume = 0;
@@ -58,77 +57,16 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
             if (lobbyAmbientSource != null)
                 audioService.Stop(lobbyAmbientSource);
         }
+        
 
-        public void PlayAudioAmbientOnLevel()
+        public void PlayAudioSfx(ProjectAudioType projectAudioType)
         {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["LevelAmbient"];
-
-            levelAmbientSource = audioService.Play(new Tune(audioClip, AudioType.Background, true));
-            levelAmbientSource.volume = 0;
-            levelAmbientSource.DOFade(1, 3f).Play();
-        }
-
-        public void StopAudioAmbientOnLevel()
+            audioService.Play(new Tune(ProjectAudioPath.ProjectAudioPathMap[projectAudioType], AudioType.Sfx));
+        } 
+        
+        public void PlayAudioMusic(ProjectAudioType projectAudioType)
         {
-            if (levelAmbientSource != null)
-                audioService.Stop(levelAmbientSource);
+            audioService.Play(new Tune(ProjectAudioPath.ProjectAudioPathMap[projectAudioType], AudioType.Music));
         }
-
-        public void PlayAudioJump()
-        {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["Jump"];
-
-            audioService.Play(new Tune(audioClip, AudioType.Sfx));
-        }
-        public void PlayAudioAddLife()
-        {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["AddLife"];
-
-            audioService.Play(new Tune(audioClip, AudioType.Sfx));
-        }
-        public void PlayAudioAddCoin()
-        {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["AddCoin"];
-
-            audioService.Play(new Tune(audioClip, AudioType.Sfx));
-        }
-        public void PlayAudioExplosionLight()
-        {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["Explosion_1"];
-
-            audioService.Play(new Tune(audioClip, AudioType.Sfx));
-        }
-        public void PlayAudioWinLevel()
-        {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["WinLevel"];
-
-            audioService.Play(new Tune(audioClip, AudioType.Sfx));
-        }
-        public void PlayAudioLoseLevel()
-        {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["LoseLevel"];
-
-            audioService.Play(new Tune(audioClip, AudioType.Sfx));
-        }
-        public void PlayAudioShoot()
-        {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["Shoot"];
-
-            audioService.Play(new Tune(audioClip, AudioType.Sfx));
-        }
-        public void PlayAudioTakeDamage()
-        {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["TakeDamage"];
-
-            audioService.Play(new Tune(audioClip, AudioType.Sfx));
-        }
-        public void PlayAudioClick()
-        {
-            var audioClip = ProjectAudioPath.ProjectAudioPathMap["Click"];
-
-            audioService.Play(new Tune(audioClip, AudioType.Sfx));
-        }
-
-       
     }
 }

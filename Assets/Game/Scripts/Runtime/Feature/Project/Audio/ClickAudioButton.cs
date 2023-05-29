@@ -14,7 +14,7 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
             if (Button == null)
                 return;
             
-            Button.onClick.AddListener(() => ProjectAudioPlayer.PlayAudioClick());
+            Button.onClick.AddListener(() => ProjectAudioPlayer.PlayAudioSfx(ProjectAudioType.Click));
         }
     }
 }

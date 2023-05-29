@@ -13,29 +13,14 @@ MonoBehaviour:
   m_Name: ProjectAudioPath
   m_EditorClassIdentifier: 
   ProjectAudioPathMap:
-    m_keys:
-    - LobbyAmbient
-    - LevelAmbient
-    - Click
-    - Jump
-    - Explosion_1
-    - Explosion_2
-    - AddCoin
-    - AddLife
-    - LoseLevel
-    - WinLevel
-    - TakeDamage
-    - Shoot
+    m_keys: 000000000100000002000000030000000400000005000000060000000700000008000000
     m_values:
-    - {fileID: 8300000, guid: 7dff6198c8eaf4f4c9fd0ee44d31af13, type: 3}
-    - {fileID: 8300000, guid: acdae070ed1e6400381db956b6f4a944, type: 3}
-    - {fileID: 8300000, guid: b6102479af224400aafca1502eef5cd1, type: 3}
-    - {fileID: 8300000, guid: 63f88dcdb475c47508b5bf31f9aff8dc, type: 3}
-    - {fileID: 8300000, guid: 26a72632cec11475ba97dc19fe3eb1b3, type: 3}
-    - {fileID: 8300000, guid: 2df37516aa3044c26af1c95175f99ee5, type: 3}
-    - {fileID: 8300000, guid: da620466739274d44852bffcf5cb570b, type: 3}
-    - {fileID: 8300000, guid: 177a35ca2c6764fdaa4cb25bb031bf82, type: 3}
-    - {fileID: 8300000, guid: 9aa5067038d904b0b94e84cea98e5646, type: 3}
-    - {fileID: 8300000, guid: d2c404117bb55489a9362ce016c875b5, type: 3}
-    - {fileID: 8300000, guid: 2355d5885dac643ed94da60ae1bf66c0, type: 3}
-    - {fileID: 8300000, guid: 73cb6275ec1584a4bb6985259197a12d, type: 3}
+    - {fileID: 8300000, guid: 6daf2e8b188ec4c9ab3cccb2bedd7cea, type: 3}
+    - {fileID: 8300000, guid: c0a5f0b4e38504a25b23793d66926fe8, type: 3}
+    - {fileID: 8300000, guid: 1fecba3c17d4440f9aac8f5b389f7504, type: 3}
+    - {fileID: 8300000, guid: 3ebd51bf138bf4b7f894c0a8bc936743, type: 3}
+    - {fileID: 8300000, guid: 53c7efce5d9334abf902bb2394f2d967, type: 3}
+    - {fileID: 8300000, guid: 858189b90ecac4a2ea0c336a8d14df06, type: 3}
+    - {fileID: 8300000, guid: d05780007c1c24ecfae04c15e77b655c, type: 3}
+    - {fileID: 8300000, guid: a37d61c406a7c4358b393ab0a383a666, type: 3}
+    - {fileID: 8300000, guid: c73259ea87123439e8c9bdc66e16ef80, type: 3}

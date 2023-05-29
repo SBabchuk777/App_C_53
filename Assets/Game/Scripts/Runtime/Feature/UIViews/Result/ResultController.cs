@@ -1,5 +1,6 @@
 using Game.Scripts.Runtime.Feature.Level;
 using Game.Scripts.Runtime.Feature.Player;
+using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using Game.Scripts.Runtime.Feature.UIViews.Shop;
@@ -24,6 +25,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         [Inject] private UIViewService uiViewService;
         [Inject] private ChallengeController challengeController;
         [Inject] private UnityADSManager unityAds;
+        [Inject] private ProjectAudioPlayer projectAudioPlayer; 
 
         public int BestScoreCount { get; private set; }
         public int ScoreCount { get; private set; }
@@ -35,7 +37,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         {
             ScoreCount = scoreCount;
             BestScoreCount = bestScoreCount;
-
+            projectAudioPlayer.PlayAudioSfx(ProjectAudioType.Lose); 
+            
             unityAds.LoadRewardedAd();
             unityAds.OnShowCompleteAds += AddRewardForWatch;
         }
@@ -44,6 +47,10 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         {
             GameStatusType = statusType;
             IsCanResumeNewBallGame = isCanResume;
+
+            projectAudioPlayer.PlayAudioSfx(statusType == GameStatusType.Win
+                ? ProjectAudioType.Win
+                : ProjectAudioType.Lose);
         }
         public void PrepareTimeView(GameStatusType statusType, bool isCanResume)
         {
@@ -53,6 +60,11 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
             if (statusType == GameStatusType.Win)
             {
                 bank.AddCoin(20);
+                projectAudioPlayer.PlayAudioSfx(ProjectAudioType.Win); 
+            }
+            else
+            {
+                projectAudioPlayer.PlayAudioSfx(ProjectAudioType.Lose); 
             }
             
             unityAds.LoadRewardedAd();

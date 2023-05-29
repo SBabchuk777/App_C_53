@@ -19,7 +19,7 @@ namespace Game.Scripts.Runtime.Services
             OnClick?.Invoke();
             
             if (ProjectAudioPlayer != null) 
-                ProjectAudioPlayer.PlayAudioClick();
+                ProjectAudioPlayer.PlayAudioSfx(ProjectAudioType.Click);
         }
 
         public void TurnOff() => 

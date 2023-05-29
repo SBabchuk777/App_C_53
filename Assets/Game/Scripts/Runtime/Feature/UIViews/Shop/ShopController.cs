@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Scripts.Runtime.Feature.Player;
+using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
@@ -16,6 +17,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
         [Inject] private DataHub dataHub;
         [Inject] private BankService bank;
         [Inject] private SceneNavigation sceneNavigation;
+        [Inject] private ProjectAudioPlayer projectAudioPlayer;
 
         private PlayerProgressData progressData;
         private Dictionary<int, SkinInfo> currentSkinInfo;
@@ -121,9 +123,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
         {
             progressData.AvailableSkins.Add(skinID);
             bank.SpendCoins(count);
+            projectAudioPlayer.PlayAudioSfx(ProjectAudioType.BuyBall);
             dataHub.SaveData("Progress", progressData);
-            
-            Debug.Log($"Purchase {skinID}, Count { count}");
         }
 
         private void SetCurrentSkin(int skinID)
@@ -131,7 +132,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
             progressData.CurrentIDBallSkin = skinID;
             dataHub.SaveData("Progress", progressData);
             
-            Debug.Log($"Set {skinID}");
         }
     }
 }

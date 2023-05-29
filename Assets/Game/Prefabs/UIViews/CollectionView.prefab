@@ -325,6 +325,7 @@ GameObject:
   - component: {fileID: 1669245669978629501}
   - component: {fileID: 1669245669978629502}
   - component: {fileID: 1669245669978629500}
+  - component: {fileID: 4862365681599037872}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -434,6 +435,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4862365681599037872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669245669978629496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5081293890055821636
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +460,7 @@ GameObject:
   - component: {fileID: 5081293890055821638}
   - component: {fileID: 5081293890055821640}
   - component: {fileID: 5081293890055821641}
+  - component: {fileID: 1534511080754348488}
   m_Layer: 5
   m_Name: ShopButton
   m_TagString: Untagged
@@ -569,6 +583,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UIViewType: 4
+--- !u!114 &1534511080754348488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5081293890055821636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5081293890182180962
 GameObject:
   m_ObjectHideFlags: 0
