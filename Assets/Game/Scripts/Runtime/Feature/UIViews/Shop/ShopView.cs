@@ -29,6 +29,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
         {
             CloseButton.onClick.AddListener(ClosePanel);
             StartButton.onClick.AddListener(StartGame);
+            InactiveBackground.BuyButton.onClick.AddListener(shopController.BuySkin);
             
             LeftArrow.onClick.AddListener(() => shopController.GetNextIcon(-1));
             RightArrow.onClick.AddListener(() => shopController.GetNextIcon(1));
@@ -51,7 +52,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
             if (info.IsCanPurchased)
             {
                 SetTryPurchasePanel(info);
-                return;
             }
             
             if (info.IsPurchased) 
@@ -110,20 +110,20 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
         private void SetChoosePanel(SkinInfo skinInfo)
         {
             ActiveBackground.gameObject.SetActive(true);
-            ActiveBackground.PanelCount.SetActive(false);
+            ActiveBackground.BuyButton.gameObject.SetActive(false);
             ActiveBackground.BallIcon.sprite = skinInfo.Skin;
             
             InactiveBackground.gameObject.SetActive(false);
         }
         private void SetTryPurchasePanel(SkinInfo skinInfo)
         {
-            ActiveBackground.gameObject.SetActive(true);
-            ActiveBackground.PanelCount.SetActive(true);
+            InactiveBackground.gameObject.SetActive(true);
+            InactiveBackground.BuyButton.gameObject.SetActive(true);
             
-            ActiveBackground.BallIcon.sprite = skinInfo.Skin;
-            ActiveBackground.BallCountText.text = skinInfo.Count.ToString();
+            InactiveBackground.BallIcon.sprite = skinInfo.Skin;
+            InactiveBackground.BallCountText.text = skinInfo.Count.ToString();
             
-            InactiveBackground.gameObject.SetActive(false);
+            ActiveBackground.gameObject.SetActive(false);
         }
 
         private void SetClosePanel(SkinInfo skinInfo)

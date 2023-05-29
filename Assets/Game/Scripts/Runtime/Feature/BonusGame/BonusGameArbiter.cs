@@ -35,17 +35,13 @@ namespace Game.Scripts.Runtime.Feature.BonusGame
             0
         );
 
-        public void StartBonusTimer()
+        public void StartBonusGame()
         {
-            bonusTimer = new TimerService();
-            converter = new TimeConverter();
-            bonusTimer.StartCountdown(30, CancellationToken.None);
-            bonusTimer.OnSecondPassed += NotifyBonusTimerTick;
-            bonusTimer.OnTimerFinished += NotifyFinishBonusTimer;
-            
+            StartTimer();
+            challengeController.NotifyCompleteBonusGame(2);
             CreateIcons();
         }
-        
+
         public void CloseView()
         {
             bonusTimer?.Stop();
@@ -57,6 +53,7 @@ namespace Game.Scripts.Runtime.Feature.BonusGame
         {
             parent.gameObject.SetActive(true);
         }
+
         private void CreateIcons()
         {
             createIconSequence = DOTween.Sequence();
@@ -77,7 +74,15 @@ namespace Game.Scripts.Runtime.Feature.BonusGame
             
             createIconSequence.Play();
         }
-
+        
+        private void StartTimer()
+        {
+            bonusTimer = new TimerService();
+            converter = new TimeConverter();
+            bonusTimer.StartCountdown(30, CancellationToken.None);
+            bonusTimer.OnSecondPassed += NotifyBonusTimerTick;
+            bonusTimer.OnTimerFinished += NotifyFinishBonusTimer;
+        }
 
         private void CreateStar()
         {
@@ -106,7 +111,6 @@ namespace Game.Scripts.Runtime.Feature.BonusGame
         
         private void NotifyFinishBonusTimer()
         {
-            challengeController.NotifyCompleteBonusGame(2);
             challengeController.PrepareView();
            
             parent.gameObject.SetActive(false);

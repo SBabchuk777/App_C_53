@@ -4,6 +4,7 @@ using System.Linq;
 using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
 using UnityEngine;
@@ -54,15 +55,19 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
 
             if (skinInfo.IsPurchased)
                 SetCurrentSkin(skinInfo.ID);
-            else
-            {
-                PurchaseSkin(skinInfo.ID, skinInfo.Count);
-                SetCurrentSkin(skinInfo.ID);
-            }
-
             
-
+            dataHub.LevelGameData.GameModeType = GameModeType.Default;
             sceneNavigation.LoadLevel();
+        }
+
+        public void BuySkin()
+        {
+            var skinInfo = currentSkinInfo[currentId];
+            
+            PurchaseSkin(skinInfo.ID, skinInfo.Count);
+            skinInfo.IsPurchased = true;
+           
+            OnChangeSkin?.Invoke(skinInfo);
         }
 
         public void UpdateView()

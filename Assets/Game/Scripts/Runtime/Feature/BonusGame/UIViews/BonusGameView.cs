@@ -99,7 +99,7 @@ namespace Game.Scripts.Runtime.Feature.BonusGame.UIViews
         {
             activePreview.gameObject.SetActive(false);
             timerText.gameObject.SetActive(true);
-            bonusGameArbiter.StartBonusTimer();
+            bonusGameArbiter.StartBonusGame();
         }
     }
 }
