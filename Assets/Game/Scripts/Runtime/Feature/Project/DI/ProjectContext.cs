@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime.Feature.Project.DI
@@ -8,7 +9,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         
         public Injector Injector { get; private set; }
         public static ProjectContext Instance { get; private set; }
-
+        
         private void Awake()
         {
             RunInjector();

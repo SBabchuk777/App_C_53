@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 
 namespace Game.Scripts.Runtime.Feature.Project.DI
@@ -8,6 +9,9 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         
         public Injector(ProjectInstaller installer) => 
             Container = installer.RegisterDependencies();
+        
+        public bool IsFinishInject { get; set; }
+        public event Action OnFinishInject;
 
         public void Inject()
         {
@@ -15,6 +19,9 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
             
             foreach (var dependency in allDependency) 
                 InjectDependenciesInObject(dependency);
+            
+            IsFinishInject = true;
+            OnFinishInject?.Invoke();
         }
         public void InjectDependenciesInObject(object target)
         {
