@@ -8,27 +8,17 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         private Injector Injector => ProjectContext.Instance.Injector;
         
 
-        private void Awake()
+        private void Start()
         {
-            if (Injector.IsFinishInject)
-            {
-                GetInjectObjects();
-            }
-            else
-            {
-                Injector.OnFinishInject += GetInjectObjects;
-            }
-            
+            GetInitializeObjects();
         }
 
-        private void GetInjectObjects()
+        private void GetInitializeObjects()
         {
             var allBehaviours = GetComponentsInChildren<MonoBehaviour>();
 
             foreach (var behaviour in allBehaviours)
                 Injector.InjectDependenciesInObject(behaviour);
-            
-            Injector.OnFinishInject -= GetInjectObjects;
         }
     }
 }
