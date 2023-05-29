@@ -222,6 +222,7 @@ GameObject:
   - component: {fileID: 2942187537452693488}
   - component: {fileID: 2942187537452693495}
   - component: {fileID: 2942187537452693494}
+  - component: {fileID: 6427017454815172389}
   m_Layer: 5
   m_Name: "CountBotton\uF746"
   m_TagString: Untagged
@@ -332,6 +333,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6427017454815172389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942187537452693492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2942187537582742222
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,6 +357,7 @@ GameObject:
   - component: {fileID: 2942187537582742218}
   - component: {fileID: 2942187537582742217}
   - component: {fileID: 2942187537582742216}
+  - component: {fileID: 3320994906953489461}
   m_Layer: 5
   m_Name: "CountBotton\uF746"
   m_TagString: Untagged
@@ -454,6 +468,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3320994906953489461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2942187537582742222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2942187537668408015
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,6 +1391,8 @@ GameObject:
   - component: {fileID: 3738897273447990223}
   - component: {fileID: 3738897273447990222}
   - component: {fileID: 3738897273447990209}
+  - component: {fileID: 2699392643173569750}
+  - component: {fileID: 7588063940356732694}
   m_Layer: 5
   m_Name: ADSButton
   m_TagString: Untagged
@@ -1475,6 +1503,30 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2699392643173569750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3738897273447990211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6764b6f8eb374486b8328fbed5c083e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7588063940356732694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3738897273447990211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3738897273697793649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,6 +1619,7 @@ GameObject:
   - component: {fileID: 8330457214243189698}
   - component: {fileID: 8330457214243189697}
   - component: {fileID: 8330457214243189699}
+  - component: {fileID: 6788110565403900673}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -1676,6 +1729,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6788110565403900673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330457214243189703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2942187539114729524
 PrefabInstance:
   m_ObjectHideFlags: 0

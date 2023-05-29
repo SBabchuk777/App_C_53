@@ -36,6 +36,10 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
         public void AddCoin()
         {
             bankService.AddCoin(10);
+        } 
+        public void AddCoinForAds()
+        {
+            bankService.AddCoin(20);
         }
         public bool IsTryBuy(int value)
         {

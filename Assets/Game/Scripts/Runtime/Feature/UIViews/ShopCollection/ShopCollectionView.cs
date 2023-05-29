@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.UIViewService;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
         [SerializeField] private Button rareBuyButton;
 
         [Inject] private ShopCollectionController controller;
+        [Inject] private UnityADSManager unityAds;
 
         protected override void Subscribe()
         {
@@ -32,6 +34,9 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
             {
                 rareBuyButton.interactable = true;
             }
+            
+            unityAds.LoadRewardedAd();
+            unityAds.OnShowCompleteAds += controller.AddCoinForAds;
         }
 
         protected override void Open()
@@ -45,6 +50,9 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
             regularBuyButton.onClick.RemoveAllListeners();
             rareBuyButton.onClick.RemoveAllListeners();
             closeButton.onClick.RemoveAllListeners();
+            
+            unityAds.OnShowCompleteAds -= controller.AddCoinForAds;
+            unityAds.UnsubscribeAllEvent();
         }
         public void ClosePanel()
         {
