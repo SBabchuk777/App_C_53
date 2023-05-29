@@ -93,7 +93,10 @@ namespace Game.Scripts.Runtime.Feature.Level
         private void PlayVibration()
         {
             if (settingService.SettingsData.IsVibro)
+            {
+                Debug.Log("vibro");
                 MMVibrationManager.Haptic(HapticTypes.Success);
+            }
         }
 
         private void StartTimer()

@@ -43,8 +43,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
         {
             shopController.StartLevel();
             shopController.Reset();
-            
-            Destroy(gameObject, .8f);
+
+            DOTween.Sequence().Append(DOVirtual.DelayedCall(.8f, Close)).Play();
         }
 
         private void ChangeSkin(SkinInfo info)
@@ -93,6 +93,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
             
             LeftArrow.onClick.RemoveAllListeners();
             RightArrow.onClick.RemoveAllListeners();
+            InactiveBackground.BuyButton.onClick.RemoveAllListeners();
             
             shopController.OnHideArrow -= HideArrow;
             shopController.OnShowArrow -= ShowArrow;

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Services.UIViewService;
+using MoreMountains.NiceVibrations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,7 +51,14 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Settings
         private void ChangeSound(bool isActive) =>
             settingService.TurnSound(isActive);
 
-        private void ChangeVibro(bool isActive) => 
+        private void ChangeVibro(bool isActive)
+        {
             settingService.ChangeVibro(isActive);
+            if (isActive)
+            {
+                MMVibrationManager.Haptic(HapticTypes.Success);
+            }
+            
+        }
     }
 }

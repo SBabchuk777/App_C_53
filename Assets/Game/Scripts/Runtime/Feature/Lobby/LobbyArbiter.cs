@@ -60,7 +60,7 @@ namespace Game.Scripts.Runtime.Feature.Lobby
 
         public void OnDestroy()
         {
-            projectAudioPlayer.StopAudioAmbientOnLobby();
+           // projectAudioPlayer.StopAudioAmbientOnLobby();
         }
     }
 }

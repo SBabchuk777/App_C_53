@@ -23,9 +23,6 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
         public void Initialize() =>
             SettingsData = dataHub.LoadData<SettingsData>("Settings");
 
-        public void UpdateData(SettingsData settingsData) =>
-            SettingsData = settingsData;
-
         public void Start()
         {
             audioService.SetVolume(AudioType.Background, SettingsData.IsMusic ? -20 : -80);
@@ -47,7 +44,7 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
         {
             var audioClip = ProjectAudioPath.ProjectAudioPathMap[ProjectAudioType.LobbyAmbient];
 
-            lobbyAmbientSource = audioService.Play(new Tune(audioClip, AudioType.Background, true));
+            lobbyAmbientSource = audioService.Play(new Tune(audioClip, AudioType.Sfx, true));
             lobbyAmbientSource.volume = 0;
             lobbyAmbientSource.DOFade(1, 3f).Play();
         }
