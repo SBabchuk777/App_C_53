@@ -51,6 +51,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Settings
             settingService.TurnSound(isActive);
 
         private void ChangeVibro(bool isActive) => 
-            settingService.TurnVibro(isActive);
+            settingService.ChangeVibro(isActive);
     }
 }

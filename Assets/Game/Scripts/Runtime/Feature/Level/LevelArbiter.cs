@@ -5,11 +5,13 @@ using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using Game.Scripts.Runtime.Feature.UIViews.Result;
+using Game.Scripts.Runtime.Feature.UIViews.Settings;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
 using Game.Scripts.Runtime.Services.Timer;
 using Game.Scripts.Runtime.Services.UIViewService;
+using MoreMountains.NiceVibrations;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime.Feature.Level
@@ -28,6 +30,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         [Inject] private ResultController resultController;
         [Inject] private ChallengeController challengeController;
         [Inject] private DataHub dataHub;
+        [Inject] private SettingService settingService;
         
         private ITimer timer;
         private TimeConverter converter;
@@ -73,11 +76,24 @@ namespace Game.Scripts.Runtime.Feature.Level
             gameStatusHandler.OnTwoPointGoal += () => projectAudioPlayer.PlayAudioSfx(ProjectAudioType.GoalHoop);
             
             gameStatusHandler.OnThreePointGoal += scoreCalculator.CalculateForThree;
-            gameStatusHandler.OnThreePointGoal += () => projectAudioPlayer.PlayAudioSfx(ProjectAudioType.Strike);
-            gameStatusHandler.OnThreePointGoal += () => projectAudioPlayer.PlayAudioSfx(ProjectAudioType.GoalHoop);
+            gameStatusHandler.OnThreePointGoal += SetThreePointGoal;
 
             builder.Initialize();
             builder.CreateGameField();
+        }
+
+        private void SetThreePointGoal()
+        {
+            projectAudioPlayer.PlayAudioSfx(ProjectAudioType.Strike);
+            projectAudioPlayer.PlayAudioSfx(ProjectAudioType.GoalHoop);
+            
+            PlayVibration();
+        }
+
+        private void PlayVibration()
+        {
+            if (settingService.SettingsData.IsVibro)
+                MMVibrationManager.Haptic(HapticTypes.Success);
         }
 
         private void StartTimer()
@@ -112,6 +128,8 @@ namespace Game.Scripts.Runtime.Feature.Level
             resultController.PrepareView(scoreCalculator.CurrentScore, scoreCalculator.BestScore);
             uiViewService.Instantiate(UIViewType.Result);
             scoreCalculator.ResetData();
+            
+            PlayVibration();
         }
         
         private void FinishNewBallGame(GameStatusType statusType)
@@ -131,6 +149,8 @@ namespace Game.Scripts.Runtime.Feature.Level
             uiViewService.Instantiate(UIViewType.ResultNewBall);
             scoreCalculator.ResetData();
             builder.ResetNewBallGame();
+            
+            PlayVibration();
         }
         private void FinishTimeGame(GameStatusType statusType)
         {
@@ -153,6 +173,8 @@ namespace Game.Scripts.Runtime.Feature.Level
 
             scoreCalculator.ResetData();
             builder.ResetTimeGame();
+            
+            PlayVibration();
         }
 
         private void RunAfterInitialize()

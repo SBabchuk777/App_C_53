@@ -30,7 +30,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Settings
             
             SettingsData.IsMusic = isOn;
         }
-        public void TurnVibro(bool isOn) => 
+        public void ChangeVibro(bool isOn) => 
             SettingsData.IsVibro = isOn;
 
         public void ChangeSound(float value)
