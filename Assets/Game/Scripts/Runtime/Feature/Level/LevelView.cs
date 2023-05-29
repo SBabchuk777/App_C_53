@@ -49,6 +49,7 @@ namespace Game.Scripts.Runtime.Feature.Level
             homeButton.onClick.RemoveAllListeners();
             gameStatusHandler.OnChangeScore -= ChangeCurrenText;
             gameStatusHandler.OnChangeBestScore -= ChangeBestText;
+            levelArbiter.OnChangeTimer -= ChangeTimerText;
         }
     }
 }

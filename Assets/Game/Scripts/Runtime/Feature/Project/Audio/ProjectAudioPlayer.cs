@@ -42,6 +42,10 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
 
         public void PlayAudioAmbientOnLobby()
         {
+            if (lobbyAmbientSource != null)
+            {
+                return;
+            }
             var audioClip = ProjectAudioPath.ProjectAudioPathMap[ProjectAudioType.LobbyAmbient];
 
             lobbyAmbientSource = audioService.Play(new Tune(audioClip, AudioType.Sfx, true));

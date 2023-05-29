@@ -56,6 +56,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Settings
             settingService.ChangeVibro(isActive);
             if (isActive)
             {
+                Debug.Log("Vibro");
                 MMVibrationManager.Haptic(HapticTypes.Success);
             }
             

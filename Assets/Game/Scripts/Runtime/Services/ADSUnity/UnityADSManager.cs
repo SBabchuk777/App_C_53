@@ -6,7 +6,7 @@ using UnityEngine.Advertisements;
 
 namespace Game.Scripts.Runtime.Services.ADSUnity
 {
-    public class UnityADSManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener, IProjectInitializable
+    public class UnityADSManager : MonoBehaviour, IUnityAdsInitializationListener, IUnityAdsLoadListener, IUnityAdsShowListener
     {
         [SerializeField] private string GameIDAndroid;
         [SerializeField] private string GameIDIOS;
@@ -28,7 +28,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         public string CurrentIdShow { get; private set; }
         public bool IsAdsLoaded { get; private set; }
 
-        public void Initialize()
+        public void Start()
         {
 #if UNITY_IOS
             currentIdInitialize = GameIDIOS;
