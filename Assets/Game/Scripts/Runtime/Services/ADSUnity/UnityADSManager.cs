@@ -32,7 +32,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         {
 #if UNITY_IOS
             currentIdInitialize = GameIDIOS;
-            currentIdShow = RewardedVideoPlacementIOS;
+            CurrentIdShow = RewardedVideoPlacementIOS;
 #elif UNITY_ANDROID
             currentIdInitialize = GameIDAndroid;
             CurrentIdShow = RewardedVideoPlacementAndroid;
