@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Services.Bank;
 using TMPro;
@@ -9,9 +10,11 @@ namespace Game.Scripts.Runtime.Feature.BonusGame
 {
     public class StarBonus : BonusGameIcon, IPointerDownHandler
     {
-        [Inject] private BankService bankService;
         [SerializeField] private TextMeshProUGUI addScoreTMP;
         
+        [Inject] private BankService bankService;
+        
+
         public void OnPointerDown(PointerEventData eventData)
         {
             if (!isCanClick) 
@@ -20,6 +23,7 @@ namespace Game.Scripts.Runtime.Feature.BonusGame
             Hide();
             HideTMP();
             bankService.AddCoin(1);
+            audioPlayer.PlayAudioSfx(ProjectAudioType.ClickStar);
         }
 
         private void HideTMP()

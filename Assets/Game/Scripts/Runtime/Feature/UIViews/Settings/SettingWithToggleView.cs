@@ -48,15 +48,18 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Settings
             settingService.SaveData();
         }
 
-        private void ChangeSound(bool isActive) =>
+        private void ChangeSound(bool isActive)
+        {
             settingService.TurnSound(isActive);
+            settingService.TurnMusic(isActive);
+        }
 
         private void ChangeVibro(bool isActive)
         {
             settingService.ChangeVibro(isActive);
+            
             if (isActive)
             {
-                Debug.Log("Vibro");
                 MMVibrationManager.Haptic(HapticTypes.Success);
             }
             

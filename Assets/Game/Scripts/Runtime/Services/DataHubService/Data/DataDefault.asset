@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: DataDefault
   m_EditorClassIdentifier: 
   Bank:
-    Coin: 10000
+    Coin: 0
     Gem: 0
   Settings:
     IsSound: 1
-    IsMusic: 0
+    IsMusic: 1
     IsVibro: 1
     IsSliderActive: 0
     SoundVolumeCount: 0

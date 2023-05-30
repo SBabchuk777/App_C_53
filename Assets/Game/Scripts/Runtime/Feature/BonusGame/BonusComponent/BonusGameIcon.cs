@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Level.GameField;
+using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Services.Bank;
 using UnityEngine;
@@ -12,6 +13,8 @@ namespace Game.Scripts.Runtime.Feature.BonusGame
     {
         public Image iconImage;
         protected bool isCanClick;
+        
+        [Inject] protected ProjectAudioPlayer audioPlayer;
 
         private void Start()
         {

@@ -10,6 +10,8 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
         GoalHoop,
         MissHoop,
         Strike,
-        Win
+        Win,
+        ClickStar,
+        ClickBall
     }
 }

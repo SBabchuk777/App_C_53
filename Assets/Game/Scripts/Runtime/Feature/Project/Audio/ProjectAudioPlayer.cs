@@ -48,7 +48,7 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
             }
             var audioClip = ProjectAudioPath.ProjectAudioPathMap[ProjectAudioType.LobbyAmbient];
 
-            lobbyAmbientSource = audioService.Play(new Tune(audioClip, AudioType.Sfx, true));
+            lobbyAmbientSource = audioService.Play(new Tune(audioClip, AudioType.Background, true));
             lobbyAmbientSource.volume = 0;
             lobbyAmbientSource.DOFade(1, 3f).Play();
         }

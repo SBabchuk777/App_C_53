@@ -1,3 +1,4 @@
+using Game.Scripts.Runtime.Feature.Project.Audio;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,7 +11,7 @@ namespace Game.Scripts.Runtime.Feature.BonusGame
             if (isCanClick)
             {
                 Hide();
-                Debug.Log("click in");
+                audioPlayer.PlayAudioSfx(ProjectAudioType.ClickBall);
             }
         }
         

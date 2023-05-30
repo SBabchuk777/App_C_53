@@ -102,6 +102,8 @@ namespace Game.Scripts.Runtime.Feature.BonusGame
             ballIcon.SetIcon(randomSprite);
             
             instance.transform.SetParent(parent, false);
+            
+            injector.InjectDependenciesInObject(ballIcon);
         }
 
         private void NotifyBonusTimerTick(float value)
