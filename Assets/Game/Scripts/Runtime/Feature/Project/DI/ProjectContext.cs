@@ -16,7 +16,6 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         {
             RunInjector();
             CreateSingleton();
-            NotifyIInitializable();
         }
 
         private void RunInjector()
@@ -33,6 +32,8 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
             else
             {
                 Instance = this;
+                
+                NotifyIInitializable();
                 DontDestroyOnLoad(gameObject);
             }
         }

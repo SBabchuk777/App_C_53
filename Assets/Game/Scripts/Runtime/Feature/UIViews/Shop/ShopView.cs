@@ -49,15 +49,16 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
 
         private void ChangeSkin(SkinInfo info)
         {
-            if (info.IsCanPurchased)
+        
+            if (info.IsPurchased)
             {
-                SetTryPurchasePanel(info);
-            }
-            
-            if (info.IsPurchased) 
                 SetChoosePanel(info);
+            }
             else
+            {
+                InactiveBackground.BuyButton.interactable = info.IsCanPurchased;
                 SetClosePanel(info);
+            }
         }
 
         private void HideArrow(int value)
@@ -116,17 +117,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
             
             InactiveBackground.gameObject.SetActive(false);
         }
-        private void SetTryPurchasePanel(SkinInfo skinInfo)
-        {
-            InactiveBackground.gameObject.SetActive(true);
-            InactiveBackground.BuyButton.gameObject.SetActive(true);
-            
-            InactiveBackground.BallIcon.sprite = skinInfo.Skin;
-            InactiveBackground.BallCountText.text = skinInfo.Count.ToString();
-            
-            ActiveBackground.gameObject.SetActive(false);
-        }
-
+        
         private void SetClosePanel(SkinInfo skinInfo)
         {
             InactiveBackground.gameObject.SetActive(true);

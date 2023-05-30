@@ -19,12 +19,11 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
         private AudioSource levelAmbientSource;
 
         private SettingsData SettingsData { get; set; }
-
-        public void Initialize() =>
-            SettingsData = dataHub.LoadData<SettingsData>("Settings");
-
-        public void Start()
+        
+        public void Initialize()
         {
+            SettingsData = dataHub.LoadData<SettingsData>("Settings");
+            
             audioService.SetVolume(AudioType.Background, SettingsData.IsMusic ? -20 : -80);
             audioService.SetVolume(AudioType.Music, SettingsData.IsSound ? 0 : -80);
             audioService.SetVolume(AudioType.Sfx, SettingsData.IsSound ? 0 : -80);
@@ -46,6 +45,7 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
             {
                 return;
             }
+
             var audioClip = ProjectAudioPath.ProjectAudioPathMap[ProjectAudioType.LobbyAmbient];
 
             lobbyAmbientSource = audioService.Play(new Tune(audioClip, AudioType.Background, true));
@@ -58,13 +58,13 @@ namespace Game.Scripts.Runtime.Feature.Project.Audio
             if (lobbyAmbientSource != null)
                 audioService.Stop(lobbyAmbientSource);
         }
-        
+
 
         public void PlayAudioSfx(ProjectAudioType projectAudioType)
         {
             audioService.Play(new Tune(ProjectAudioPath.ProjectAudioPathMap[projectAudioType], AudioType.Sfx));
-        } 
-        
+        }
+
         public void PlayAudioMusic(ProjectAudioType projectAudioType)
         {
             audioService.Play(new Tune(ProjectAudioPath.ProjectAudioPathMap[projectAudioType], AudioType.Music));
