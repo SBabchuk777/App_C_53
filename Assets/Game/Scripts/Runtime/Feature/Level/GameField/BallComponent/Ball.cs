@@ -104,7 +104,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
             
             var distanceMultiplier = distance / Vector2.Distance(startPos, endPos); // Множитель для задания фиксированного расстояния полета
             rb.isKinematic = false;
-            direction = Vector2.Lerp(direction, direction * 0.2f, 0.2f);
+            direction = Vector2.Lerp(direction, direction * 0.1f, 0.2f);
             rb.AddForce(direction * force * distanceMultiplier, ForceMode2D.Impulse);
             isBallThrown = true;
             isCanChangeScale = true;

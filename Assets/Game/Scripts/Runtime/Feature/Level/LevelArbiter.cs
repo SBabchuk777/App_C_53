@@ -103,7 +103,8 @@ namespace Game.Scripts.Runtime.Feature.Level
         private void StartTimer()
         {
             timer = new TimerService();
-            timer.StartCountdown(61, CancellationToken.None);
+            timer.StartCountdown(30, CancellationToken.None);
+            
             timer.OnSecondPassed += NotifyTimerTick;
             timer.OnTimerFinished += NotifyTimeLose;
         }
