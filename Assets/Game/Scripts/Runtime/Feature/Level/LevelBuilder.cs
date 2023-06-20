@@ -108,6 +108,9 @@ namespace Game.Scripts.Runtime.Feature.Level
 
         private void MoveComponentsForNewBallGame()
         {
+            Hoop.Reset();
+            stick.ResetStick();
+            
             if (newBallChallengeSettings.CountAnchor == 0)
             {
                 newBallChallengeSettings.CountAnchor++;
@@ -128,8 +131,6 @@ namespace Game.Scripts.Runtime.Feature.Level
             }
             if (stick.IsTouch && Hoop.IsGoal)
             {
-                Hoop.Reset();
-                
                 if (newBallChallengeSettings.CountAnchor == 4)
                 {
                     gameStatusHandler.NotifyFinishBallGame(GameStatusType.Win);
@@ -138,8 +139,7 @@ namespace Game.Scripts.Runtime.Feature.Level
                 
                 return;
             }
-            stick.ResetStick();
-
+            
             gameStatusHandler.NotifyFinishBallGame(GameStatusType.Lose);
         }
 

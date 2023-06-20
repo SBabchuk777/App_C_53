@@ -25,12 +25,18 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             challengeController.OnTimerFinish[0] += ActiveNewBallButtonAfterFinishTimer;
             challengeController.OnTimerFinish[1] += ActiveTimeButtonAfterFinishTimer;
             
-            unityAdsButton[0].OnCanGetReward += () => challengeController.UpdateTimerAfterWatchAds(0);
-            unityAdsButton[1].OnCanGetReward += () => challengeController.UpdateTimerAfterWatchAds(1);
+            unityAdsButton[0].OnCanGetReward += () => GetReward(0);
+            unityAdsButton[1].OnCanGetReward += () => GetReward(1);
             
             challengeController.OnClosePanel += ClosePanelAfterStartGame;
         }
-        
+
+        private void GetReward(int index)
+        {
+            challengeController.UpdateTimerAfterWatchAds(index);
+            unityAdsButton[index].Deactivate();
+        }
+
         protected override void Initialize()
         {
             challengeButtons[GameModeType.Collect].SetActiveButton(challengeController.OpenCollectionView);

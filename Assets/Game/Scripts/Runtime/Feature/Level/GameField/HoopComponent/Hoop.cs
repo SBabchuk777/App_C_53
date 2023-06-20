@@ -28,7 +28,7 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField.HoopComponent
         private Star Star { get; set; }
 
         private bool isTouchHoop;
-        public bool IsGoal { get; set; }
+        public bool IsGoal { get; private set; }
 
         private void Awake()
         {
