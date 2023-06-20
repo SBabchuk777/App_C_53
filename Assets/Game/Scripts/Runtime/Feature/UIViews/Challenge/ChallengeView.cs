@@ -12,7 +12,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
     public class ChallengeView : BaseView
     {
         [SerializeField] private Button closeButton;
-        [SerializeField] private List<UnityAdsButtonListener> unityAdsButton;
+        [SerializeField] private List<UnityAdsButton> unityAdsButton;
         [SerializeField] private SerializableDictionary<GameModeType, ChallengeButton> challengeButtons;
         
         [Inject] private ChallengeController challengeController;
@@ -25,8 +25,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             challengeController.OnTimerFinish[0] += ActiveNewBallButtonAfterFinishTimer;
             challengeController.OnTimerFinish[1] += ActiveTimeButtonAfterFinishTimer;
             
-            unityAdsButton[0].OnShowCompleteAds += () => challengeController.UpdateTimerAfterWatchAds(0);
-            unityAdsButton[1].OnShowCompleteAds += () => challengeController.UpdateTimerAfterWatchAds(1);
+            unityAdsButton[0].OnCanGetReward += () => challengeController.UpdateTimerAfterWatchAds(0);
+            unityAdsButton[1].OnCanGetReward += () => challengeController.UpdateTimerAfterWatchAds(1);
             
             challengeController.OnClosePanel += ClosePanelAfterStartGame;
         }

@@ -21,7 +21,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         [Inject] private UIViewService uiViewService;
         [Inject] private DataHub dataHub;
         [Inject] private SceneNavigation sceneNavigation;
-        [Inject] private UnityADSManager unityAds;
+        [Inject] private UnityAdsService unityAds;
 
         public Action<string>[] OnTimerTick = new Action<string>[3];
         public Action[] OnTimerFinish = new Action[3];
@@ -84,8 +84,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
 
         public void PrepareView()
         {
-            unityAds.LoadRewardedAd();
-            
             var elapsedTime = (float)(DateTime.Now - ChallengeData.LastDateTime).TotalSeconds;
 
             for (var i = 0; i < maxGetTime.Length; i++)

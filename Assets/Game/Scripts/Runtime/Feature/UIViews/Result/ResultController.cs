@@ -24,7 +24,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         [Inject] private BankService bank;
         [Inject] private UIViewService uiViewService;
         [Inject] private ChallengeController challengeController;
-        [Inject] private UnityADSManager unityAds;
         [Inject] private ProjectAudioPlayer projectAudioPlayer; 
 
         public int BestScoreCount { get; private set; }
@@ -37,10 +36,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         {
             ScoreCount = scoreCount;
             BestScoreCount = bestScoreCount;
-            projectAudioPlayer.PlayAudioSfx(ProjectAudioType.Lose); 
-            
-            unityAds.LoadRewardedAd();
-            unityAds.OnShowCompleteAds += AddRewardForWatch;
+            projectAudioPlayer.PlayAudioSfx(ProjectAudioType.Lose);
         }
         
         public void PrepareNewBallView(GameStatusType statusType, bool isCanResume)
@@ -66,9 +62,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
             {
                 projectAudioPlayer.PlayAudioSfx(ProjectAudioType.Lose); 
             }
-            
-            unityAds.LoadRewardedAd();
-            unityAds.OnShowCompleteAds += AddRewardForWatch;
         }
         public void BackToMenu()
         {
@@ -104,7 +97,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
             return contentTextMap[GameStatusType];
         }
 
-        private void AddRewardForWatch()
+        public void AddRewardForWatch()
         {
             bank.AddCoin(20);
         }

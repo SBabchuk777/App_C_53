@@ -14,7 +14,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
     {
         [SerializeField] private Text winLoseText;
         [SerializeField] private GameObject countWinPanel;
-        [SerializeField] private GameObject unityAdsButton;
+        [SerializeField] private UnityAdsButton unityAdsButton;
 
         [SerializeField] private Button closeButton;
         [SerializeField] private Button reloadButton;
@@ -24,7 +24,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         [SerializeField] private GameObject view;
 
         [Inject] private ResultController resultController;
-        [Inject] private UnityADSManager unityAds;
 
         public event Action OnCloseAfterReload;
         protected override void Subscribe()
@@ -32,6 +31,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
             reloadButton.onClick.AddListener(ClosePanelAfterReload);
             closeButton.onClick.AddListener(BackMenu);
             bonusButton.onClick.AddListener(resultController.LoadBonusGame);
+            
+            unityAdsButton.OnCanGetReward += AddRewarded;
         }
 
         protected override void Initialize()
@@ -41,7 +42,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
             if (resultController.GameStatusType == GameStatusType.Win)
             {
                 countWinPanel.SetActive(true);
-                unityAdsButton.SetActive(true);
+                unityAdsButton.Activate();
             }
             
             if (!resultController.IsCanResumeTimeGame)
@@ -65,8 +66,12 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
             reloadButton.onClick.RemoveAllListeners();
             closeButton.onClick.RemoveAllListeners();
             bonusButton.onClick.RemoveAllListeners();
-            
-            unityAds.UnsubscribeAllEvent();
+        }
+        
+        private void AddRewarded()
+        {
+            resultController.AddRewardForWatch();
+            unityAdsButton.Deactivate();
         }
         
         private void ChangeWinLoseText(string value)

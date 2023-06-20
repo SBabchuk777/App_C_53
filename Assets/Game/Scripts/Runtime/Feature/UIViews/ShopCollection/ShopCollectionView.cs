@@ -12,25 +12,30 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
         [SerializeField] private Button closeButton;
         [SerializeField] private Button regularBuyButton;
         [SerializeField] private Button rareBuyButton;
+        [SerializeField] private Button adsButton;
 
         [Inject] private ShopCollectionController controller;
-        [Inject] private UnityADSManager unityAds;
+        [Inject] private UnityAdsService unityAds;
 
         protected override void Subscribe()
         {
             regularBuyButton.onClick.AddListener(controller.BuyRegularElement);
             rareBuyButton.onClick.AddListener(controller.BuyRareElement);
             closeButton.onClick.AddListener(ClosePanel);
+            adsButton.onClick.AddListener(ShowRewarded);
 
             controller.OnUpdateBank += ActivateBuyButton;
+        }
+
+        private void ShowRewarded()
+        {
+            var listener = unityAds.ShowRewardedAd();
+            listener.OnShowCompleteAds += controller.AddCoinForAds;
         }
 
         protected override void Initialize()
         {
             ActivateBuyButton();
-            
-            unityAds.LoadRewardedAd();
-            unityAds.OnShowCompleteAds += controller.AddCoinForAds;
         }
 
         protected override void Open()
@@ -44,9 +49,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
             regularBuyButton.onClick.RemoveAllListeners();
             rareBuyButton.onClick.RemoveAllListeners();
             closeButton.onClick.RemoveAllListeners();
-
-            unityAds.OnShowCompleteAds -= controller.AddCoinForAds;
-            unityAds.UnsubscribeAllEvent();
             
             controller.OnUpdateBank -= ActivateBuyButton;
         }

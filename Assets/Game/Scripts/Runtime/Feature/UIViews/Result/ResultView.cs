@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Services;
@@ -20,14 +21,22 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         [SerializeField] private ImageFader fader;
         [SerializeField] private GameObject view;
 
+        [SerializeField] private UnityAdsButton unityAdsButton;
+        
         [Inject] private ResultController resultController;
-        [Inject] private UnityADSManager unityAds;
 
         protected override void Subscribe()
         {
             reloadButton.onClick.AddListener(ClosePanelAfterReload);
             closeButton.onClick.AddListener(BackMenu);
             bonusButton.onClick.AddListener(resultController.LoadBonusGame);
+            unityAdsButton.OnCanGetReward += AddRewarded;
+        }
+
+        private void AddRewarded()
+        {
+            resultController.AddRewardForWatch();
+            unityAdsButton.Deactivate();
         }
 
         protected override void Initialize()
@@ -51,8 +60,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
             reloadButton.onClick.RemoveAllListeners();
             closeButton.onClick.RemoveAllListeners();
             bonusButton.onClick.RemoveAllListeners();
-            
-            unityAds.UnsubscribeAllEvent();
         }
 
         private void ClosePanelAfterReload()

@@ -660,7 +660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.49019608}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1049,6 +1049,7 @@ MonoBehaviour:
   closeButton: {fileID: 8330457214243189699}
   regularBuyButton: {fileID: 2942187537582742216}
   rareBuyButton: {fileID: 2942187537452693494}
+  adsButton: {fileID: 3738897273447990209}
 --- !u!1 &2942187538891654407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1391,7 +1392,6 @@ GameObject:
   - component: {fileID: 3738897273447990223}
   - component: {fileID: 3738897273447990222}
   - component: {fileID: 3738897273447990209}
-  - component: {fileID: 2699392643173569750}
   - component: {fileID: 7588063940356732694}
   m_Layer: 5
   m_Name: ADSButton
@@ -1503,18 +1503,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2699392643173569750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3738897273447990211}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6764b6f8eb374486b8328fbed5c083e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7588063940356732694
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         public PauseService PauseService;
         public ProjectAudioPlayer ProjectAudioPlayer;
         public UIViewService UIViewService;
-        public UnityADSManager UnityAdsManager;
+        public UnityAdsService UnityAdsService;
         public DataHub DataHub;
 
         [Header("Controllers in MVC")]
@@ -67,7 +67,7 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
             container.Register(SceneNavigation);
             container.Register(ProjectAudioPlayer);
             container.Register(UIViewService);
-            container.Register(UnityAdsManager);
+            container.Register(UnityAdsService);
             container.Register(PauseService);
             container.Register(DataHub);
         }

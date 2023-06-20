@@ -1,47 +1,88 @@
+using System;
+using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.UIViewService;
+using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Game.Scripts.Runtime.Services.ADSUnity
 {
     public class WatchView : BaseView
     {
-        public int CountCoinForWatch;
-        public Button WatchButton;
+        [SerializeField] private ImageFader _fader;
+        [SerializeField] private Transform _view;
+        [SerializeField] private Button _watchButton;
+        [SerializeField] private Button _closeButton;
         
-        [Inject] private UnityADSManager unityAdsManager;
+        [SerializeField] private Text _currentText;
+        [SerializeField] private Text _maxCountText;
+
+        private int currentCountAd;
+        private int maxCountAd;
+        
+        [Inject] private UnityAdsService unityAdsService;
         [Inject] private BankService bankService;
+        public event Action OnCanGetReward;
 
-        private void Start()
+        protected override void Subscribe()
         {
-            TurnOffButton();
+            _watchButton.onClick.AddListener(WatchADS);
+            _closeButton.onClick.AddListener(ClosePanel);
+        }
+
+        private void WatchADS()
+        {
+            var listener = unityAdsService.ShowRewardedAd();
+            listener.OnShowCompleteAds += CheckGetReward;
+        }
+
+        protected override void Initialize()
+        {
+            _currentText.text = currentCountAd.ToString();
+            _maxCountText.text = $"/{maxCountAd}";
             
-            unityAdsManager.LoadRewardedAd();
-            WatchButton.onClick.AddListener(unityAdsManager.ShowRewardedAd);
-            unityAdsManager.OnShowCompleteAds += AddGemForWatch;
+            _view.transform.localScale = Vector3.zero;
+        }
 
-            if (unityAdsManager.IsAdsLoaded)
-                TurnOnButton();
+        protected override void Unsubscribe()
+        {
+            _watchButton.onClick.RemoveAllListeners();
+            _closeButton.onClick.RemoveAllListeners();
+        }
+
+        protected override void Open()
+        {
+            _fader.FadeTo(.3f, () => _view.DOScale(Vector3.one, 0.3f).Play());
+        }
+
+
+        private void CheckGetReward()
+        {
+            if (currentCountAd < maxCountAd -1)
+            {
+                currentCountAd++;
+                _currentText.text = currentCountAd.ToString();
+            }
             else
-                unityAdsManager.OnAdsLoaded += TurnOnButton;
+            {
+                ClosePanel();
+                OnCanGetReward?.Invoke();
+                OnCanGetReward = null;
+            }
         }
 
-        private void OnDisable()
+        private void ClosePanel()
         {
-            unityAdsManager.OnShowCompleteAds -= AddGemForWatch;
-            unityAdsManager.OnAdsLoaded -= TurnOnButton;
+            _view.DOScale(Vector3.zero, 0.3f)
+                .OnComplete(()=> _fader.FadeOut(0.3f, Close))
+                .Play();
         }
 
-        private void AddGemForWatch()
+        public void Set(int maxCountAd)
         {
-            TurnOffButton();
-            bankService.AddCoin(CountCoinForWatch);
+            this.maxCountAd = maxCountAd;
         }
-
-        private void TurnOnButton() => 
-            WatchButton.interactable = true;
-        private void TurnOffButton() => 
-            WatchButton.interactable = false;
     }
 }
