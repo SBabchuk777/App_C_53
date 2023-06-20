@@ -61,6 +61,7 @@ namespace Game.Scripts.Runtime.Feature.Level
             {
                 gameStatusHandler.OnFinishBallGame += FinishNewBallGame;
                 uiViewService.Instantiate(UIViewType.LevelPreview);
+                challengeData.CountPlayGameInNewBall++;
             }
             if (dataHub.LevelGameData.GameModeType == GameModeType.Time)
             {
@@ -188,6 +189,28 @@ namespace Game.Scripts.Runtime.Feature.Level
         {
             gameStatusHandler.UnsubscribeAllEventHandlers();
             sceneFader.FadeTo(0.8f, () => sceneNavigation.LoadLobby());
+            
+            if (dataHub.LevelGameData.GameModeType == GameModeType.Time)
+            {
+                StopTimer();
+                
+                if (challengeData.CountPlayGameInTime == 5)
+                {
+                    challengeController.NotifyCompleteBonusGame(1);
+                    challengeData.CountPlayGameInTime = 0;
+                    dataHub.SaveData("Challenge", challengeData);
+                }
+            }
+
+            if (dataHub.LevelGameData.GameModeType == GameModeType.NewBall)
+            {
+                if (challengeData.CountPlayGameInNewBall == 5)
+                {
+                    challengeController.NotifyCompleteBonusGame(0);
+                    challengeData.CountPlayGameInNewBall = 0;
+                    dataHub.SaveData("Challenge", challengeData);
+                }
+            }
         }
     }
 }
