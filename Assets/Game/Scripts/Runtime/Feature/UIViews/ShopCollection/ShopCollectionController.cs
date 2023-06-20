@@ -1,3 +1,4 @@
+using System;
 using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Collection;
@@ -6,6 +7,7 @@ using Game.Scripts.Runtime.Feature.UIViews.ShopCollection.PopUp;
 using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.UIViewService;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
 {
@@ -28,6 +30,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
         private int GetRandomRareElementID => 
             Random.Range(0, collectionElementsInfoData.RareElementsPathMap.Count);
 
+        public event Action OnUpdateBank;
+
         public void Initialize()
         {
             playerProgressData = dataHub.LoadData<PlayerProgressData>("Progress");
@@ -36,10 +40,12 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
         public void AddCoin()
         {
             bankService.AddCoin(10);
+            CheckNotifyUpdate();
         } 
         public void AddCoinForAds()
         {
             bankService.AddCoin(20);
+            CheckNotifyUpdate();
         }
         public bool IsTryBuy(int value)
         {
@@ -51,6 +57,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
             bankService.SpendCoins(100);
             SetPopUpPanelInfoForRegular();
             uiViewService.Instantiate(UIViewType.ShopCollectionPopUp);
+
+            CheckNotifyUpdate();
         }
 
         public void BuyRareElement()
@@ -58,6 +66,13 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
             bankService.SpendCoins(250);
             SetPopUpPanelInfoForRare();
             uiViewService.Instantiate(UIViewType.ShopCollectionPopUp);
+
+            CheckNotifyUpdate();
+        }
+
+        private void CheckNotifyUpdate()
+        {
+            OnUpdateBank?.Invoke();
         }
 
         private void SetPopUpPanelInfoForRegular()

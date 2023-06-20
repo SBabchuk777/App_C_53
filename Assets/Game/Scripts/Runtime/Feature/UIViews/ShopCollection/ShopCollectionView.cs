@@ -21,13 +21,14 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
             regularBuyButton.onClick.AddListener(controller.BuyRegularElement);
             rareBuyButton.onClick.AddListener(controller.BuyRareElement);
             closeButton.onClick.AddListener(ClosePanel);
+
+            controller.OnUpdateBank += ActivateBuyButton;
         }
 
         protected override void Initialize()
         {
-            regularBuyButton.interactable = controller.IsTryBuy(100);
-            rareBuyButton.interactable = controller.IsTryBuy(250);
-
+            ActivateBuyButton();
+            
             unityAds.LoadRewardedAd();
             unityAds.OnShowCompleteAds += controller.AddCoinForAds;
         }
@@ -46,9 +47,17 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
 
             unityAds.OnShowCompleteAds -= controller.AddCoinForAds;
             unityAds.UnsubscribeAllEvent();
+            
+            controller.OnUpdateBank -= ActivateBuyButton;
         }
 
-        public void ClosePanel()
+        private void ActivateBuyButton()
+        {
+            regularBuyButton.interactable = controller.IsTryBuy(100);
+            rareBuyButton.interactable = controller.IsTryBuy(250);
+        }
+
+        private void ClosePanel()
         {
             transform.DOLocalMoveX(-1080, 0.5f).Play().OnComplete(Close);
         }

@@ -7,29 +7,28 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection.PopUp
 {
     public class PanelPopUp : MonoBehaviour
     {
-        [SerializeField] private GameObject backlighting;
-        [SerializeField] private Button buyButton;
+        [SerializeField] private GameObject _backlighting;
+        [SerializeField] private Transform _starInfo;
 
-        [SerializeField] private Image elementImage;
+        [SerializeField] private Image _elementImage;
 
         private Tween backAnimation;
         public void SetIcon(Sprite sprite)
         {
             gameObject.SetActive(true);
-            elementImage.sprite = sprite;
+            _elementImage.sprite = sprite;
         }
 
-        public void ActivateBuyButton(UnityAction call)
+        public void ActivateBuyButton()
         {
-            buyButton.gameObject.SetActive(true);
-            buyButton.onClick.AddListener(call);
+            _starInfo.gameObject.SetActive(true);
         }
 
         public void ActivateBacklighting()
         {
-            backlighting.SetActive(true);
+            _backlighting.SetActive(true);
             
-            backAnimation = backlighting.transform.DOLocalRotate(new Vector3(0, 0, 180), 20f)
+            backAnimation = _backlighting.transform.DOLocalRotate(new Vector3(0, 0, 180), 20f)
                 .SetEase(Ease.Linear)
                 .Play();
         }

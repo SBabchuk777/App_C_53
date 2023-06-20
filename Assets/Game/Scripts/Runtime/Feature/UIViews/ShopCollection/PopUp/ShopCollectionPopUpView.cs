@@ -12,12 +12,12 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection.PopUp
     {
         [SerializeField] private ImageFader fader;
         [SerializeField] private GameObject panel;
-        
+
         [SerializeField] private Button coolButton;
-        
+
         [SerializeField] private PanelPopUp regularPanel;
         [SerializeField] private PanelPopUp rarePanel;
-        
+
         [Inject] private ShopCollectionController controller;
 
         protected override void Subscribe()
@@ -41,11 +41,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection.PopUp
 
             if (controller.PanelPopUpInfo.IsActiveBuyButton)
             {
-                panelPopUp.ActivateBuyButton(()=>
-                {
-                    controller.AddCoin();
-                    ClosePanel();
-                });
+                panelPopUp.ActivateBuyButton();
             }
         }
 
@@ -65,6 +61,11 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection.PopUp
             panel.transform.DOScale(Vector3.zero, .3f)
                 .OnComplete(() => fader.FadeOut(0.3f, Close))
                 .Play();
+
+            if (controller.PanelPopUpInfo.IsActiveBuyButton)
+            {
+                controller.AddCoin();
+            }
         }
     }
 }
