@@ -62,7 +62,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Settings
             {
                 MMVibrationManager.Haptic(HapticTypes.Success);
             }
-            
         }
     }
 }
