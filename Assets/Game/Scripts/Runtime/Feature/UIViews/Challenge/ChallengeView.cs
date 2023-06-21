@@ -1,6 +1,8 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Feature.UIViews.Collection;
 using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.UIViewService;
 using Game.Scripts.Runtime.Tools.SerializableComponent;
@@ -16,12 +18,14 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         [SerializeField] private SerializableDictionary<GameModeType, ChallengeButton> challengeButtons;
         
         [Inject] private ChallengeController challengeController;
+        [Inject] private CollectionController collectionController;
         protected override void Subscribe()
         {
             closeButton.onClick.AddListener(ClosePanel);
             
             challengeController.OnTimerTick[0] += challengeButtons[GameModeType.NewBall].SetTimerText;
             challengeController.OnTimerTick[1] += challengeButtons[GameModeType.Time].SetTimerText;
+            
             challengeController.OnTimerFinish[0] += ActiveNewBallButtonAfterFinishTimer;
             challengeController.OnTimerFinish[1] += ActiveTimeButtonAfterFinishTimer;
             
@@ -29,6 +33,12 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             unityAdsButton[1].OnCanGetReward += () => GetReward(1);
             
             challengeController.OnClosePanel += ClosePanelAfterStartGame;
+            collectionController.OnUpdateView += UpdateSetProgress;
+        }
+
+        private void UpdateSetProgress()
+        {
+            challengeButtons[GameModeType.Collect].SetProgressBar(challengeController.GetProgressValueCollectButton());
         }
 
         private void GetReward(int index)
@@ -79,7 +89,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             
             challengeController.OnClosePanel -= ClosePanelAfterStartGame;
             challengeController.ClosePanel();
-
+            collectionController.OnUpdateView -= UpdateSetProgress;
         }
 
         private void ActiveNewBallButtonAfterFinishTimer()
