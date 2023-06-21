@@ -8,6 +8,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
     {
         public bool IsAdsLoaded { get; private set; }
         public event Action OnShowCompleteAds;
+        public event Action OnShowFailedAds;
 
         public void Load(string currentIdShow)
         {
@@ -21,6 +22,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
 
         public void OnUnityAdsFailedToLoad(string placementId, UnityAdsLoadError error, string message)
         {
+            OnShowFailedAds?.Invoke();
             Debug.Log($"Failed To Load: [{error}]: {message}");
         }
         

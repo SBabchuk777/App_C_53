@@ -12,6 +12,7 @@ namespace Game.Scripts.Runtime.Services.UIViewService
         LevelPreview,
         ResultNewBall,
         ResultTime,
-        BonusGame
+        BonusGame,
+        FaderView
     }
 }

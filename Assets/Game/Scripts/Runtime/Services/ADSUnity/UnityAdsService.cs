@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Game.Scripts.Runtime.Services.UIViewService;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -17,7 +18,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         [SerializeField] private string GameIDIOS;
         [SerializeField] private bool TestMode;
 
-
+        [Inject] private UIViewService.UIViewService uiViewService;
         public delegate void DebugEvent(string msg);
 
         public static event DebugEvent OnDebugLog;
@@ -66,10 +67,15 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         
         public UnityAdsListener ShowRewardedAd()
         {
+            var faderView = uiViewService.Instantiate(UIViewType.FaderView).GetComponent<FaderView>();
+            
             var listener = AdsListenersPool.Dequeue();
             Advertisement.Show(CurrentIdShow, listener);
 
             StartCoroutine(LoadRewardsCoroutine());
+            
+            listener.OnShowCompleteAds += faderView.CloseView;
+            listener.OnShowFailedAds += faderView.CloseView;
             
             return listener;
         }
