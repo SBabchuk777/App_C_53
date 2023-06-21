@@ -4,9 +4,10 @@ using UnityEngine.Advertisements;
 
 namespace Game.Scripts.Runtime.Services.ADSUnity
 {
-    public class UnityAdsListener : IUnityAdsLoadListener, IUnityAdsShowListener
+    public class UnityAdsListener : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
     {
         public bool IsAdsLoaded { get; private set; }
+        public bool IsAdsStarted { get; private set; }
         public event Action OnShowCompleteAds;
         public event Action OnShowFailedAds;
 
@@ -24,6 +25,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         {
             OnShowFailedAds?.Invoke();
             Debug.Log($"Failed To Load: [{error}]: {message}");
+            OnShowFailedAds = null;
         }
         
         public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
@@ -32,6 +34,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
 
         public void OnUnityAdsShowStart(string placementId)
         {
+            IsAdsStarted = true;
         }
 
         public void OnUnityAdsShowClick(string placementId)

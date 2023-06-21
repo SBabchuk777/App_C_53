@@ -19,10 +19,7 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         [SerializeField] private bool TestMode;
 
         [Inject] private UIViewService.UIViewService uiViewService;
-        public delegate void DebugEvent(string msg);
-
-        public static event DebugEvent OnDebugLog;
-
+        
         private string currentIdInitialize;
         public string CurrentIdShow { get; private set; }
 
@@ -40,11 +37,55 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
 #endif
             if (Advertisement.isSupported)
             {
-                DebugLog(Application.platform + " supported by Advertisement");
+                Debug.Log(Application.platform + " supported by Advertisement");
             }
 
             Advertisement.Initialize(currentIdInitialize, TestMode, this);
         }
+
+        public UnityAdsListener ShowRewardedAd()
+        {
+            var listener = AdsListenersPool.Dequeue();
+            Advertisement.Show(CurrentIdShow, listener);
+            Destroy(listener.gameObject);
+
+            StartCoroutine(LoadRewardsCoroutine());
+            StartCoroutine(CheckStartAds(listener));
+            
+            return listener;
+        }
+
+        private UnityAdsListener CreateUnityAdsListener()
+        {
+            var newGameObject = new GameObject($"ADS_{AdsListenersPool.Count}");
+            newGameObject.transform.SetParent(transform);
+            newGameObject.AddComponent<UnityAdsListener>().GetComponent<UnityAdsListener>();
+            
+            var listener = newGameObject.GetComponent<UnityAdsListener>();
+            listener.Load(CurrentIdShow);
+            AdsListenersPool.Enqueue(listener);
+            
+            return listener;
+        }
+
+        #region Interface Implementations
+
+        public void OnInitializationComplete()
+        {
+            Debug.Log("Init Success");
+            StartCoroutine(LoadRewardsCoroutine());
+        }
+
+        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
+        {
+            Debug.Log($"Init Failed: [{error}]: {message}");
+        }
+
+        #endregion
+
+
+        //wrapper around debug.log to allow broadcasting log strings to the UI
+        
 
         private IEnumerator LoadRewardsCoroutine()
         {
@@ -52,10 +93,8 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
             
             while (AdsListenersPool.Count <= ADLoadMaxCount)
             {
-                var listener = new UnityAdsListener();/*CreateUnityAdsListener();*/
-                listener.Load(CurrentIdShow);
-                AdsListenersPool.Enqueue(listener);
-
+                var listener = CreateUnityAdsListener();
+                
                 yield return new WaitUntil(() => listener.IsAdsLoaded);
 
                 Debug.Log($"ADS add to Pool {AdsListenersPool.Count}");
@@ -64,42 +103,28 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
             Debug.Log($"All ADS load in pool");
             yield break;
         }
-        
-        public UnityAdsListener ShowRewardedAd()
+
+        private IEnumerator CheckStartAds(UnityAdsListener listener)
         {
             var faderView = uiViewService.Instantiate(UIViewType.FaderView).GetComponent<FaderView>();
             
-            var listener = AdsListenersPool.Dequeue();
-            Advertisement.Show(CurrentIdShow, listener);
-
-            StartCoroutine(LoadRewardsCoroutine());
-            
             listener.OnShowCompleteAds += faderView.CloseView;
-            listener.OnShowFailedAds += faderView.CloseView;
+            listener.OnShowFailedAds += faderView.ShowError;
             
-            return listener;
-        }
-        
-        #region Interface Implementations
+            yield return new WaitForSeconds(1f); 
 
-        public void OnInitializationComplete()
-        {
-            DebugLog("Init Success");
-            StartCoroutine(LoadRewardsCoroutine());
-        }
+            if (!listener.IsAdsStarted)
+            {
+                Advertisement.Show(CurrentIdShow, listener);
+                yield return new WaitForSeconds(2f); 
 
-        public void OnInitializationFailed(UnityAdsInitializationError error, string message)
-        {
-            DebugLog($"Init Failed: [{error}]: {message}");
-        }
-
-        #endregion
-
-        //wrapper around debug.log to allow broadcasting log strings to the UI
-        void DebugLog(string msg)
-        {
-            OnDebugLog?.Invoke(msg);
-            Debug.Log(msg);
+                if (!listener.IsAdsStarted)
+                {
+                    Debug.Log("ADS don't start, hide Fader");
+                    faderView.ShowError();
+                    yield break;
+                }
+            }
         }
     }
 }
