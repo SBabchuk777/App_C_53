@@ -24,8 +24,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         [SerializeField] private GameObject view;
 
         [Inject] private ResultController resultController;
-
-        public event Action OnCloseAfterReload;
+        
         protected override void Subscribe()
         {
             reloadButton.onClick.AddListener(ClosePanelAfterReload);
@@ -87,7 +86,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
                 {
                     fader.FadeOut(0.3f, () =>
                     {
-                        OnCloseAfterReload?.Invoke();
+                        resultController.NotifyReloadTimeGame();
                         Close();
                     });
                     

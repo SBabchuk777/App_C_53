@@ -72,6 +72,8 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
 
         private void ClosePanelAfterReload()
         {
+            resultController.NotifyReloadNewBallGame();
+            
             view.transform
                 .DOScaleX(0, 0.3f)
                 .OnComplete(() => fader.FadeOut(0.3f, Close))

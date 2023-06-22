@@ -1,3 +1,4 @@
+using System;
 using Game.Scripts.Runtime.Feature.Level;
 using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.Audio;
@@ -11,6 +12,7 @@ using Game.Scripts.Runtime.Services.UIViewService;
 using Game.Scripts.Runtime.Tools.SerializableComponent;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Game.Scripts.Runtime.Feature.UIViews.Result
 {
@@ -24,7 +26,10 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         [Inject] private BankService bank;
         [Inject] private UIViewService uiViewService;
         [Inject] private ChallengeController challengeController;
-        [Inject] private ProjectAudioPlayer projectAudioPlayer; 
+        [Inject] private ProjectAudioPlayer projectAudioPlayer;
+
+        public event Action OnReloadNewBallGame;
+        public event Action OnReloadTimeGame;
 
         public int BestScoreCount { get; private set; }
         public int ScoreCount { get; private set; }
@@ -100,6 +105,22 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Result
         public void AddRewardForWatch()
         {
             bank.AddCoin(20);
+        }
+
+        public void NotifyReloadNewBallGame()
+        {
+            OnReloadNewBallGame?.Invoke();
+        }
+
+        public void NotifyReloadTimeGame()
+        {
+            OnReloadTimeGame?.Invoke();
+        }
+
+        public void RemoveAllSubscribe()
+        {
+            OnReloadNewBallGame = null;
+            OnReloadTimeGame = null;
         }
     }
 }

@@ -31,13 +31,14 @@ namespace Game.Scripts.Runtime.Feature.Level
         private Stick stick;
        
         private Injector Injector => ProjectContext.Instance.Injector;
+      
 
 
         public void Initialize()
         {
             BallFactory.Initialize();
             BallDetector.OnBallInArea += CreateGameField;
-
+          
             if (dataHub.LevelGameData.GameModeType == GameModeType.NewBall)
             {
                 CreateStick();

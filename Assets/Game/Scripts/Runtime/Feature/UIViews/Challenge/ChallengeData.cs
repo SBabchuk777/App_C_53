@@ -14,5 +14,11 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
 
         public int CountPlayGameInNewBall { get; set; }
         public int CountPlayGameInTime { get; set; }
+
+        public override void InitializeDefault()
+        {
+            CountPlayGameInNewBall = 0;
+            CountPlayGameInTime = 0;
+        }
     }
 }

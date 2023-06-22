@@ -60,17 +60,23 @@ namespace Game.Scripts.Runtime.Feature.Level
             if (dataHub.LevelGameData.GameModeType == GameModeType.NewBall)
             {
                 gameStatusHandler.OnFinishBallGame += FinishNewBallGame;
+                resultController.OnReloadNewBallGame += () => challengeData.CountPlayGameInNewBall++;
                 uiViewService.Instantiate(UIViewType.LevelPreview);
+                
                 challengeData.CountPlayGameInNewBall++;
             }
             if (dataHub.LevelGameData.GameModeType == GameModeType.Time)
             {
                 gameStatusHandler.OnFinishTimeGame += FinishTimeGame;
                 gameStatusHandler.OnMissedToHope += scoreCalculator.ResetData;;
-                challengeData.CountPlayGameInTime++;
+                
+                resultController.OnReloadTimeGame += StartTimer;
+                resultController.OnReloadTimeGame += () => challengeData.CountPlayGameInTime++;
                 
                 preview = uiViewService.Instantiate(UIViewType.LevelPreview);
                 preview.OnCloseView += StartTimer;
+                
+                challengeData.CountPlayGameInTime++;
             }
             
             gameStatusHandler.OnTwoPointGoal += scoreCalculator.CalculateForTwo;
@@ -95,7 +101,6 @@ namespace Game.Scripts.Runtime.Feature.Level
         {
             if (settingService.SettingsData.IsVibro)
             {
-                Debug.Log("vibro");
                 MMVibrationManager.Haptic(HapticTypes.Success);
             }
         }
@@ -139,7 +144,6 @@ namespace Game.Scripts.Runtime.Feature.Level
         
         private void FinishNewBallGame(GameStatusType statusType)
         {
-            challengeData.CountPlayGameInNewBall++;
             var isCanResume = true;
             if (challengeData.CountPlayGameInNewBall == 5)
             {
@@ -151,7 +155,7 @@ namespace Game.Scripts.Runtime.Feature.Level
             dataHub.SaveData("Challenge", challengeData);
             
             resultController.PrepareNewBallView(statusType, isCanResume);
-            uiViewService.Instantiate(UIViewType.ResultNewBall);
+            var resultNewBall = uiViewService.Instantiate(UIViewType.ResultNewBall);
             scoreCalculator.ResetData();
             builder.ResetNewBallGame();
             
@@ -171,11 +175,8 @@ namespace Game.Scripts.Runtime.Feature.Level
             dataHub.SaveData("Challenge", challengeData);
             
             resultController.PrepareTimeView(statusType, isCanResume);
-            var result = uiViewService.Instantiate(UIViewType.ResultTime) as TimeChallengeResultView;
+            uiViewService.Instantiate(UIViewType.ResultTime);
             
-            result.OnCloseAfterReload += StartTimer;
-            result.OnCloseView -= StartTimer;
-
             scoreCalculator.ResetData();
             builder.ResetTimeGame();
             
