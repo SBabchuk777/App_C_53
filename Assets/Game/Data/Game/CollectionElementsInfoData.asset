@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4929255603944eb18883538b91046c03, type: 3}
+  m_Name: CollectionElementsInfoData
+  m_EditorClassIdentifier: 
+  RegularElementsMap:
+    m_keys: 000000000100000002000000030000000400000005000000
+    m_values:
+    - InactiveElementImage: {fileID: 21300000, guid: 44e7b33bda37145719aa570532a1b3a2, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: 35242a9edd330442aa6bdbca5b8b8f6c, type: 3}
+      ElementText: Regular Ball
+    - InactiveElementImage: {fileID: 21300000, guid: 5bef6de2c40dc4988ac59776998a73e2, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: a0c9d4475812842cd93d9fa68de39695, type: 3}
+      ElementText: Timer
+    - InactiveElementImage: {fileID: 21300000, guid: 1644933b08cc24d0f833a51fd0383fab, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: 1a542251af38648d2ac61a6f74a6bc22, type: 3}
+      ElementText: Whistle
+    - InactiveElementImage: {fileID: 21300000, guid: 5ee31765482c24848bc675a2a597a0fc, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: 998df5d3f60d248daab5ecd382511f55, type: 3}
+      ElementText: Basketball court
+    - InactiveElementImage: {fileID: 21300000, guid: 689481eb24c7140d7b77cb2e71c37f17, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: cc34762ac4184433ba43a2245a6f89be, type: 3}
+      ElementText: Sneakers
+    - InactiveElementImage: {fileID: 21300000, guid: 6dbf10fbe046d405b8331cc936fa39b7, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: eaf7c4c797bd940f1b14cf0b9a5a8c17, type: 3}
+      ElementText: Basket
+  RareElementsPathMap:
+    m_keys: 00000000010000000200000003000000
+    m_values:
+    - InactiveElementImage: {fileID: 21300000, guid: 7f765b0ca51be4c6398797a2f1bad69f, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: d27910f4babcf475ea1a7cc6c45374e1, type: 3}
+      ElementText: "\u21161"
+    - InactiveElementImage: {fileID: 21300000, guid: 090905a7f8c094e49b295434b6705812, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: 0362165f47d504b9598cde12c2968185, type: 3}
+      ElementText: Worldwide Award
+    - InactiveElementImage: {fileID: 21300000, guid: 00e0c97be8dcd4e3a9b160533da5c6ef, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: 90cf6a156a58f4547a777a7fb5633874, type: 3}
+      ElementText: Legendary T-shirt
+    - InactiveElementImage: {fileID: 21300000, guid: ec096703f7fd643da89d8eca220f0597, type: 3}
+      ActiveElementImage: {fileID: 21300000, guid: 71e6caa07e5f64dcdad5ac6947746d37, type: 3}
+      ElementText: Fireball
+  ActiveBackground: {fileID: 21300000, guid: 933490fcf71b940f89afb1c02076ee91, type: 3}
+  ActiveRareBackground: {fileID: 21300000, guid: fb6844f0ba5e2458ea805f3981ec435d, type: 3}
+  InactiveBackground: {fileID: 21300000, guid: 70a9d30b636c04eeba08dfc6627c03e8, type: 3}
+  ActiveOutlineColor: {r: 0.8235294, g: 0.08627451, b: 0.08627451, a: 1}
+  ActiveRareOutlineColor: {r: 0.27058825, g: 0.38823533, b: 0.25882354, a: 1}
+  InactiveOutlineColor: {r: 0.3647059, g: 0.28235295, b: 0.27450982, a: 1}

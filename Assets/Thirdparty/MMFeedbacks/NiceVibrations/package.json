@@ -1,0 +1,14 @@
+{
+  "name": "com.unibit.nicevibrations",
+  "displayName": "NiceVibrations",
+  "version": "1.0.0",
+  "description": "NiceVibrations tools",
+  "dependencies": {
+  },
+  "keywords": [
+    "Unity",
+    "UPM"
+  ],
+  "author": "serhii.babchuk",
+  "license": "UNLICENSED"
+}
