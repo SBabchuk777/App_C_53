@@ -82,7 +82,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Shop
             if (currentId == currentSkinInfo.Count - 1)
                 OnHideArrow?.Invoke(1);
 
-            if (currentId > 0 && currentId < currentSkinInfo.Count - 2)
+            if (currentId > 0 && currentId < currentSkinInfo.Count - 1)
             {
                 OnShowArrow?.Invoke();
             }
