@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1369f691501114eabab160ec26864b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameIdAndroid: 5352894
-  _gameIdIos: 5352895
+  _gameIdAndroid: 5289701
+  _gameIdIos: 5289700
   _testMode: 1
   _faderViewPrefab: {fileID: 1740607287596633119, guid: 5f9403f2350dc480f88b5ac24428e565, type: 3}
   _parentFader: {fileID: 4665618644605151818}

@@ -50,7 +50,7 @@ MonoBehaviour:
       ElementText: Fireball
   ActiveBackground: {fileID: 21300000, guid: 933490fcf71b940f89afb1c02076ee91, type: 3}
   ActiveRareBackground: {fileID: 21300000, guid: fb6844f0ba5e2458ea805f3981ec435d, type: 3}
-  InactiveBackground: {fileID: 21300000, guid: 70a9d30b636c04eeba08dfc6627c03e8, type: 3}
+  InactiveBackground: {fileID: 21300000, guid: b4bd49e0d5d3d40fa86555c9a64aa7fe, type: 3}
   ActiveOutlineColor: {r: 0.8235294, g: 0.08627451, b: 0.08627451, a: 1}
   ActiveRareOutlineColor: {r: 0.27058825, g: 0.38823533, b: 0.25882354, a: 1}
   InactiveOutlineColor: {r: 0.3647059, g: 0.28235295, b: 0.27450982, a: 1}
