@@ -75,7 +75,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6377303277579193450}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2768605982844953900
 MonoBehaviour:
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6b337ec55746418f478d0072239e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeEndValue: 1
+  _fadeEndValue: 0
 --- !u!1 &2768605983002410452
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +300,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 5
-  m_Depth: 20
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 32
@@ -583,54 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6b337ec55746418f478d0072239e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeEndValue: 0.5
---- !u!1 &2991599482437510155
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7364624266251717919}
-  - component: {fileID: 1999731461843964989}
-  m_Layer: 0
-  m_Name: ADSManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7364624266251717919
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2991599482437510155}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6377303277579193450}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1999731461843964989
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2991599482437510155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1369f691501114eabab160ec26864b0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GameIDAndroid: 5289701
-  GameIDIOS: '5289700 '
-  TestMode: 1
+  _fadeEndValue: 0
 --- !u!1 &3406210909211214343
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +636,6 @@ MonoBehaviour:
   PauseService: {fileID: 4196792922759835277}
   ProjectAudioPlayer: {fileID: 2090463053141313358}
   UIViewService: {fileID: 770464846}
-  UnityAdsService: {fileID: 1999731461843964989}
   DataHub: {fileID: 3204570226880261326}
   ShopController: {fileID: 8288265544121140002}
   ResultController: {fileID: 4791419067741642409}
@@ -859,7 +811,6 @@ Transform:
   - {fileID: 512458079479873027}
   - {fileID: 2768605983255371075}
   - {fileID: 2723465431313397215}
-  - {fileID: 7364624266251717919}
   - {fileID: 2768605982844953901}
   - {fileID: 2502907647530007950}
   m_Father: {fileID: 6377303276575844002}
@@ -1036,7 +987,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6377303277579193450}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4196792922759835277
 MonoBehaviour:

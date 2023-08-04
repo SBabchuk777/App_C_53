@@ -7,6 +7,7 @@ using Game.Scripts.Runtime.Feature.UIViews.LastChance;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
 using Game.Scripts.Runtime.Services.UIViewService;
+using Tools.UnityAdsService.Scripts.Common;
 using UnityEngine;
 using UnityEngine.UI;
 

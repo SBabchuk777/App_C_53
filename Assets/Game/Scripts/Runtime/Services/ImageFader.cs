@@ -3,18 +3,18 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.Scripts.Runtime.Services
+namespace Tools.UnityAdsService.Scripts.Common
 {
     [RequireComponent(typeof(Image))]
     public class ImageFader : MonoBehaviour
     {
-        [SerializeField] private float FadeEndValue;
+        [SerializeField] private float _fadeEndValue;
         private Image Image => GetComponent<Image>();
         
         public void FadeTo(float time, Action callback = null)
         {
             TurnOn();
-            Fade(time, FadeEndValue, callback);
+            Fade(time, _fadeEndValue, callback);
         }
 
         public void FadeOut(float time, Action callback = null)
@@ -31,7 +31,6 @@ namespace Game.Scripts.Runtime.Services
         public void FadeOutAwait(float timeAwait, float time, Action callback = null, Action callbackAfterAwait = null)
         {
             TurnOn();
-            Image.color = new Color(0, 0, 0, 1);
 
             DOTween.Sequence()
                 .Append(DOVirtual.DelayedCall(timeAwait, () => {callbackAfterAwait?.Invoke(); }))

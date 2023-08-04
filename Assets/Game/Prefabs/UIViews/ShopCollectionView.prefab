@@ -1049,7 +1049,7 @@ MonoBehaviour:
   closeButton: {fileID: 8330457214243189699}
   regularBuyButton: {fileID: 2942187537582742216}
   rareBuyButton: {fileID: 2942187537452693494}
-  adsButton: {fileID: 3738897273447990209}
+  adsButton: {fileID: 6646090458503920200}
 --- !u!1 &2942187538891654407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1393,6 +1393,7 @@ GameObject:
   - component: {fileID: 3738897273447990222}
   - component: {fileID: 3738897273447990209}
   - component: {fileID: 7588063940356732694}
+  - component: {fileID: 6646090458503920200}
   m_Layer: 5
   m_Name: ADSButton
   m_TagString: Untagged
@@ -1513,6 +1514,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6646090458503920200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3738897273447990211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fee4602569ce4379a4407a7ccd7fb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3738897273697793649

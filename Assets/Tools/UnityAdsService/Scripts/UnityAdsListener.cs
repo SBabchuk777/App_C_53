@@ -2,12 +2,13 @@ using System;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-namespace Game.Scripts.Runtime.Services.ADSUnity
+namespace Tools.UnityAdsService.Scripts
 {
-    public class UnityAdsListener : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
+    public class UnityAdsListener : IUnityAdsLoadListener, IUnityAdsShowListener
     {
         public bool IsAdsLoaded { get; private set; }
         public bool IsAdsStarted { get; private set; }
+        
         public event Action OnShowCompleteAds;
         public event Action OnShowFailedAds;
 
@@ -30,6 +31,12 @@ namespace Game.Scripts.Runtime.Services.ADSUnity
         
         public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
         {
+            if (error == UnityAdsShowError.VIDEO_PLAYER_ERROR)
+            {
+                OnShowCompleteAds?.Invoke();
+                
+                Debug.Log($"Show To Failure: [{error}]: {message}");
+            }
         }
 
         public void OnUnityAdsShowStart(string placementId)

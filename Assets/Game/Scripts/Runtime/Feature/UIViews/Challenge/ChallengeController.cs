@@ -4,7 +4,6 @@ using Game.Scripts.Runtime.Feature.Player;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Collection;
 using Game.Scripts.Runtime.Feature.UIViews.LastChance;
-using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
 using Game.Scripts.Runtime.Services.Timer;
 using Game.Scripts.Runtime.Services.UIViewService;
@@ -21,7 +20,6 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         [Inject] private UIViewService uiViewService;
         [Inject] private DataHub dataHub;
         [Inject] private SceneNavigation sceneNavigation;
-        [Inject] private UnityAdsService unityAds;
 
         public Action<string>[] OnTimerTick = new Action<string>[3];
         public Action[] OnTimerFinish = new Action[3];

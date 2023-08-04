@@ -5,13 +5,11 @@ using Game.Scripts.Runtime.Feature.Project.Audio;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Challenge;
 using Game.Scripts.Runtime.Feature.UIViews.Shop;
-using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
 using Game.Scripts.Runtime.Services.UIViewService;
 using Game.Scripts.Runtime.Tools.SerializableComponent;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Game.Scripts.Runtime.Feature.UIViews.Result

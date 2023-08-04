@@ -1,4 +1,5 @@
 using Game.Scripts.Runtime.Feature.Project.DI;
+using Tools.UnityAdsService.Scripts.Common;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime.Services.SceneLoaderService

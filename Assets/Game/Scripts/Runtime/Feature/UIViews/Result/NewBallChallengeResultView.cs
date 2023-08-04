@@ -2,6 +2,7 @@ using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Services;
 using Game.Scripts.Runtime.Services.UIViewService;
+using Tools.UnityAdsService.Scripts.Common;
 using UnityEngine;
 using UnityEngine.UI;
 

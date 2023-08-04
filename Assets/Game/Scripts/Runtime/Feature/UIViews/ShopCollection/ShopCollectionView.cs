@@ -1,7 +1,7 @@
 using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
-using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.UIViewService;
+using Tools.UnityAdsService.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,26 +12,21 @@ namespace Game.Scripts.Runtime.Feature.UIViews.ShopCollection
         [SerializeField] private Button closeButton;
         [SerializeField] private Button regularBuyButton;
         [SerializeField] private Button rareBuyButton;
-        [SerializeField] private Button adsButton;
+        [SerializeField] private UnityAdsButton adsButton;
 
         [Inject] private ShopCollectionController controller;
-        [Inject] private UnityAdsService unityAds;
 
         protected override void Subscribe()
         {
             regularBuyButton.onClick.AddListener(controller.BuyRegularElement);
             rareBuyButton.onClick.AddListener(controller.BuyRareElement);
             closeButton.onClick.AddListener(ClosePanel);
-            adsButton.onClick.AddListener(ShowRewarded);
+            
 
             controller.OnUpdateBank += ActivateBuyButton;
+            adsButton.OnCanGetReward += controller.AddCoinForAds;
         }
-
-        private void ShowRewarded()
-        {
-            var listener = unityAds.ShowRewardedAd();
-            listener.OnShowCompleteAds += controller.AddCoinForAds;
-        }
+        
 
         protected override void Initialize()
         {

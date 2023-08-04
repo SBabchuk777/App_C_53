@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using DG.Tweening;
 using Game.Scripts.Runtime.Feature.Project.DI;
 using Game.Scripts.Runtime.Feature.UIViews.Collection;
-using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.UIViewService;
 using Game.Scripts.Runtime.Tools.SerializableComponent;
+using Tools.UnityAdsService.Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 

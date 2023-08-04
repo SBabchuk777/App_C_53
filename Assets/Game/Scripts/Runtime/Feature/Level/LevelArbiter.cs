@@ -12,6 +12,7 @@ using Game.Scripts.Runtime.Services.SceneLoaderService;
 using Game.Scripts.Runtime.Services.Timer;
 using Game.Scripts.Runtime.Services.UIViewService;
 using MoreMountains.NiceVibrations;
+using Tools.UnityAdsService.Scripts.Common;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime.Feature.Level

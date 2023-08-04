@@ -5,13 +5,12 @@ using Game.Scripts.Runtime.Feature.UIViews.Result;
 using Game.Scripts.Runtime.Feature.UIViews.Settings;
 using Game.Scripts.Runtime.Feature.UIViews.Shop;
 using Game.Scripts.Runtime.Feature.UIViews.ShopCollection;
-using Game.Scripts.Runtime.Services;
-using Game.Scripts.Runtime.Services.ADSUnity;
 using Game.Scripts.Runtime.Services.Audio;
 using Game.Scripts.Runtime.Services.Bank;
 using Game.Scripts.Runtime.Services.Pause;
 using Game.Scripts.Runtime.Services.SceneLoaderService;
 using Game.Scripts.Runtime.Services.UIViewService;
+using Tools.UnityAdsService.Scripts.Common;
 using UnityEngine;
 
 namespace Game.Scripts.Runtime.Feature.Project.DI
@@ -26,7 +25,6 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
         public PauseService PauseService;
         public ProjectAudioPlayer ProjectAudioPlayer;
         public UIViewService UIViewService;
-        public UnityAdsService UnityAdsService;
         public DataHub DataHub;
 
         [Header("Controllers in MVC")]
@@ -67,7 +65,6 @@ namespace Game.Scripts.Runtime.Feature.Project.DI
             container.Register(SceneNavigation);
             container.Register(ProjectAudioPlayer);
             container.Register(UIViewService);
-            container.Register(UnityAdsService);
             container.Register(PauseService);
             container.Register(DataHub);
         }
