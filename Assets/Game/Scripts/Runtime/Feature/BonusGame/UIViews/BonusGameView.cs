@@ -29,7 +29,7 @@ namespace Game.Scripts.Runtime.Feature.BonusGame.UIViews
         {
             challengeController.OnTimerTick[2] += ChangeInactiveTimer;
             challengeController.OnTimerFinish[2] += SetActivePreview;
-
+            
             bonusGameArbiter.OnBonusTimerTick += ChangeBonusTimer;
             bonusGameArbiter.OnFinishBonusTimer += SetInactivePreview;
             
@@ -67,6 +67,7 @@ namespace Game.Scripts.Runtime.Feature.BonusGame.UIViews
             else
             {
                 SetInactivePreview();
+                ChangeInactiveTimer(challengeController.TimeCount[2]);
             }
         }
 

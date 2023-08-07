@@ -22,6 +22,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         [Inject] private SceneNavigation sceneNavigation;
 
         public Action<string>[] OnTimerTick = new Action<string>[3];
+        public string[] TimeCount = new string[3];
         public Action[] OnTimerFinish = new Action[3];
 
         private ITimer[] timers = new ITimer[] { new TimerService(), new TimerService(), new TimerService() };
@@ -86,9 +87,9 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
 
             for (var i = 0; i < maxGetTime.Length; i++)
             {
-                if (ChallengeData.IsActiveButtons[i]) 
+                if (ChallengeData.IsActiveButtons[i])
                     continue;
-                
+
                 var currentTime = Mathf.Clamp(ChallengeData.CountLastTime[i] - elapsedTime, 0.0f, maxGetTime[i]);
 
                 if (currentTime > 0)
@@ -101,7 +102,7 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
         public void UpdateTimerAfterWatchAds(int index)
         {
             var currentTime = timers[index].CurrentSeconds;
-            
+
             timers[index].Pause();
             timers[index].SetSeconds(currentTime - 1800);
             timers[index].Resume();
@@ -137,7 +138,9 @@ namespace Game.Scripts.Runtime.Feature.UIViews.Challenge
             var timer = timers[index];
             timer.StartCountdown(time, CancellationToken.None);
 
-            OnTimerTick[index]?.Invoke(timeConverter.FormatSecondsToHHMMSS(time));
+            var secondsToHHMMSS = timeConverter.FormatSecondsToHHMMSS(time);
+            TimeCount[index] = secondsToHHMMSS;
+            OnTimerTick[index]?.Invoke(secondsToHHMMSS);
 
             SubscribeTimer(timer, index);
         }
