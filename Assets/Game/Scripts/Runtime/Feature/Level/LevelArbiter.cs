@@ -48,6 +48,11 @@ namespace Game.Scripts.Runtime.Feature.Level
             sceneFader.FadeOut(1f, RunAfterInitialize);
         }
 
+        private void OnDestroy()
+        {
+            resultController.RemoveAllSubscribe();
+        }
+
         private void Initialize()
         {
             scoreCalculator.Initialize();
@@ -146,7 +151,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         private void FinishNewBallGame(GameStatusType statusType)
         {
             var isCanResume = true;
-            if (challengeData.CountPlayGameInNewBall == 5)
+            if (challengeData.CountPlayGameInNewBall >= 5)
             {
                 challengeController.NotifyCompleteBonusGame(0);
                 challengeData.CountPlayGameInNewBall = 0;
