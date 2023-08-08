@@ -517,8 +517,6 @@ GameObject:
   m_Component:
   - component: {fileID: 223688619}
   - component: {fileID: 223688620}
-  - component: {fileID: 223688622}
-  - component: {fileID: 223688621}
   m_Layer: 0
   m_Name: LeftHoop
   m_TagString: Untagged
@@ -579,45 +577,6 @@ PolygonCollider2D:
       - {x: -0.43833357, y: -0.8644472}
       - {x: -0.45682326, y: -0.52479464}
       - {x: -0.50314844, y: -0.32447466}
---- !u!256 &223688621
-FrictionJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223688618}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: -0.47997573, y: 0.047433987}
-  m_ConnectedAnchor: {x: -0.6790218, y: -0.14663462}
-  m_MaxForce: 200
-  m_MaxTorque: 0.5
---- !u!50 &223688622
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223688618}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &331686316
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,8 +2220,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1271766214}
   - component: {fileID: 1271766217}
-  - component: {fileID: 1271766216}
-  - component: {fileID: 1271766215}
   m_Layer: 0
   m_Name: LeftHoop_1
   m_TagString: Untagged
@@ -2285,45 +2242,6 @@ Transform:
   m_Father: {fileID: 194274528}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!256 &1271766215
-FrictionJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1271766213}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: -0.47997573, y: 0.047433987}
-  m_ConnectedAnchor: {x: 0.7158788, y: -0.16026555}
-  m_MaxForce: 200
-  m_MaxTorque: 0.5
---- !u!50 &1271766216
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1271766213}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!60 &1271766217
 PolygonCollider2D:
   m_ObjectHideFlags: 0
