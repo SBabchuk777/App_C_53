@@ -1,7 +1,10 @@
+using System;
 using UnityEngine;
 
 public class WebviewShowPage : MonoBehaviour
 {
+    public static WebviewShowPage Instance;
+
     [SerializeField, Header("Embedded Toolbar")] private bool _embeddedToolbar;
     
     [SerializeField, Header("Reference RectTransform")] private RectTransform _referenceRectTransform;
@@ -11,7 +14,12 @@ public class WebviewShowPage : MonoBehaviour
     [SerializeField, Header("No Internet")] private GameObject _noInternet;
      
     private UniWebView _webView;
-    
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void LoadUrl(string urlBinom = "http://google.com")
     {
         if (_webView != null) return;
@@ -40,9 +48,7 @@ public class WebviewShowPage : MonoBehaviour
     }
     
     private void OnPageErrorReceived(UniWebView view, int statusCode, string url)
-    {
-        RemoveWebView();
-        
+    {  
         _noInternet.SetActive(true);
         
         _webView.OnPageErrorReceived -= OnPageErrorReceived;
@@ -50,6 +56,8 @@ public class WebviewShowPage : MonoBehaviour
         _webView.OnPageFinished -= OnPageFinished;
         
         _webView.OnShouldClose -= OnPageClosed;
+
+	RemoveWebView();
     }
     
     private bool OnPageClosed(UniWebView webview)
