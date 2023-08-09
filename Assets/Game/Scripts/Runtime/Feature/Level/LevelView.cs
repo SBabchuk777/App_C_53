@@ -20,9 +20,12 @@ namespace Game.Scripts.Runtime.Feature.Level
         public void Start()
         {
             homeButton.onClick.AddListener(levelArbiter.BackLobby);
-
+            gameStatusHandler.OnStartThrowBall += () => homeButton.interactable = false;
+            gameStatusHandler.OnCreateBall += () => homeButton.interactable = true;
+            
             gameStatusHandler.OnChangeScore += ChangeCurrenText;
             gameStatusHandler.OnChangeBestScore += ChangeBestText;
+            
             levelArbiter.OnChangeTimer += ChangeTimerText;
 
             if (levelArbiter.IsActiveScorePanel)

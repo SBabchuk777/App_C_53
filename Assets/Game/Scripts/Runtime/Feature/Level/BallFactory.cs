@@ -21,6 +21,7 @@ namespace Game.Scripts.Runtime.Feature.Level
         public Ball InstantiateBall(Vector3 position, Transform parent)
         {
             var ballInstance = Instantiate(BallPrefab, position, Quaternion.identity, parent);
+            ballInstance.Initialize();
             SetSkin(ballInstance);
 
             return ballInstance;

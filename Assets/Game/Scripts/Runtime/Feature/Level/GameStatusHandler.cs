@@ -7,6 +7,8 @@ namespace Game.Scripts.Runtime.Feature.Level
     public class GameStatusHandler : MonoBehaviour
     {
         public event Action OnTwoPointGoal;
+        public event Action OnStartThrowBall;
+        public event Action OnCreateBall;
         public event Action OnThreePointGoal;
 
         public event Action OnMissedToHope;
@@ -58,12 +60,22 @@ namespace Game.Scripts.Runtime.Feature.Level
         {
             OnFinishBallGame?.Invoke(statusType);
         }
-        
+
         public void NotifyFinishTimeGame(GameStatusType statusType)
         {
             OnFinishTimeGame?.Invoke(statusType);
         }
-        
+
+        public void NotifyStartThrow()
+        {
+            OnStartThrowBall?.Invoke();
+        }
+
+        public void NotifyCreateBall()
+        {
+            OnCreateBall?.Invoke();
+        }
+
         public void UnsubscribeAllEventHandlers()
         {
             OnTwoPointGoal = null;
@@ -75,7 +87,8 @@ namespace Game.Scripts.Runtime.Feature.Level
             OnChangeScore = null;
             OnChangeBestScore = null;
             OnAddScore = null;
+            OnStartThrowBall = null;
+            OnCreateBall = null;
         }
-
     }
 }
