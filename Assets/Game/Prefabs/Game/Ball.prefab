@@ -47,12 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddf3666a701d40adbb35b59ba26f54dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinSwipeDistance: 0.5
-  MaxSwipeDistance: 1
-  force: 23
-  distance: 12
-  maxHeightScale: 0.668
-  SpriteRenderer: {fileID: 3108998744686066864}
+  _spriteRenderer: {fileID: 3108998744686066864}
+  _rigidbody2D: {fileID: 3108998744257472283}
 --- !u!50 &3108998744257472283
 Rigidbody2D:
   serializedVersion: 4

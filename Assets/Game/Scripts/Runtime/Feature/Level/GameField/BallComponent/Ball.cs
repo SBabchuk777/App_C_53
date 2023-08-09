@@ -6,26 +6,30 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
 
     public class Ball : MonoBehaviour
     {
-        public float MinSwipeDistance;
-        public float MaxSwipeDistance;
-        public float force; // Сила полета мяча
-        public float distance; // Сила полета мяча
-        public float maxHeightScale; // Максимальное значение изменения масштаба мяча
+        private const float MinSwipeDistance = .5f;
+        private const float MaxSwipeDistance = 1;
+        private const float Force = 23f;
+        private const float Distance = 12f;
+        private const float MaxHeightScale = 0.668f;
+        private readonly Vector3 EndPositionForScale = new Vector3(0, -.4f, 0);
 
-        public SpriteRenderer SpriteRenderer;
-        private Vector3 startPos; // Начальная позиция мяча
-        private Vector3 endPos; // Конечная позиция мяча
-        private Rigidbody2D rb; // Компонент Rigidbody2D мяча
-        private float startYScale; // Начальное значение масштаба мяча по оси Y
-        
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Rigidbody2D _rigidbody2D;
+
+        private Vector3 startPosition;
+        private Vector3 mouseWorldPosition;
+        private Vector3 startPositionForScale;
+        private float startYScale;
+
         private bool isBallThrown;
         private bool isCanChangeScale;
         private bool isClickBall;
-        private void Start()
+        public event Action OnThrow;
+
+        public void Initialize()
         {
-            rb = GetComponent<Rigidbody2D>();
-            rb.isKinematic = true;
-            startPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            _rigidbody2D.isKinematic = true;
+            startPosition = transform.position;
             startYScale = transform.localScale.y;
         }
 
@@ -41,74 +45,109 @@ namespace Game.Scripts.Runtime.Feature.Level.GameField
             {
                 if (Input.GetMouseButtonUp(0))
                 {
-                    endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-                    var swipeDistance = Vector2.Distance(startPos, endPos);
-
-                    if (swipeDistance >= MinSwipeDistance)
-                    {
-                        ThrowBall();
-                    }
-
-                    if (transform.position != startPos)
-                    {
-                        transform.position = Vector3.Lerp(transform.position, startPos, 1);
-                    }
-                
                     isClickBall = false;
+
+                    if (TryThrowBall())
+                        return;
+
+                    MoveToStartPosition();
                 }
 
                 if (Input.GetMouseButton(0))
                 {
-                    endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                
-                    var swipeDistance = Vector2.Distance(startPos, endPos);
+                    mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    var swipeDistance = Vector2.Distance(startPosition, mouseWorldPosition);
+                    
                     if (swipeDistance < MaxSwipeDistance)
                     {
-                        transform.position = Vector3.Lerp(transform.position, new Vector3(endPos.x, endPos.y, transform.position.z), 3f * Time.deltaTime);
+                        MoveBallToMousePosition();
                     }
-                    if (swipeDistance >= MaxSwipeDistance) 
-                        ThrowBall();
+                    else
+                    {
+                        TryThrowBall();
+                    }
                 }
-                
             }
-            
-            ChangeScaleToPositionY();
+
+            if (isCanChangeScale)
+            {
+                ChangeScaleToPositionY();
+            }
         }
-        
-        public void SetSprite(Sprite sprite) => 
-            SpriteRenderer.sprite = sprite;
+
+        private void OnDestroy()
+        {
+            OnThrow = null;
+        }
+
+        private void MoveBallToMousePosition()
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(mouseWorldPosition.x, mouseWorldPosition.y, transform.position.z), 3f * Time.deltaTime);
+        }
+
+        private void MoveToStartPosition()
+        {
+            if (transform.position != startPosition)
+            {
+                transform.position = Vector3.Lerp(transform.position, startPosition, 1);
+            }
+        }
+
+        private bool TryThrowBall()
+        {
+            var swipeDistance = Vector2.Distance(startPosition, mouseWorldPosition);
+
+            if (swipeDistance >= MinSwipeDistance)
+            {
+                ThrowBall();
+                return true;
+            }
+
+            return false;
+        }
+
+        public void SetSprite(Sprite sprite)
+        {
+            _spriteRenderer.sprite = sprite;
+        }
 
         private void ChangeScaleToPositionY()
         {
-            if (!isCanChangeScale) 
+            if (!isCanChangeScale)
                 return;
-            
-            var currentHeightScale = Mathf.Lerp(startYScale, startYScale * maxHeightScale, (transform.position.y - startPos.y) / (endPos.y - startPos.y)/2);
+
+            var normalizedY = (transform.position.y - startPositionForScale.y) /
+                              (EndPositionForScale.y - startPositionForScale.y);
+            var currentHeightScale = Mathf.Lerp(startYScale, MaxHeightScale, normalizedY);
+
             transform.localScale = new Vector3(currentHeightScale, currentHeightScale, transform.localScale.z);
 
-            if (transform.localScale.x <= maxHeightScale)
+            if (normalizedY >= 1.0f)
                 isCanChangeScale = false;
         }
 
         private void ThrowBall()
         {
-            Vector2 direction = (endPos - startPos).normalized;
-            
+            Vector2 direction = (mouseWorldPosition - startPosition).normalized;
+
             if (direction.y < 0.02)
                 return;
             if (direction.x < -0.015f)
                 return;
             if (direction.x > 0.015f)
                 return;
-            
-            var distanceMultiplier = distance / Vector2.Distance(startPos, endPos); // Множитель для задания фиксированного расстояния полета
-            rb.isKinematic = false;
+
+            var distanceMultiplier = Distance / Vector2.Distance(startPosition, mouseWorldPosition);
             direction = Vector2.Lerp(direction, direction * 0.16f, 0.2f);
-            rb.AddForce(direction * force * distanceMultiplier, ForceMode2D.Impulse);
+
+            _rigidbody2D.isKinematic = false;
+            _rigidbody2D.AddForce(direction * Force * distanceMultiplier, ForceMode2D.Impulse);
+
             isBallThrown = true;
             isCanChangeScale = true;
+            startPositionForScale = transform.position;
+
+            OnThrow?.Invoke();
         }
     }
-
 }

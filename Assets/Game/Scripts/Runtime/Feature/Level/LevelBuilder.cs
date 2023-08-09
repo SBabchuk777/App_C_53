@@ -170,6 +170,8 @@ namespace Game.Scripts.Runtime.Feature.Level
         private void CreateBall()
         {
             ball = BallFactory.InstantiateBall(BallAnchor.position, InstanceParent);
+            ball.OnThrow += gameStatusHandler.NotifyStartThrow;
+            gameStatusHandler.NotifyCreateBall();
         }
 
         private void CreateStar()
