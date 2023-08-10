@@ -2409,7 +2409,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.06
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2461,10 +2461,10 @@ RectTransform:
   m_Father: {fileID: 4422295485285560623}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 4, y: 0}
-  m_SizeDelta: {x: -8, y: -9.999998}
+  m_AnchorMin: {x: 0.06879855, y: 0.031639032}
+  m_AnchorMax: {x: 1, y: 0.968361}
+  m_AnchoredPosition: {x: 0.05000305, y: 0}
+  m_SizeDelta: {x: -0.09000015, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4422295485324874721
 CanvasRenderer:
