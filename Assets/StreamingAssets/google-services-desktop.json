@@ -1,0 +1,36 @@
+{
+  "project_info": {
+    "project_number": "857128394712",
+    "project_id": "betano-6462151807-c53",
+    "storage_bucket": "betano-6462151807-c53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:857128394712:ios:b11ce168caaf6056ca5cad",
+        "android_client_info": {
+          "package_name": "com.arcanumone.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "857128394712-75vjcusl57q47qgm0aekqbp886spjjrf.apps.googleusercontent.com"
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA78V-4SVbaBV9wLQ2t40k6-bo113XkuSs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

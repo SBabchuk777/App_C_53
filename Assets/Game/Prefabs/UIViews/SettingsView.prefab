@@ -393,6 +393,7 @@ GameObject:
   - component: {fileID: 6992137386563214694}
   - component: {fileID: 6992137386563214693}
   - component: {fileID: 6409839598607068438}
+  - component: {fileID: 2572569985947904155}
   m_Layer: 5
   m_Name: TermsButton
   m_TagString: Untagged
@@ -478,6 +479,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2572569985947904155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6992137386563214695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40d9a639d83542a4f9b1c4737c58fb69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  url: https://poletekhnika.com/#terms
 --- !u!1 &6992137386579808798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,6 +1211,7 @@ GameObject:
   - component: {fileID: 6992137387497154292}
   - component: {fileID: 6992137387497154291}
   - component: {fileID: 3751855004486365889}
+  - component: {fileID: 5318103006841863704}
   m_Layer: 5
   m_Name: PrivacyButton
   m_TagString: Untagged
@@ -1282,6 +1297,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6343d02bcb914f858d39a3ab57ce99e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5318103006841863704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6992137387497154293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40d9a639d83542a4f9b1c4737c58fb69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  url: https://poletekhnika.com/#privacy
 --- !u!1 &6992137387567611748
 GameObject:
   m_ObjectHideFlags: 0
