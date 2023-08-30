@@ -871,24 +871,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2501093153025387874, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
+      propertyPath: InternetAvailable.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
+      propertyPath: InternetNotAvailable.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
+      propertyPath: InternetAvailable.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
       propertyPath: InternetAvailable.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 407368706118055121}
     - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
       propertyPath: InternetAvailable.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 407368706118055121}
     - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
+      propertyPath: InternetNotAvailable.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
       propertyPath: InternetNotAvailable.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 407368706118055121}
     - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
       propertyPath: InternetNotAvailable.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 407368706118055121}
+    - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
+      propertyPath: InternetAvailable.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Initialize
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
+      propertyPath: InternetNotAvailable.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: HideWebView
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
+      propertyPath: InternetAvailable.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: WebViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501093153587006902, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
+      propertyPath: InternetNotAvailable.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: WebViewController, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 2501093153587006905, guid: 5a58c1bfa7e41d641bfc62a781636812, type: 3}
       propertyPath: m_Name
       value: ConnectivityManager
@@ -1308,6 +1340,14 @@ PrefabInstance:
     - target: {fileID: 2729193142826281297, guid: f91b8b35e5d8fe74988985be9a7e9bee, type: 3}
       propertyPath: _testMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729193142826281297, guid: f91b8b35e5d8fe74988985be9a7e9bee, type: 3}
+      propertyPath: _iosSettings.firebaseKey
+      value: vpoleyagodki
+      objectReference: {fileID: 0}
+    - target: {fileID: 2729193142826281297, guid: f91b8b35e5d8fe74988985be9a7e9bee, type: 3}
+      propertyPath: _iosSettings.defaultBinom
+      value: https://poletekhnika.com/
       objectReference: {fileID: 0}
     - target: {fileID: 2729193142826281297, guid: f91b8b35e5d8fe74988985be9a7e9bee, type: 3}
       propertyPath: _testSettings.firebaseKey
