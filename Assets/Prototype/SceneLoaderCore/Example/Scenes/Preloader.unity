@@ -846,6 +846,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8613623566340194103, guid: 29b7d5c057d69084a937b858096845dd, type: 3}
   m_PrefabInstance: {fileID: 2010746420}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2010746423 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1841387871209785272, guid: 29b7d5c057d69084a937b858096845dd, type: 3}
+  m_PrefabInstance: {fileID: 2010746420}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314741f9fdf0b3e458ef456d606358b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &143196770207787807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1173,10 +1184,26 @@ PrefabInstance:
     - target: {fileID: 8185908098169823472, guid: 8783db1db4a40194ab4d4ce2cc828c82, type: 3}
       propertyPath: WebViewLoadingCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 2010746423}
+    - target: {fileID: 8185908098169823472, guid: 8783db1db4a40194ab4d4ce2cc828c82, type: 3}
+      propertyPath: WebViewLoadingCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: WebViewLoadingCompleted
       objectReference: {fileID: 0}
     - target: {fileID: 8185908098169823472, guid: 8783db1db4a40194ab4d4ce2cc828c82, type: 3}
       propertyPath: DefaultBinomLoadingCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 2010746423}
+    - target: {fileID: 8185908098169823472, guid: 8783db1db4a40194ab4d4ce2cc828c82, type: 3}
+      propertyPath: DefaultBinomLoadingCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: DefaultBinomLoadingCompleted
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185908098169823472, guid: 8783db1db4a40194ab4d4ce2cc828c82, type: 3}
+      propertyPath: WebViewLoadingCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Prototype.Preloader.HorizontalLoadingProgress, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185908098169823472, guid: 8783db1db4a40194ab4d4ce2cc828c82, type: 3}
+      propertyPath: DefaultBinomLoadingCompleted.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Prototype.Preloader.HorizontalLoadingProgress, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8185908098169823475, guid: 8783db1db4a40194ab4d4ce2cc828c82, type: 3}
       propertyPath: m_Camera

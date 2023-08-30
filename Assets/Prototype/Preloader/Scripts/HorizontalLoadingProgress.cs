@@ -17,6 +17,18 @@ namespace Prototype.Preloader
 		{
 			if (progress.value < 0.9f) progress.value += 0.8f * Time.deltaTime;
 		}
+		
+		public void WebViewLoadingCompleted()
+		{
+			
+		}
+        
+		public void DefaultBinomLoadingCompleted()
+		{
+			SceneLoader.Instance.SwitchToScene(SceneLoader.Instance.mainScene);
+
+			
+		}
 
 		public void StopLoading(bool webViewIsLoaded)
 		{
