@@ -7,16 +7,24 @@ using UnityEngine.Events;
 public class WebViewController : MonoBehaviour
 {
     private const string AGREE_TERMS = "Agree_Terms";
- 
-    [SerializeField, Header("Remote Config")] private FirebaseRemoteConfig firebaseRemoteConfig;
 
-    [SerializeField, Header("Reference RectTransform")] private RectTransform _referenceRectTransform;
+    [SerializeField, Header("Ignore errors")] 
+    private bool _ignoreCheckErrors = true;
     
-    [SerializeField, Header("Reference RectTransform")] private RectTransform _referenceRectTransform2;
+    [SerializeField, Header("Remote Config")] 
+    private FirebaseRemoteConfig firebaseRemoteConfig;
 
-    [SerializeField, Header("Webview Background")] private GameObject _bgWebView;
+    [SerializeField, Header("Reference RectTransform")] 
+    private RectTransform _referenceRectTransform;
     
-    [SerializeField, Header("Button Agree Terms")] private GameObject _bttnAgreeTerms;
+    [SerializeField, Header("Reference RectTransform")] 
+    private RectTransform _referenceRectTransform2;
+
+    [SerializeField, Header("Webview Background")] 
+    private GameObject _bgWebView;
+    
+    [SerializeField, Header("Button Agree Terms")] 
+    private GameObject _bttnAgreeTerms;
     
     [Space(10)]
     
@@ -126,11 +134,22 @@ public class WebViewController : MonoBehaviour
 
     private void OnPageErrorReceived(UniWebView view, int statusCode, string url)
     {
-        DLogger.Log(" ----- Hide WebView in WebView");
-        HideWebView();
+        DLogger.Log("xxxxx OnPageErrorReceived statusCode=" + statusCode);
+        
+        if(_ignoreCheckErrors) 
+            return;
+        
+	    switch (statusCode)
+        {
+            case -10:
+            case -1202:
+                return;
+        }
         
         _webView.OnPageFinished -= OnPageFinished;
         _webView.OnPageErrorReceived -= OnPageErrorReceived;
+
+	    HideWebView();
     }
 
     private void OnPageFinished(UniWebView view, int statusCode, string url)
