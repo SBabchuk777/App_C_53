@@ -31,8 +31,11 @@
       <Path>.git</Path>
       <Path>.idea</Path>
       <Path>App_C_53_BurstDebugInformation_DoNotShip</Path>
+      <Path>Keystore</Path>
       <Path>Library</Path>
       <Path>Logs</Path>
+      <Path>SportDo_BackUpThisFolder_ButDontShipItWithYourGame</Path>
+      <Path>SportDo_BurstDebugInformation_DoNotShip</Path>
       <Path>Temp</Path>
       <Path>UserSettings</Path>
       <Path>obj</Path>
